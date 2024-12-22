@@ -34,10 +34,10 @@ const SellectCollege = () => {
   const [selectedBranchIndex, setSelectedBranchIndex] = useState<number | null>(null);
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState<number | null>(null);
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState<number | null>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
 
-  const handleCollegeClick = (event: { target: { value: string; }; }) => {
+  const handleCollegeClick = (event: { target: { value: string } }) => {
     const index = parseInt(event.target.value, 10);
     setSelectedCollegeIndex(index);
     setSelectedBranchIndex(null);
@@ -48,7 +48,7 @@ const SellectCollege = () => {
   useEffect(() => {
     const fetchColleges = async () => {
       try {
-        const response = await axios.get(`${process.env.DOMAIN!}/api/colleges`);
+        const response = await axios.get(`${process.env.DOMAIN}/api/colleges`);
         setColleges(response.data.colleges);
       } catch (error) {
         console.error('Error fetching colleges:', error);
@@ -83,61 +83,44 @@ const SellectCollege = () => {
     //   return;
     // }
     setSelectedSubjectIndex(subjectIndex);
-    setIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsOpen(false);
-    setSelectedSubjectIndex(null);
+    // setIsOpen(true);
   };
 
   return (
     <div className="p-5 text-white text-center backdrop-blur-2xl">
-      <College 
-        colleges={colleges} 
-        selectedCollegeIndex={selectedCollegeIndex} 
-        handleCollegeClick={handleCollegeClick} 
+      <College
+        colleges={colleges}
+        selectedCollegeIndex={selectedCollegeIndex}
+        handleCollegeClick={handleCollegeClick}
       />
       {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
         <div>
-          <Branch 
-            branches={colleges[selectedCollegeIndex].branches} 
-            selectedCollegeIndex={selectedCollegeIndex} 
-            selectedBranchIndex={selectedBranchIndex} 
-            handleBranchClick={handleBranchClick} 
+          <Branch
+            branches={colleges[selectedCollegeIndex].branches}
+            selectedCollegeIndex={selectedCollegeIndex}
+            selectedBranchIndex={selectedBranchIndex}
+            handleBranchClick={handleBranchClick}
           />
           <h2 className="mt-2 text-lg dark:text-white text-black">{colleges[selectedCollegeIndex].name}</h2>
         </div>
       )}
       {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
-        <SemesterComponent 
-          semesters={colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters} 
-          selectedBranchIndex={selectedBranchIndex} 
-          handleSemesterClick={handleSemesterClick} 
-          handleSubjectClick={handleSubjectClick} 
+        <SemesterComponent
+          semesters={colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters}
+          selectedBranchIndex={selectedBranchIndex}
+          handleSemesterClick={handleSemesterClick}
+          handleSubjectClick={handleSubjectClick}
         />
       )}
-      {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 dark:bg-black bg-white bg-opacity-90">
-          <div className="relative dark:bg-black bg-white text-white rounded-lg p-5 w-11/12 h-4/5 overflow-auto">
-            <button onClick={closeModal} className="absolute top-2 right-2 p-2 dark:bg-black bg-white text-white rounded-lg cursor-pointer">X</button>
-            <h2 className="text-2xl mb-2">
-              {selectedCollegeIndex !== null && selectedBranchIndex !== null && selectedSemesterIndex !== null && selectedSubjectIndex !== null &&
-                colleges[selectedCollegeIndex]?.branches[selectedBranchIndex]?.semesters[selectedSemesterIndex]?.subjects[selectedSubjectIndex]?.name}
-            </h2>
-            <div className="mt-5">
-              {selectedCollegeIndex !== null && selectedBranchIndex !== null && selectedSemesterIndex !== null && selectedSubjectIndex !== null &&
-                colleges[selectedCollegeIndex]?.branches[selectedBranchIndex]?.semesters[selectedSemesterIndex]?.subjects[selectedSubjectIndex]?.descriptionButtons?.map((button, index) => (
-                <button
-                  key={index}
-                  onClick={() => window.open(button.link, '_blank')}
-                  className="block w-full p-2 my-1 bg-orange-600 text-white rounded-lg cursor-pointer text-left"
-                >
-                  {button.title}
-                </button>
-              ))}
-            </div>
-          </div>
+      {selectedSemesterIndex !== null && selectedCollegeIndex !== null && selectedBranchIndex !== null && selectedSubjectIndex !== null && (
+        <div>
+          <h3>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].name}</h3>
+          <p>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].description}</p>
+          {colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].descriptionButtons.map((button, index) => (
+            <a key={index} href={button.link} target="_blank" rel="noopener noreferrer">
+              {button.title}
+            </a>
+          ))}
         </div>
       )}
     </div>

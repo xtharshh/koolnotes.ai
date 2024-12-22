@@ -79,14 +79,14 @@ const SemesterComponent: React.FC<SemesterProps> = ({
         </div>
       )}
       {isOpen && selectedSubjectIndex !== null && (
-        <div className="fixed dark:bg-black bg-white text-white  p-5  text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 justify-center z-50 w-4/5 h-4/5 rounded-lg border border-gray-200 overflow-hidden">
+        <div className="fixed dark:bg-black bg-gray-50 text-white  p-5  text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 justify-center z-50 w-4/5 h-4/5 rounded-lg border border-gray-200 overflow-hidden">
 
             <button onClick={closeModal} className="absolute top-2 right-2 p-2 dark:bg-black bg-white  dark:text-white text-black rounded-lg cursor-pointer">X</button>
             <h2 className="text-2xl mb-2 dark:text-white text-black">
               {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].name}
             </h2>
             <p className='dark:text-white text-black'>{selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].description}</p>
-            <div className="mt-5 dark:bg-black bg-white">
+            <div className="mt-5 dark:bg-black ">
               {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].descriptionButtons?.map((button, index) => (
                 <button
                   key={index}
