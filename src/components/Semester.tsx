@@ -22,7 +22,7 @@ interface SemesterProps {
 
 const SemesterComponent: React.FC<SemesterProps> = ({
   semesters,
-  selectedBranchIndex,
+  // selectedBranchIndex,
   handleSemesterClick,
   handleSubjectClick,
 }) => {

@@ -6,7 +6,7 @@ interface CollegeProps {
   handleCollegeClick: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const College: React.FC<CollegeProps> = ({ colleges, selectedCollegeIndex, handleCollegeClick }) => {
+const College: React.FC<CollegeProps> = ({ colleges,handleCollegeClick }) => {
   return (
     <div className="text-center">
       <h1 className="text-4xl mb-5 dark:text-white text-black">SELECT YOUR COLLEGE</h1>

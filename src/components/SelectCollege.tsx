@@ -35,7 +35,7 @@ const SellectCollege = () => {
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState<number | null>(null);
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
 
   const handleCollegeClick = (event: { target: { value: string; }; }) => {
     const index = parseInt(event.target.value, 10);
@@ -78,10 +78,10 @@ const SellectCollege = () => {
   };
 
   const handleSubjectClick = (subjectIndex: number | null) => {
-    if (!isLoggedIn) {
-      // Trigger Google login
-      return;
-    }
+    // if (!isLoggedIn) {
+    //   // Trigger Google login
+    //   return;
+    // }
     setSelectedSubjectIndex(subjectIndex);
     setIsOpen(true);
   };

@@ -7,7 +7,7 @@ interface BranchProps {
   handleBranchClick: (collegeIndex: number, branchIndex: number) => void;
 }
 
-const Branch: React.FC<BranchProps> = ({ branches, selectedCollegeIndex, selectedBranchIndex, handleBranchClick }) => {
+const Branch: React.FC<BranchProps> = ({ branches, selectedCollegeIndex, handleBranchClick }) => {
   return (
     <div className="flex flex-wrap justify-center">
       {branches.map((branch, branchIndex) => (
