@@ -9,13 +9,16 @@ interface BranchProps {
 
 const Branch: React.FC<BranchProps> = ({ branches, selectedCollegeIndex, handleBranchClick }) => {
   return (
-    <div className="grid grid-cols-1 gap-4 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
+    <div className="grid grid-cols-1 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
+      
       {branches.map((branch, branchIndex) => (
-        <div key={branch._id} className="flex-1 max-w-1/5 p-4 box-border">
+        <div key={branch._id} className="p-4">
           <button
-            className="bg-eclipse w-44 p-3 my-2 border-none rounded-lg h-60
-             text-white  cursor-pointer text-lg  duration-300
-               hover:bg-gray-200 bg-yellow-500 "
+            // className="bg-eclipse w-44 p-3 my-2 border-none rounded-lg w-44
+            //  text-white  cursor-pointer text-lg 
+            //    hover:bg-black "
+               className="p-2 bg-eclipse  shadow-lg text-white rounded-lg cursor-pointer text-center h-60 w-44 font-bold text-lg"
+          
             onClick={() => handleBranchClick(selectedCollegeIndex, branchIndex)}
           >
             {branch.title}
