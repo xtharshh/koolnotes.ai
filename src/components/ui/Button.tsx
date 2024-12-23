@@ -1,6 +1,6 @@
-import {Button} from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 
-export const UserIcon = ({fill = "currentColor", size, height, width, ...props}: {fill?: string, size?: number, height?: number, width?: number}) => {
+export const UserIcon = ({ fill = "currentColor", size, height, width, ...props }: { fill?: string, size?: number, height?: number, width?: number }) => {
   return (
     <svg
       data-name="Iconly/Curved/Profile"
@@ -28,7 +28,7 @@ export const UserIcon = ({fill = "currentColor", size, height, width, ...props}:
   );
 };
 
-export const CameraIcon = ({fill = "currentColor", size , height, width, ...props}: {fill?: string, size?: number, height?: number, width?: number}) => {
+export const CameraIcon = ({ fill = "currentColor", size, height, width, ...props }: { fill?: string, size?: number, height?: number, width?: number }) => {
   return (
     <svg
       fill="none"
@@ -50,11 +50,11 @@ export const CameraIcon = ({fill = "currentColor", size , height, width, ...prop
 
 export default function Buttons() {
   return (
-    <div className="flex flex-wrap gap-4 items-center text-center justify-center pt-8">
-      <Button color="secondary" endContent={<CameraIcon size={24} height={24} width={24} />} className="text-wrap h-14">
-       <h3 className="text-white"> Send Message</h3>
+    <div className="flex flex-wrap gap-4 items-center text-center justify-center pt-8 font-new">
+      <Button as="a" href="https://www.instagram.com/xt.harshh" color="secondary" className="text-wrap h-14">
+        <h3 className="text-white text-lg">Send Message</h3>
       </Button>
-      <Button color="danger" startContent={<UserIcon size={24} height={24} width={24} />} className="text-wrap h-14">
+      <Button as="a" href="https://www.google.com" color="danger" startContent={<UserIcon size={24} height={24} width={24} />} className="text-lg text-wrap h-14 text-white">
         Subscribe
       </Button>
     </div>
