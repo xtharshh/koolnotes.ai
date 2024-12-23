@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   try {
     const reqBody = await req.json();
     const { name, branches } = reqBody;
-    console.log('reqBody:', reqBody);
+    
 
     // Check if the college already exists
     const colleges = await College.findOne({ name });

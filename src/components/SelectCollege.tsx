@@ -53,7 +53,7 @@ const SellectCollege = () => {
             'x-api-key': process.env.NEXT_PUBLIC_API_KEY // Read API key from environment variable
           }
         });
-        console.log('Fetched colleges:', response.data.colleges);
+        
         setColleges(response.data.colleges || []);
       } catch (error) {
         console.error('Error fetching colleges:', error);
