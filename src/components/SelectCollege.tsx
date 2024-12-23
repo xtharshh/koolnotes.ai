@@ -30,19 +30,38 @@ interface College {
 
 const SellectCollege = () => {
   const [colleges, setColleges] = useState<College[]>([]);
+  const [filteredColleges, setFilteredColleges] = useState<College[]>([]);
   const [selectedCollegeIndex, setSelectedCollegeIndex] = useState<number | null>(null);
   const [selectedBranchIndex, setSelectedBranchIndex] = useState<number | null>(null);
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState<number | null>(null);
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState<number | null>(null);
-  // const [isOpen, setIsOpen] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login state
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const handleCollegeClick = (event: { target: { value: string } }) => {
+  const handleCollegeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const index = parseInt(event.target.value, 10);
     setSelectedCollegeIndex(index);
     setSelectedBranchIndex(null);
     setSelectedSemesterIndex(null);
     setSelectedSubjectIndex(null);
+  };
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    const filtered = colleges.filter(college =>
+      college.name.toLowerCase().includes(term.toLowerCase())
+    );
+    setFilteredColleges(filtered);
+  };
+
+  const handleSearchKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter' && filteredColleges.length > 0) {
+      const index = colleges.findIndex(college => college._id === filteredColleges[0]._id);
+      setSelectedCollegeIndex(index);
+      setSelectedBranchIndex(null);
+      setSelectedSemesterIndex(null);
+      setSelectedSubjectIndex(null);
+    }
   };
 
   useEffect(() => {
@@ -53,8 +72,9 @@ const SellectCollege = () => {
             'x-api-key': process.env.NEXT_PUBLIC_API_KEY // Read API key from environment variable
           }
         });
-        
+
         setColleges(response.data.colleges || []);
+        setFilteredColleges(response.data.colleges || []);
       } catch (error) {
         console.error('Error fetching colleges:', error);
       }
@@ -83,21 +103,22 @@ const SellectCollege = () => {
   };
 
   const handleSubjectClick = (subjectIndex: number | null) => {
-    // if (!isLoggedIn) {
-    //   // Trigger Google login
-    //   return;
-    // }
     setSelectedSubjectIndex(subjectIndex);
-    // setIsOpen(true);
   };
 
   return (
-    <div className="p-5 text-white text-center backdrop-blur-2xl">
-      <College
-        colleges={colleges}
-        selectedCollegeIndex={selectedCollegeIndex}
-        handleCollegeClick={handleCollegeClick}
-      />
+    <div className="p-5 dark:text-white text-black text-center backdrop-blur-2xl ">
+      
+        <College
+          colleges={filteredColleges}
+          selectedCollegeIndex={selectedCollegeIndex}
+          handleCollegeClick={handleCollegeSelect}
+        />
+      <div className="flex justify-center mb-4"> 
+        <input type="text" placeholder="Search..." className="border p-2 rounded-l mt-4" onChange={handleSearchChange}
+        onKeyPress={handleSearchKeyPress} value={searchTerm}/>
+        <button className="bg-yellow-500 p-2 rounded-r mt-4">🔍</button> 
+      </div>
       {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
         <div>
           <Branch
