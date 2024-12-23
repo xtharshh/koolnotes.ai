@@ -11,7 +11,7 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundImage: () => ({ 'eclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile-1_apro5p.jpg')",'newEclipse':"url('https://res.cloudinary.com/djcbdfehg/video/upload/v1711614275/samples/dance-2.mp4')" }),
+      backgroundImage: () => ({ 'eclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile-1_apro5p.jpg')",'newEclipse':"url('https://res.cloudinary.com/djcbdfehg/image/upload/v1711614262/samples/ecommerce/leather-bag-gray.jpg')" }),
       colors: { 
         customBeige: 'rgba(156, 132, 73, 0.9)',
         background: "var(--background)",
