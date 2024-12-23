@@ -66,7 +66,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
             <button 
               key={index} 
               onClick={() => handleSemesterButtonClick(index)}  
-              className="p-2 bg-eclipse bg-cover bg-center shadow-lg text-xl text-black rounded-lg font-newMono cursor-pointer text-center h-44 w-25 font-bold "
+              className="p-2 bg-eclipse bg-cover bg-center shadow-lg text-3xl text-black rounded-lg font-newMono cursor-pointer text-center h-44 w-25 font-bold "
             >
               <h3>{semester.name}</h3> 
             </button>
