@@ -17,7 +17,7 @@ const Branch: React.FC<BranchProps> = ({ branches, selectedCollegeIndex, handleB
             // className="bg-eclipse w-44 p-3 my-2 border-none rounded-lg w-44
             //  text-white  cursor-pointer text-lg 
             //    hover:bg-black "
-               className="p-2 bg-eclipse  shadow-lg text-white rounded-lg cursor-pointer text-center h-60 w-44 font-bold text-lg"
+               className="p-2 bg-eclipse  shadow-lg text-white font-new rounded-lg cursor-pointer text-center h-60 w-44 font-bold text-lg"
           
             onClick={() => handleBranchClick(selectedCollegeIndex, branchIndex)}
           >

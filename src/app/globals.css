@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Freckle+Face&family=Gabarito:wght@400..900&family=Lilita+One&family=Luckiest+Guy&family=Syne+Mono&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,6 +29,4 @@ body {
   }
 }
 
-body {
 
-}

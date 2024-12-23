@@ -9,13 +9,13 @@ interface CollegeProps {
 const College: React.FC<CollegeProps> = ({ colleges, selectedCollegeIndex, handleCollegeClick }) => {
   return (
     <div className="text-center">
-      <h1 className="text-4xl mb-5 dark:text-white text-black">SELECT YOUR COLLEGE</h1>
+      <h1 className="text-4xl mb-5 dark:text-white text-black font-new">SELECT YOUR COLLEGE</h1>
       
       <div className="flex justify-center">
         <select
           value={selectedCollegeIndex !== null ? selectedCollegeIndex : ""}
           onChange={handleCollegeClick}
-          className="border p-2 rounded-l"
+          className="border p-2 rounded-l font-new text-xl"
         >
           <option value="" disabled>
             Select College

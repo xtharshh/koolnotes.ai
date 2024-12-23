@@ -146,7 +146,7 @@ const SellectCollege = () => {
             selectedBranchIndex={selectedBranchIndex}
             handleBranchClick={handleBranchClick}
           />
-          <h2 className="mt-2 text-lg dark:text-white text-black">{colleges[selectedCollegeIndex].name}</h2>
+          <h2 className="mt-2 text-4xl dark:text-white text-red-700 font-new ">{colleges[selectedCollegeIndex].name}</h2>
         </div>
       )}
       {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
