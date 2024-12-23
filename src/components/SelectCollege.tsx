@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import College from '../components/College';
 import Branch from '../components/Branch';
@@ -34,15 +34,21 @@ const SellectCollege = () => {
   const [selectedCollegeIndex, setSelectedCollegeIndex] = useState<number | null>(null);
   const [selectedBranchIndex, setSelectedBranchIndex] = useState<number | null>(null);
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState<number | null>(null);
-  const [selectedSubjectIndex, setSelectedSubjectIndex] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  const collegeRef = useRef<HTMLDivElement | null>(null);
+  const branchRef = useRef<HTMLDivElement | null>(null);
+  const semesterRef = useRef<HTMLDivElement | null>(null);
+  const subjectRef = useRef<HTMLDivElement | null>(null);
 
   const handleCollegeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const index = parseInt(event.target.value, 10);
     setSelectedCollegeIndex(index);
     setSelectedBranchIndex(null);
     setSelectedSemesterIndex(null);
-    setSelectedSubjectIndex(null);
+    setTimeout(() => {
+      branchRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 300);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +66,9 @@ const SellectCollege = () => {
       setSelectedCollegeIndex(index);
       setSelectedBranchIndex(null);
       setSelectedSemesterIndex(null);
-      setSelectedSubjectIndex(null);
+      setTimeout(() => {
+        branchRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
     }
   };
 
@@ -88,9 +96,11 @@ const SellectCollege = () => {
       setSelectedBranchIndex(null);
     } else {
       setSelectedBranchIndex(branchIndex);
+      setTimeout(() => {
+        semesterRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
     }
     setSelectedSemesterIndex(null);
-    setSelectedSubjectIndex(null);
   };
 
   const handleSemesterClick = (semesterIndex: number | null) => {
@@ -98,29 +108,38 @@ const SellectCollege = () => {
       setSelectedSemesterIndex(null);
     } else {
       setSelectedSemesterIndex(semesterIndex);
+      setTimeout(() => {
+        subjectRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
     }
-    setSelectedSubjectIndex(null);
   };
 
   const handleSubjectClick = (subjectIndex: number | null) => {
-    setSelectedSubjectIndex(subjectIndex);
+    setSelectedSemesterIndex(subjectIndex);
   };
 
   return (
-    <div className="p-5 dark:text-white text-black text-center backdrop-blur-2xl ">
-      
-        <College
-          colleges={filteredColleges}
+    <div className="p-5 dark:text-white text-black text-center backdrop-blur-2xl">
+      <div id="select-college-section" ref={collegeRef}>
+         <College 
+          colleges={filteredColleges} 
           selectedCollegeIndex={selectedCollegeIndex}
-          handleCollegeClick={handleCollegeSelect}
-        />
+          handleCollegeClick={handleCollegeSelect} 
+        /> 
+      </div>
       <div className="flex justify-center mb-4"> 
-        <input type="text" placeholder="Search..." className="border p-2 rounded-l mt-4" onChange={handleSearchChange}
-        onKeyPress={handleSearchKeyPress} value={searchTerm}/>
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          className="border p-2 rounded-l mt-4" 
+          onChange={handleSearchChange}
+          onKeyPress={handleSearchKeyPress} 
+          value={searchTerm}
+        />
         <button className="bg-yellow-500 p-2 rounded-r mt-4">🔍</button> 
       </div>
       {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
-        <div>
+        <div ref={branchRef}>
           <Branch
             branches={colleges[selectedCollegeIndex].branches}
             selectedCollegeIndex={selectedCollegeIndex}
@@ -131,22 +150,13 @@ const SellectCollege = () => {
         </div>
       )}
       {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
-        <SemesterComponent
-          semesters={colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters}
-          selectedBranchIndex={selectedBranchIndex}
-          handleSemesterClick={handleSemesterClick}
-          handleSubjectClick={handleSubjectClick}
-        />
-      )}
-      {selectedSemesterIndex !== null && selectedCollegeIndex !== null && selectedBranchIndex !== null && selectedSubjectIndex !== null && (
-        <div>
-          <h3>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].name}</h3>
-          <p>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].description}</p>
-          {colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].descriptionButtons.map((button, index) => (
-            <a key={index} href={button.link} target="_blank" rel="noopener noreferrer">
-              {button.title}
-            </a>
-          ))}
+        <div ref={semesterRef}>
+          <SemesterComponent
+            semesters={colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters}
+            selectedBranchIndex={selectedBranchIndex}
+            handleSemesterClick={handleSemesterClick}
+            handleSubjectClick={handleSubjectClick}
+          />
         </div>
       )}
     </div>
@@ -154,3 +164,7 @@ const SellectCollege = () => {
 };
 
 export default SellectCollege;
+
+// by using setTimeout function we have created ref for each of the division
+// like sems, branch by ref={upar referenes banae hai}
+// aur waha se yeh us jagah pahucha rahehai

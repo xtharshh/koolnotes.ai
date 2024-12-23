@@ -50,11 +50,11 @@ export const CameraIcon = ({fill = "currentColor", size , height, width, ...prop
 
 export default function Buttons() {
   return (
-    <div className="flex gap-4 items-center text-center justify-center pt-8">
-      <Button color="secondary" endContent={<CameraIcon size={24} height={24} width={24} />} >
-        Send Message
+    <div className="flex flex-wrap gap-4 items-center text-center justify-center pt-8">
+      <Button color="secondary" endContent={<CameraIcon size={24} height={24} width={24} />} className="text-wrap h-14">
+       <h3 className="text-white"> Send Message</h3>
       </Button>
-      <Button color="danger" startContent={<UserIcon size={24} height={24} width={24} />} >
+      <Button color="danger" startContent={<UserIcon size={24} height={24} width={24} />} className="text-wrap h-14">
         Subscribe
       </Button>
     </div>

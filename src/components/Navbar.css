@@ -1,3 +1,4 @@
+/* Navbar.css */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -8,7 +9,7 @@
   left: 1rem;
   right: 1rem;
   z-index: 1000;
-  background-color: rgba(156, 132, 73, 0.1);
+  background-color: rgba(174, 136, 40, 0.1);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -55,7 +56,6 @@
   display: inline-block;
   width: 60px;
   height: 34px;
-  
 }
 
 .switch input {
@@ -73,6 +73,7 @@
   bottom: 0;
   background-color: #ffffff;
   transition: .4s;
+  border-radius: 34px;
 }
 
 .slider:before {
@@ -84,6 +85,7 @@
   bottom: 4px;
   background-color: rgb(245, 78, 0);
   transition: .4s;
+  border-radius: 50%;
 }
 
 input:checked + .slider {
@@ -101,4 +103,3 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 20px;
 }
-

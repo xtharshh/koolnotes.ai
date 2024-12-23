@@ -11,11 +11,13 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
+      colors: { 
+        customBeige: 'rgba(156, 132, 73, 0.9)',
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
     },
+    screens: { 'custom-md': '780px', "custom-nmd":"485px" },
   }, 
   darkMode: "class",
   plugins: [nextui()],
