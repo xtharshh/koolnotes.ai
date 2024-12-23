@@ -11,7 +11,7 @@ export default {
   ],
   theme: {
     extend: {
-      backgroundImage: () => ({ 'eclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile_xdoat0.jpg')", }),
+      backgroundImage: () => ({ 'eclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile-1_apro5p.jpg')", }),
       colors: { 
         customBeige: 'rgba(156, 132, 73, 0.9)',
         background: "var(--background)",
