@@ -9,7 +9,7 @@ interface BranchProps {
 
 const Branch: React.FC<BranchProps> = ({ branches, selectedCollegeIndex, handleBranchClick }) => {
   return (
-    <div className="flex flex-wrap justify-center">
+    <div className="grid grid-cols-1 gap-4 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
       {branches.map((branch, branchIndex) => (
         <div key={branch._id} className="flex-1 max-w-1/5 p-4 box-border">
           <button

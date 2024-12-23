@@ -1,7 +1,7 @@
 "use client";
 import { Button } from '@nextui-org/button';
 import React, { useRef, useState } from 'react';
-import Eclipse from "../assets/Eclipse.jpeg";
+// import Eclipse from "../assets/Eclipse.jpeg";
 interface Subject {
   name: string;
   description: string;
@@ -80,7 +80,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
       )}
       {selectedSemesterIndex !== null && (
         <div ref={subjectRef}>
-        <div className="grid grid-cols-4 gap-2 mt-5">
+        <div className="grid grid-cols-2 gap-4 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
           {semesters[selectedSemesterIndex].subjects.map((subject, subjectIndex) => (
             <button 
               key={subjectIndex} 
