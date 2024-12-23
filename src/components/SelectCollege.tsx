@@ -48,8 +48,13 @@ const SellectCollege = () => {
   useEffect(() => {
     const fetchColleges = async () => {
       try {
-        const response = await axios.get('/api/colleges');
-        setColleges(response.data.colleges);
+        const response = await axios.get('/api/colleges', {
+          headers: {
+            'x-api-key': process.env.NEXT_PUBLIC_API_KEY // Read API key from environment variable
+          }
+        });
+        console.log('Fetched colleges:', response.data.colleges);
+        setColleges(response.data.colleges || []);
       } catch (error) {
         console.error('Error fetching colleges:', error);
       }
