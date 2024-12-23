@@ -17,8 +17,8 @@ const Introduction = () => {
                         </span>
                         </h2>
                     <Button/>
-                    <p className="text-orange-600 font-bold font-cursive text-4xl py-10">
-                    <span className='bg-yellow-400 p-2'>Discover the amazing features we offer to enhance your study.</span></p>
+                    <p className="text-red-500 font-bold font-cursive text-4xl py-10">
+                    <span className=' p-2'>Discover the amazing features we offer to enhance your study.</span></p>
                 </div>
             </main>
         </div>
