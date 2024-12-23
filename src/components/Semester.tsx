@@ -1,7 +1,7 @@
 "use client";
 import { Button } from '@nextui-org/button';
 import React, { useRef, useState } from 'react';
-// import Eclipse from "../assets/Eclipse.jpeg";
+
 interface Subject {
   name: string;
   description: string;
@@ -67,7 +67,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
           <Button 
             key={index} 
             onClick={() => handleSemesterButtonClick(index)} 
-            className="p-12 bg-orange-500 rounded-lg cursor-pointer text-center dark:bg-red-500 "
+            className="p-12 bg-eclipse bg-center bg-cover rounded-lg cursor-pointer text-center text-white"
           >
             <h3>{semester.name}</h3> 
           </Button>
@@ -85,7 +85,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
             <button 
               key={subjectIndex} 
               onClick={() => handleSubjectButtonClick(subjectIndex)} 
-              className="p-2 bg-green-600 text-white rounded-lg cursor-pointer text-center h-16 w-30"
+              className="p-2 bg-eclipse text-white rounded-lg cursor-pointer text-center h-16 w-30"
             >
               <h2>{subject.name}</h2>
             </button>

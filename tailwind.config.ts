@@ -11,13 +11,14 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: () => ({ 'eclipse': "url('../assets/Eclipse.jpeg')", }),
       colors: { 
         customBeige: 'rgba(156, 132, 73, 0.9)',
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
     },
-    screens: { 'custom-md': '780px', "custom-nmd":"485px" },
+    screens: { 'custom-md': '780px', "custom-nmd":"485px",'custom-lg': '1050px', 'sm': '576px',},
   }, 
   darkMode: "class",
   plugins: [nextui()],

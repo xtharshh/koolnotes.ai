@@ -13,9 +13,9 @@ const Branch: React.FC<BranchProps> = ({ branches, selectedCollegeIndex, handleB
       {branches.map((branch, branchIndex) => (
         <div key={branch._id} className="flex-1 max-w-1/5 p-4 box-border">
           <button
-            className="w-44 p-3 my-2 border-none rounded-lg h-20
-             text-black  cursor-pointer text-lg transition-colors duration-300
-              dark:bg-white hover:bg-gray-200 bg-yellow-500 "
+            className="bg-eclipse w-44 p-3 my-2 border-none rounded-lg h-60
+             text-white  cursor-pointer text-lg  duration-300
+               hover:bg-gray-200 bg-yellow-500 "
             onClick={() => handleBranchClick(selectedCollegeIndex, branchIndex)}
           >
             {branch.title}
