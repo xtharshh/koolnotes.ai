@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, GraduationCap, Library, Star, Users } from 'lucide-react'
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { reviews } from "@/data/reviews"
+import { reviews } from "../data/reviews"
 import { ContactSection } from "./Contact"
 
 
