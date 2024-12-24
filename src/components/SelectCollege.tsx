@@ -152,8 +152,8 @@ const SellectCollege = () => {
             selectedBranchIndex={selectedBranchIndex}
             handleBranchClick={handleBranchClick}
           />
-          <div className='border-black  p-6'>
-          <h2 className="mt-2 text-4xl text-red-400 font-newLuck-extrabold">{colleges[selectedCollegeIndex].name}</h2>
+          <div className='border-red p-6'>
+          <h2 className="mt-2 text-4xl text-blue-700 font-newLuck-extrabold">{colleges[selectedCollegeIndex].name}</h2>
           {!branchClicked && (
             <h3 className="mt-2 text-3xl cursor-pointer" onClick={() => setBranchClicked(true)}>
               Select Branch
@@ -161,7 +161,7 @@ const SellectCollege = () => {
           )}
           {branchClicked && selectedBranchIndex !== null && (
             <h3 className="mt-2 text-2xl cursor-pointer" onClick={() => setBranchClicked(false)}>
-              Branch Selected: {colleges[selectedCollegeIndex].branches[selectedBranchIndex].title}
+              Branch Selected: <span className='font-semibold text-blue-700'>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].title}</span>
             </h3>
           )}
           </div>
