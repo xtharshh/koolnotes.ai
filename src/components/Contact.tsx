@@ -1,73 +1,71 @@
+'use client';
 
-'use client'
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Loader2, MailIcon, MessageSquare, Send, User } from 'lucide-react';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Loader2, MailIcon, MessageSquare, Send, User } from 'lucide-react'
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-
-import { Button } from "../components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/hooks/use-toast"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Button } from '../components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/hooks/use-toast';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 
 const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  subject: z.string().min(5, "Subject must be at least 5 characters"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-})
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  subject: z.string().min(5, 'Subject must be at least 5 characters'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
+});
 
 export function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
-        const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values),
-        });
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
 
-        if (response.ok) {
-            toast({
-                title: "Message sent successfully!",
-                description: "We'll get back to you as soon as possible.",
-            });
-            form.reset();
-        } else {
-            const errorData = await response.json();
-            throw new Error(errorData.error);
-        }
-    } catch (error: unknown) {
+      if (response.ok) {
         toast({
-            variant: "destructive",
-            title: "Error sending message",
-            description: `Please try again later. Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          title: 'Message sent successfully!',
+          description: "We'll get back to you as soon as possible.",
         });
+        form.reset();
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.error);
+      }
+    } catch (error: unknown) {
+      toast({
+        variant: 'destructive',
+        title: 'Error sending message',
+        description: `Please try again later. Error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      });
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
     }
-}
-
+  }
 
   return (
     <section className="container mx-auto py-16 px-4 md:px-6 bg-white dark:bg-black text-black dark:text-white font-newLuck">
@@ -190,6 +188,5 @@ export function ContactSection() {
         </div>
       </motion.div>
     </section>
-  )
+  );
 }
-

@@ -21,19 +21,19 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between w-full text-black dark:text-white">
         <div className="logo font-newLuck font-bold  text-black dark:text-white">CollegED</div>
-        <div className="hidden custom-md:flex space-x-4 nav-links text-white">
-          <a href="#select-college-section" className="hover:text-yellow-500 font-newLuck">Colleges</a>
-          <a href="#about" className=" font-newLuck">About</a>
-          <a href="#reviews" className=" font-newLuck">Reviews</a>     
-          <a href="#contact" className="font-newLuck">Contact</a>
-          <a href="#contributers" className=" font-newLuck">Contributers</a>
+        <div className="hidden custom-md:flex space-x-4 nav-links text-black dark:text-white font-newLuck font-semibold ">
+          <a href="#select-college-section" className="">Colleges</a>
+          <a href="#about" className="">About</a>
+          <a href="#reviews" className="">Reviews</a>     
+          <a href="#contact" className="">Contact</a>
+          <a href="#contributers" className="">Contributers</a>
         </div>
         <ThemeToggle /> {/* Add the ThemeToggle component here */}
-        <div className="custom-md:hidden">
+        <div className="custom-md:hidden  ">
           <button onClick={toggleMenu} className="focus:outline-none">
-            {isOpen ? <FaTimes color='white' size={24} /> : <FaBars color='white' size={24} />}
+            {isOpen ? <FaTimes color='text-black dark:text-white' size={24} /> : <FaBars color='text-black dark:text-white' size={24} />}
           </button>
         </div>
       </div>

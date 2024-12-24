@@ -76,6 +76,7 @@ export default {
         'custom-nmd': '485px',
         'custom-lg': '1050px',
         sm: '576px',
+        lg:"670px",
       },
     },
   },

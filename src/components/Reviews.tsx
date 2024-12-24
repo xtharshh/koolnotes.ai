@@ -27,15 +27,15 @@ export default function AboutAndReviews() {
       <section className="mb-20">
         <div className="container mx-auto">
           <h2 className="text-4xl font-newLuck font-bold text-center mb-12 bg-gradient-to-r from-primary to-primary/50 bg-clip-text  text-black dark:text-white">
-            About EduResource Hub
+            About CollegED
           </h2>
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-4 items-center">
             <div className="space-y-6">
               <p className="text-lg font-newLuck text-muted-foreground leading-relaxed">
-                EduResource Hub is your comprehensive platform for accessing academic materials across various engineering disciplines. 
+                CollegeED is your comprehensive platform for accessing academic materials across various engineering disciplines. 
                 We understand the importance of having the right resources at your fingertips during your academic journey.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 w-92 lg:w-auto">
                 <Card className="backdrop-blur-md bg-background/60 border-gradient hover:scale-105 transition-transform duration-300 dark:bg-background/40 border-gray-700">
                   <CardContent className="p-6 space-y-2">
                     <Users className="w-8 h-8 text-primary" />
