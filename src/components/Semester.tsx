@@ -58,22 +58,23 @@ const SemesterComponent: React.FC<SemesterProps> = ({
   };
 
   return (
-    <div className="p-5 text-white">
-      <div className="w-full max-w-screen-lg">
-        <h1 className="text-4xl dark:text-white text-black font-bold font-new text-center">Semesters</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 custom-lg:grid-cols-4 gap-4 mt-5 justify-center custom-md:grid-cols-4 custom-nmd:grid-cols-2 ">
+    <div className="p-5">
+      <div className="w-full">
+        <h1 className="text-4xl  font-bold font-newLuck text-center">Semesters</h1>
+        <div className=" sm:grid-cols-2 custom-lg:grid-cols-4 gap-4  
+        grid grid-cols-1 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
           {semesters.map((semester, index) => (
             <button 
               key={index} 
               onClick={() => handleSemesterButtonClick(index)}  
-              className="p-2 bg-eclipse bg-cover bg-center shadow-lg text-3xl text-black rounded-lg font-newMono cursor-pointer text-center h-44 w-25 font-bold "
+              className="p-2 bg-eclipse bg-cover bg-center shadow-lg text-3xl rounded-lg font-newLuck cursor-pointer text-center h-44 w-25 font-bold "
             >
               <h3>{semester.name}</h3> 
             </button>
           ))}
         </div>
         {selectedSemesterIndex !== null && (
-          <h2 className="text-center my-5 text-3xl dark:text-white text-black font-bold font-new">
+          <h2 className="text-center my-5 text-3xl font-bold font-newLuck">
             {semesters[selectedSemesterIndex].name}
           </h2>
         )}
@@ -84,7 +85,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
                 <button 
                   key={subjectIndex} 
                   onClick={() => handleSubjectButtonClick(subjectIndex)} 
-                  className="p-2 bg-eclipse text-white rounded-lg cursor-pointer text-center h-16 w-30 font-bold font-newMono text-lg"
+                  className="p-2 bg-eclipse rounded-lg cursor-pointer text-center h-16 w-30 font-bold font-newLuck text-lg"
                 >
                   <h2>{subject.name}</h2>
                 </button>
@@ -93,21 +94,21 @@ const SemesterComponent: React.FC<SemesterProps> = ({
           </div>
         )}
         {isOpen && selectedSubjectIndex !== null && (
-          <div className="fixed dark:bg-black bg-gray-50 text-white p-5 text-center left-1/2 
+          <div className="fixed bg-white dark:bg-black text-black dark:text-white  p-5 text-center left-1/2 
           transform -translate-x-1/2 -translate-y-1/2 
           justify-center z-50 w-4/5 h-2/3 rounded-lg border border-gray-400 overflow-hidden mt-10">
-            <button onClick={closeModal} className="absolute top-2 right-2 p-2 dark:bg-black bg-white dark:text-white text-black rounded-lg cursor-pointer font-bold font-new">X</button>
+            <button onClick={closeModal} className="absolute top-2 right-2 p-2 rounded-lg cursor-pointer font-bold font-newLuck">X</button>
             <div ref={descriptionRef}>
-              <h2 className="text-2xl mb-2 dark:text-white text-black font-bold font-newLuck">
+              <h2 className="text-2xl mb-2  font-bold font-newLuck">
                 {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].name}
               </h2>
-              <p className='dark:text-white text-black font-bold font-new'>{selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].description}</p>
-              <div className="mt-5 dark:bg-black">
+              <p className=' font-bold font-newLuck'>{selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].description}</p>
+              <div className="mt-5 ">
                 {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].descriptionButtons?.map((button, index) => (
                   <button
                     key={index}
                     onClick={() => window.open(button.link, '_blank')}
-                    className="block w-1/2 p-2 my-1 bg-yellow-600 text-black rounded-lg cursor-pointer text-center font-newGab"
+                    className="block w-1/2 p-2 my-1 bg-yellow-600 text-black rounded-lg cursor-pointer text-center font-newLuck"
                   >
                     {button.title}
                   </button>

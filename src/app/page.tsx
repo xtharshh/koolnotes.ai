@@ -2,6 +2,7 @@
 import React from "react";
 import Introduction from "../components/Introduction";
 import SellectCollege from "../components/SelectCollege";
+import AboutAndReviews from "@/components/Reviews";
 
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <>
       <Introduction />
       <SellectCollege />
+      <AboutAndReviews />
       </>
 
   );

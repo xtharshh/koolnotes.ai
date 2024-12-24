@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import College from '../components/College';
@@ -35,6 +36,7 @@ const SellectCollege = () => {
   const [selectedBranchIndex, setSelectedBranchIndex] = useState<number | null>(null);
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [branchClicked, setBranchClicked] = useState<boolean>(false);
 
   const collegeRef = useRef<HTMLDivElement | null>(null);
   const branchRef = useRef<HTMLDivElement | null>(null);
@@ -46,6 +48,7 @@ const SellectCollege = () => {
     setSelectedCollegeIndex(index);
     setSelectedBranchIndex(null);
     setSelectedSemesterIndex(null);
+    setBranchClicked(false);
     setTimeout(() => {
       branchRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 300);
@@ -66,6 +69,7 @@ const SellectCollege = () => {
       setSelectedCollegeIndex(index);
       setSelectedBranchIndex(null);
       setSelectedSemesterIndex(null);
+      setBranchClicked(false);
       setTimeout(() => {
         branchRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 300);
@@ -94,8 +98,10 @@ const SellectCollege = () => {
   const handleBranchClick = (collegeIndex: number | null, branchIndex: number | null) => {
     if (selectedBranchIndex === branchIndex) {
       setSelectedBranchIndex(null);
+      setBranchClicked(false);
     } else {
       setSelectedBranchIndex(branchIndex);
+      setBranchClicked(true);
       setTimeout(() => {
         semesterRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 300);
@@ -119,24 +125,24 @@ const SellectCollege = () => {
   };
 
   return (
-    <div className="p-5 dark:text-white text-black text-center backdrop-blur-2xl">
+    <div className="p-5 text-center backdrop-blur-2xl bg-white dark:bg-black text-black dark:text-white">
       <div id="select-college-section" ref={collegeRef}>
-         <College 
-          colleges={filteredColleges} 
+        <College
+          colleges={filteredColleges}
           selectedCollegeIndex={selectedCollegeIndex}
-          handleCollegeClick={handleCollegeSelect} 
-        /> 
+          handleCollegeClick={handleCollegeSelect}
+        />
       </div>
-      <div className="flex justify-center mb-4"> 
-        <input 
-          type="text" 
-          placeholder="Search..." 
-          className="border p-2 rounded-l mt-4" 
+      <div className="flex justify-center mb-4">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="border p-2 rounded-l mt-4"
           onChange={handleSearchChange}
-          onKeyPress={handleSearchKeyPress} 
+          onKeyPress={handleSearchKeyPress}
           value={searchTerm}
         />
-        <button className="bg-yellow-500 p-2 rounded-r mt-4">🔍</button> 
+        <button className="bg-yellow-500 p-2 rounded-r mt-4">🔍</button>
       </div>
       {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
         <div ref={branchRef}>
@@ -146,7 +152,19 @@ const SellectCollege = () => {
             selectedBranchIndex={selectedBranchIndex}
             handleBranchClick={handleBranchClick}
           />
-          <h2 className="mt-2 text-4xl dark:text-white text-red-700 font-new ">{colleges[selectedCollegeIndex].name}</h2>
+          <div className='border-black  p-6'>
+          <h2 className="mt-2 text-4xl text-red-400 font-newLuck-extrabold">{colleges[selectedCollegeIndex].name}</h2>
+          {!branchClicked && (
+            <h3 className="mt-2 text-3xl cursor-pointer" onClick={() => setBranchClicked(true)}>
+              Select Branch
+            </h3>
+          )}
+          {branchClicked && selectedBranchIndex !== null && (
+            <h3 className="mt-2 text-2xl cursor-pointer" onClick={() => setBranchClicked(false)}>
+              Branch Selected: {colleges[selectedCollegeIndex].branches[selectedBranchIndex].title}
+            </h3>
+          )}
+          </div>
         </div>
       )}
       {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
@@ -164,7 +182,3 @@ const SellectCollege = () => {
 };
 
 export default SellectCollege;
-
-// by using setTimeout function we have created ref for each of the division
-// like sems, branch by ref={upar referenes banae hai}
-// aur waha se yeh us jagah pahucha rahehai

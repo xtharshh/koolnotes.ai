@@ -1,24 +1,23 @@
 "use client"
-import Button from './ui/Button';
+import Button from './ui/Buttons';
 import React from 'react';
 
 const Introduction = () => {
     return (
-        <div className="pb-20 bg-newEclipse bg-cover bg-center" >
+        <div className="pb-20 bg-newEclipse bg-cover bg-center bg-white dark:bg-black text-black dark:text-white" >
             <main className="p-20">
                 <div className=" p-5 rounded-lg  text-center ">
-                    <h1 className="text-yellow-400 py-20 pb-0 text-5xl font-bold font-new ">
+                    <h1 className="text-yellow-400 py-20 pb-0 text-5xl font-bold font-newLuck ">
                         <span >Welcome to Our Site
                         </span>
                         </h1>
-                    <h2 className="text-green-100 py-6 pb-0 text-5xl font-bold mb-2">
+                    <h2 className="text-green-100 py-6 pb-0 text-5xl font-newLuck font-bold mb-2">
                     <span>
                         Explore Our Features
                         </span>
                         </h2>
                     <Button/>
-                    <p className="text-red-500 font-bold font-newGab text-4xl py-10">
-                    <span className=' p-2'>Discover the amazing features we offer to enhance your study.</span></p>
+                    
                 </div>
             </main>
         </div>

@@ -8,26 +8,36 @@ import Navbar from "../components/Navbar";
 import "./globals.css";
 import { Providers } from "./providers";
 import Footer from "../components/Footer";
-import React, { useState } from 'react';
+import React from 'react';
+import { Inter } from 'next/font/google'
+import { ThemeProvider } from "@/components/ThemeProvider"
+import { Toaster } from "@/components/ui/toaster"
+import "./globals.css"
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState('light'); // State to manage theme
+const inter = Inter({ subsets: ["latin"] })
 
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
-
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <>
-      <html lang="en" className={theme}>
-        <body style={{ backgroundColor: theme === 'light' ? 'white' : 'black', color: theme === 'light' ? 'black' : 'white' }}>
-          <Providers>
-            <Navbar theme={theme} setTheme={toggleTheme} /> {/* Pass the toggleTheme function */}
-            {children}
-            <Footer />
-          </Providers>
-        </body>
-      </html>
-    </>
-  );
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <Providers>
+        <ThemeProvider 
+          attribute="class" 
+          defaultTheme="system" 
+          enableSystem 
+          disableTransitionOnChange
+        >
+          <Navbar/>
+          {children}
+          <Footer/>
+          <Toaster />
+        </ThemeProvider>
+        </Providers>
+      </body>
+    </html>
+  )
 }
