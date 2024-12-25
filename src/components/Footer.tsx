@@ -1,7 +1,38 @@
-import React from 'react';
-import { FaFacebook, FaTwitter, FaInstagram, FaDribbble, FaGithub } from 'react-icons/fa';
+import React, { useEffect, useState } from 'react';
+import { FaTwitter, FaFacebook, FaDribbble, FaGithub, FaInstagram } from 'react-icons/fa';
 
 const Footer: React.FC = React.memo(() => {
+  const [year, setYear] = useState<number>(new Date().getFullYear());
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      const images = document.querySelectorAll('img');
+      images.forEach((img) => {
+        const width = img.style.width;
+        const height = img.style.height;
+        if ((width && width !== 'auto') || (height && height !== 'auto')) {
+          if (width && width !== 'auto') {
+            img.style.height = 'auto';
+          }
+          if (height && height !== 'auto') {
+            img.style.width = 'auto';
+          }
+          console.warn('Image with src', img.src, 'has either width or height modified, but not the other. Both are now set to "auto" to maintain the aspect ratio.');
+        }
+      });
+    }
+  }, [isClient]);
+
+  if (!isClient) {
+    return null;
+  }
+
   return (
     <footer className="relative bg-white dark:bg-black pt-8 pb-6 text-black dark:text-white">
       <div
@@ -83,7 +114,7 @@ const Footer: React.FC = React.memo(() => {
                   <li>
                     <a
                       className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href=""
+                      href="#aboutus"
                     >
                       About Us
                     </a>
@@ -112,6 +143,14 @@ const Footer: React.FC = React.memo(() => {
                       Free Products
                     </a>
                   </li>
+                  <li>
+                    <a
+                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                      href="#features"
+                    >
+                      Upcoming Features
+                    </a>
+                  </li>
                 </ul>
               </div>
               <div className="w-full lg:w-4/12 px-4">
@@ -119,14 +158,6 @@ const Footer: React.FC = React.memo(() => {
                   Other Resources
                 </span>
                 <ul className="list-unstyled">
-                  <li>
-                    <a
-                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href="www.google.com"
-                    >
-                      MIT License
-                    </a>
-                  </li>
                   <li>
                     <a
                       className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
@@ -146,9 +177,17 @@ const Footer: React.FC = React.memo(() => {
                   <li>
                     <a
                       className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                      href=""
+                      href="#contactus"
                     >
                       Contact Us
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                      href="#select-college-section"
+                    >
+                      Get Notes
                     </a>
                   </li>
                 </ul>
@@ -160,7 +199,7 @@ const Footer: React.FC = React.memo(() => {
         <div className="flex flex-wrap items-center md:justify-between justify-center">
           <div className="w-full  px-4 mx-auto text-center">
             <div className="text-blueGray-500 text-xl py-1 font-newGab font-bold">
-              ©{new Date().getFullYear()} Made With ❤️ by&nbsp;
+              ©{year} Made With ❤️ by&nbsp;
               <a
                 href="https://www.instagram.com/xt.harshh"
                 className="text-blueGray-500 hover:text-gray-500"
@@ -178,10 +217,14 @@ const Footer: React.FC = React.memo(() => {
           </div>
         </div>
       </div>
+      <style jsx>{`
+        img {
+          width: auto;
+          height: auto;
+        }
+      `}</style>
     </footer>
   );
 });
-
 Footer.displayName = 'Footer';
-
 export default Footer;

@@ -25,9 +25,9 @@ export default function Navbar() {
         <div className="logo font-newLuck font-bold  text-black dark:text-white">CollegED</div>
         <div className="hidden custom-md:flex space-x-4 nav-links text-black dark:text-white font-newLuck font-semibold ">
           <a href="#select-college-section" className="">Colleges</a>
-          <a href="#about" className="">About</a>
+          <a href="#aboutus" className="">About</a>
           <a href="#reviews" className="">Reviews</a>     
-          <a href="#contact" className="">Contact</a>
+          <a href="#contactus" className="">Contact</a>
           <a href="#contributers" className="">Contributers</a>
         </div>
         <ThemeToggle /> {/* Add the ThemeToggle component here */}
@@ -41,9 +41,9 @@ export default function Navbar() {
         <div className="absolute top-14 left-0 w-full bg-customBeige font-new flex flex-col items-center custom-md:hidden 
         border border-gray-400 rounded-xl backdrop-blur-5xl bg-white dark:bg-black text-black dark:text-white">
           <a href="#select-college-section" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Colleges</a>
-          <a href="#about" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">About</a>
+          <a href="#aboutus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">About</a>
           <a href="#reviews" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Reviews</a>
-          <a href="#contact" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Contact</a>
+          <a href="#contactus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Contact</a>
           <a href="#contributers" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Contributers</a>
         </div>
       )}

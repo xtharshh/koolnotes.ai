@@ -23,21 +23,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <Providers>
-        <ThemeProvider 
-          attribute="class" 
-          defaultTheme="system" 
-          enableSystem 
-          disableTransitionOnChange
-        >
-          <Navbar/>
-          {children}
-          <Footer/>
-          <Toaster />
-        </ThemeProvider>
-        </Providers>
-      </body>
-    </html>
+  <body className={inter.className}>
+    <Providers>
+      <ThemeProvider 
+        attribute="class" 
+        defaultTheme="system" 
+        enableSystem 
+        disableTransitionOnChange
+      >
+        <Navbar/>
+        {children}
+        <Footer/>
+        <Toaster />
+      </ThemeProvider>
+    </Providers>
+  </body>
+</html>
   )
 }

@@ -15,14 +15,14 @@ const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name }) => {
       <Image
         alt="Feature Image"
         className="object-cover"
-        height={200}
+        height="auto" // Set height to auto
         src="https://nextui.org/images/hero-card.jpeg"
-        width="100%" // Set width to 100% to match the card's width
+        width="auto" // Set width to auto
       />
       <CardFooter
         className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10"
       >
-        <p className="text-tiny text-center text-white/80">{name}</p>
+        <p className="text-tiny text-center text-white/80 text-bold text-newGab">{name}</p>
         <Button
           className="text-tiny text-white bg-black/20"
           color="default"

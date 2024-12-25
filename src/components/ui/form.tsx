@@ -28,7 +28,7 @@ const FormFieldContext = React.createContext<FormFieldContextValue>(
   {} as FormFieldContextValue
 )
 
-const FormField = <
+const FormField = React.memo(<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
@@ -39,7 +39,8 @@ const FormField = <
       <Controller {...props} />
     </FormFieldContext.Provider>
   )
-}
+});
+FormField.displayName = "FormField";
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)

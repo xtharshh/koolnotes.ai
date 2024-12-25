@@ -1,8 +1,11 @@
+"use client"
+
 import React from 'react';
 import FeatureCard from './ui/featureCard';
 
 const NewFeatures = React.memo(() => {
   return (
+    <div id='features' >
     <div className="bg-white dark:bg-black text-black dark:text-white">
       <h1 className="text-4xl font-bold font-newLuck text-center pt-10">New Features</h1>
       <div className="flex justify-center">
@@ -13,6 +16,7 @@ const NewFeatures = React.memo(() => {
           <FeatureCard name="PixelWalls" />
         </div>
       </div>
+    </div>
     </div>
   );
 });

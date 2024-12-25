@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, GraduationCap, Library, Star, Users } from 'lucide-react'
@@ -9,10 +9,25 @@ import { Button } from "@/components/ui/button"
 import { reviews } from "../data/reviews"
 import ContactSection from "@/components/Contact"
 
-
-
 export default function AboutAndReviews() {
   const [currentReview, setCurrentReview] = useState(0)
+
+  useEffect(() => {
+    const images = document.querySelectorAll('.review-image');
+    images.forEach((img) => {
+      const width = (img as HTMLImageElement).style.width;
+      const height = (img as HTMLImageElement).style.height;
+      if ((width && width !== 'auto') || (height && height !== 'auto')) {
+        if (width && width !== 'auto') {
+          (img as HTMLImageElement).style.height = 'auto';
+        }
+        if (height && height !== 'auto') {
+          (img as HTMLImageElement).style.width = 'auto';
+        }
+        console.warn('Image with src', (img as HTMLImageElement).src, 'has either width or height modified, but not the other. Both are now set to "auto" to maintain the aspect ratio.');
+      }
+    });
+  }, []);
 
   const nextReview = () => {
     setCurrentReview((prev) => (prev + 1) % reviews.length)
@@ -23,16 +38,15 @@ export default function AboutAndReviews() {
   }
 
   return (
-    <div className="min-h-screen  bg-white dark:bg-black text-black dark:text-white w-full py-12 px-4 md:px-6 bg-background">
-      
+    <div id="aboutus" className="min-h-screen bg-white dark:bg-black text-black dark:text-white w-full py-12 px-4 md:px-6 bg-background">
       <section className="mb-20">
-        <div className="container mx-auto">
-          <h2 className="text-4xl font-newLuck font-bold text-center mb-12 bg-gradient-to-r from-primary to-primary/50 bg-clip-text  text-black dark:text-white">
-            About CollegED
+        <div  className="container mx-auto">
+          <h2 className="text-4xl font-newLuck font-bold text-center mb-12 bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-black dark:text-white">
+            About Us
           </h2>
           <div className="grid lg:grid-cols-2 gap-4 items-center">
-            <div className="space-y-6 text-center vlg:pl-28 ">
-              <p className="text-lg font-newLuck text-muted-foreground leading-relaxed ">
+            <div className="space-y-6 text-center vlg:pl-28">
+              <p className="text-lg font-newLuck text-muted-foreground leading-relaxed">
                 CollegeED is your comprehensive platform for accessing academic materials across various engineering disciplines. 
                 We understand the importance of having the right resources at your fingertips during your academic journey.
               </p>
@@ -74,19 +88,20 @@ export default function AboutAndReviews() {
                 alt="Students studying"
                 width={600}
                 height={400}
-                className="rounded-3xl relative shadow-2xl border-gray-700"
+                className="rounded-3xl relative shadow-2xl border-gray-700 review-image"
+                style={{ width: 'auto', height: 'auto' }} // Maintain aspect ratio
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Reviews Section */}
-      <section className="container mx-auto mb-20 font-newLuck">
+      {/* Reviews  */}
+      <section id='reviews' className="container mx-auto mb-20 font-newLuck">
         <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-black dark:text-white">
           What Our Users Say
         </h2>
-        <div className="relative max-w-4xl mx-auto ">
+        <div className="relative max-w-4xl mx-auto">
           <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl blur-3xl dark:from-primary/5 dark:to-secondary/5" />
           <Card className="backdrop-blur-md bg-background/60 border-gradient dark:bg-background/40 border-gray-700 font-newLuck">
             <CardContent className="p-8">
@@ -96,7 +111,7 @@ export default function AboutAndReviews() {
                   alt={reviews[currentReview].name}
                   width={60}
                   height={60}
-                  className="rounded-full"
+                  className="rounded-full review-image"
                 />
                 <div>
                   <h3 className="font-semibold">{reviews[currentReview].name}</h3>

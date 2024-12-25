@@ -68,7 +68,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
   }
 
   return (
-    <section className=" container mx-auto py-16 px-4  bg-white dark:bg-black text-black dark:text-white font-newLuck">
+    <section id='contactus' className=" container mx-auto py-16 px-4  bg-white dark:bg-black text-black dark:text-white font-newLuck">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
