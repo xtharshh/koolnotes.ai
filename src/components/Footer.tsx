@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-wrap text-center lg:text-left">
           <div className="w-full lg:w-6/12 px-4">
-            <h4 className="text-3xl font-semibold">Let's keep in touch!</h4>
+            <h4 className="text-3xl font-semibold">Let&apos;s keep in touch!</h4>
             <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
               Find us on any of these platforms, we respond within 1-2 business days.
             </h5>
@@ -158,21 +158,21 @@ const Footer: React.FC = () => {
         </div>
         <hr className="my-6 border-blueGray-300" />
         <div className="flex flex-wrap items-center md:justify-between justify-center">
-          <div className="w-full px-4 mx-auto text-center">
+          <div className="w-full md:w-4/12 px-4 mx-auto text-center">
             <div className="text-blueGray-500 text-xl py-1 font-newGab font-bold">
-              ©{new Date().getFullYear()} Made With ❤️ by{' '}
+              ©{new Date().getFullYear()} Made With ❤️ by&nbsp;
               <a
                 href="https://www.instagram.com/xt.harshh"
                 className="text-blueGray-500 hover:text-gray-500"
               >
                 Harsh
               </a>
-              <span> {' '}&{' '} </span>
+              <span>&nbsp;&</span>
               <a
                 href="https://www.instagram.com/yash._.deep"
                 className="text-blueGray-500 hover:text-gray-500"
               >
-                Yashdeep{' '}
+                Yashdeep
               </a>
             </div>
           </div>

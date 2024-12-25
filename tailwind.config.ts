@@ -79,6 +79,7 @@ export default {
         sm: '576px',
         lg:"670px",
         vlg:"1290px",
+        xlg:"900px"
       },
       
     },
