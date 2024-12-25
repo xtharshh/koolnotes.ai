@@ -51,8 +51,8 @@ export const CameraIcon = ({ fill = "currentColor", size, height, width, ...prop
 export default function Buttons() {
   return (
     <div className="flex flex-wrap gap-4 items-center text-center justify-center pt-8 font-newLuck">
-      <Button as="a" href="https://www.instagram.com/xt.harshh" color="secondary" className="text-wrap h-14">
-        <h3 className="text-white text-lg">Send Message</h3>
+      <Button as="a" href="https://www.instagram.com/xt.harshh" color="secondary" className="text-wrap h-14 border border-black">
+        <h3 className="text-black dark:text-white text-lg">Send Message</h3>
       </Button>
       <Button as="a" href="https://www.google.com" color="danger" startContent={<UserIcon size={24} height={24} width={24} />} className="text-lg text-wrap h-14 text-white">
         Subscribe
