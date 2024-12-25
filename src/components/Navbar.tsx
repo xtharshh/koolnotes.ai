@@ -38,8 +38,8 @@ export default function Navbar() {
         </div>
       </div>
       {isOpen && (
-        <div className="absolute top-14 left-0 w-full bg-customBeige font-new flex flex-col items-center custom-md:hidden 
-        border border-gray-400 rounded-xl backdrop-blur-5xl bg-white dark:bg-black text-black dark:text-white">
+        <div className="absolute top-14 left-0 w-full bg-customBeige font-newLuck
+         flex flex-col items-center custom-md:hidden hover:text-gray-400 dark:hover:bg-gray-700 border border-gray-400 rounded-xl backdrop-blur-5xl bg-white dark:bg-black text-black dark:text-white">
           <a href="#select-college-section" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Colleges</a>
           <a href="#aboutus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">About</a>
           <a href="#reviews" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Reviews</a>

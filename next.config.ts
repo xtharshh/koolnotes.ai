@@ -4,10 +4,16 @@ const nextConfig: NextConfig = {
   // config options here
   experimental: {
     optimizePackageImports: ["@chakra-ui/react"],
-    
   },
   images: {
-    domains: ['res.cloudinary.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**',
+      },
+      // Add other remote patterns as needed
+    ],
   },
 };
 
