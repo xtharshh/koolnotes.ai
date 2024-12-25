@@ -1,5 +1,5 @@
 "use client"
-import Button from './ui/Buttons';
+import Button from './ui/dualBut';
 import React from 'react';
 
 const Introduction = () => {
