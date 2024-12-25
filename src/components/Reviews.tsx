@@ -7,7 +7,8 @@ import { ChevronLeft, ChevronRight, GraduationCap, Library, Star, Users } from '
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { reviews } from "../data/reviews"
-import { ContactSection } from "./Contact"
+import {ContactSection} from "@/components/Contact"
+
 
 
 export default function AboutAndReviews() {

@@ -159,6 +159,7 @@ const SellectCollege = () => {
               Select Branch
             </h3>
           )}
+              <div ref={semesterRef}>
           {branchClicked && selectedBranchIndex !== null && (
             <h3 className="mt-2 text-2xl cursor-pointer" onClick={() => setBranchClicked(false)}>
               Branch Selected: <span className='font-semibold text-blue-700'>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].title}</span>
@@ -166,16 +167,15 @@ const SellectCollege = () => {
           )}
           </div>
         </div>
+      </div>
       )}
       {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
-        <div ref={semesterRef}>
           <SemesterComponent
             semesters={colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters}
             selectedBranchIndex={selectedBranchIndex}
             handleSemesterClick={handleSemesterClick}
             handleSubjectClick={handleSubjectClick}
           />
-        </div>
       )}
     </div>
   );

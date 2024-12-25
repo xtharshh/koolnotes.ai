@@ -68,7 +68,7 @@ export function ContactSection() {
   }
 
   return (
-    <section className="container mx-auto py-16 px-4 md:px-6 bg-white dark:bg-black text-black dark:text-white font-newLuck">
+    <section className=" container mx-auto py-16 px-4  bg-white dark:bg-black text-black dark:text-white font-newLuck">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -79,7 +79,7 @@ export function ContactSection() {
           <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/50 bg-clip-text">
             Get in Touch
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground mx-auto">
             Have questions about our resources? Need support? Or want to collaborate? 
             We&apos;re here to help! Fill out the form below and we&apos;ll get back to you shortly.
           </p>
