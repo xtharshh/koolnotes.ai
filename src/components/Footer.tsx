@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebook, FaTwitter, FaInstagram, FaDribbble, FaGithub } from 'react-icons/fa';
 
-const Footer: React.FC = () => {
+const Footer: React.FC = React.memo(() => {
   return (
     <footer className="relative bg-white dark:bg-black pt-8 pb-6 text-black dark:text-white">
       <div
@@ -180,6 +180,8 @@ const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = 'Footer';
 
 export default Footer;

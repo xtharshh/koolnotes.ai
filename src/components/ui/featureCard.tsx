@@ -1,6 +1,7 @@
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
+import React from "react";
 
-export default function FeaureCard() {
+const FeatureCard = React.memo(() => {
   return (
     <Card 
       isFooterBlurred 
@@ -30,4 +31,8 @@ export default function FeaureCard() {
       </CardFooter>
     </Card>
   );
-}
+});
+
+FeatureCard.displayName = "FeatureCard";
+
+export default FeatureCard;

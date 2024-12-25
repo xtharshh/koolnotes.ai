@@ -6,7 +6,7 @@ interface CollegeProps {
   handleCollegeClick: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const College: React.FC<CollegeProps> = ({ colleges, selectedCollegeIndex, handleCollegeClick }) => {
+const College: React.FC<CollegeProps> = React.memo(function College({ colleges, selectedCollegeIndex, handleCollegeClick }) {
   return (
     <div className="text-center ">
       <p className="text-red-500 font-bold font-newMono text-4xl py-10">
@@ -32,6 +32,6 @@ const College: React.FC<CollegeProps> = ({ colleges, selectedCollegeIndex, handl
       </div>
     </div>
   );
-};
+});
 
 export default College;

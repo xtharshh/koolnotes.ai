@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons for menu
 import './Navbar.css'; // Importing the CSS file
-import { ThemeToggle } from './ThemeToggle'; // Import the ThemeToggle component
+import  ThemeToggle  from './ThemeToggle'; // Import the ThemeToggle component
 
 // Correctly use the Props interface for the Navbar component
 export default function Navbar() {

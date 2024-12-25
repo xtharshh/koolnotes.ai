@@ -74,13 +74,14 @@ const SemesterComponent: React.FC<SemesterProps> = ({
             </button>
           ))}
         </div>
+        <div ref={subjectRef}>
         {selectedSemesterIndex !== null && (
           <h2 className="text-center my-5 text-3xl font-bold font-newLuck">
             {semesters[selectedSemesterIndex].name}
           </h2>
         )}
+              </div>
         {selectedSemesterIndex !== null && (
-          <div ref={subjectRef}>
             <div className="grid grid-cols-1 sm:grid-cols-2 custom-lg:grid-cols-4 gap-4 mt-5">
               {semesters[selectedSemesterIndex].subjects.map((subject, subjectIndex) => (
                 <button 
@@ -91,7 +92,6 @@ const SemesterComponent: React.FC<SemesterProps> = ({
                   <h2>{subject.name}</h2>
                 </button>
               ))}
-            </div>
           </div>
         )}
         {isOpen && selectedSubjectIndex !== null && (

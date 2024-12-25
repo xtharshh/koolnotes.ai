@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, MailIcon, MessageSquare, Send, User } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -21,7 +21,7 @@ const formSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
-export function ContactSection() {
+const ContactSection: React.FC = React.memo(function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -189,4 +189,6 @@ export function ContactSection() {
       </motion.div>
     </section>
   );
-}
+});
+
+export default ContactSection;
