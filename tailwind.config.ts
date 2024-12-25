@@ -14,6 +14,7 @@ export default {
       backgroundImage: {
         'eclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile-1_apro5p.jpg')",
         'newEclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1711614262/samples/ecommerce/leather-bag-gray.jpg')",
+        'newImage': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1711614281/samples/chair-and-coffee-table.jpg')",
       },
       colors: {
         customBeige: 'rgba(156, 132, 73, 0.9)',
@@ -77,7 +78,9 @@ export default {
         'custom-lg': '1050px',
         sm: '576px',
         lg:"670px",
+        vlg:"1290px",
       },
+      
     },
   },
   darkMode: 'class',

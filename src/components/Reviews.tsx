@@ -30,8 +30,8 @@ export default function AboutAndReviews() {
             About CollegED
           </h2>
           <div className="grid lg:grid-cols-2 gap-4 items-center">
-            <div className="space-y-6">
-              <p className="text-lg font-newLuck text-muted-foreground leading-relaxed">
+            <div className="space-y-6 text-center vlg:pl-28 ">
+              <p className="text-lg font-newLuck text-muted-foreground leading-relaxed ">
                 CollegeED is your comprehensive platform for accessing academic materials across various engineering disciplines. 
                 We understand the importance of having the right resources at your fingertips during your academic journey.
               </p>
@@ -69,7 +69,7 @@ export default function AboutAndReviews() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-3xl blur-3xl dark:from-primary/10 dark:to-secondary/10" />
               <Image
-                src="/placeholder.svg"
+                src="https://res.cloudinary.com/djcbdfehg/image/upload/v1711614282/samples/cup-on-a-table.jpg"
                 alt="Students studying"
                 width={600}
                 height={400}
