@@ -1,6 +1,6 @@
 "use client"; // Marking this file as a client component
+
 import Navbar from "../components/Navbar";
-import { SpeedInsights } from "@vercel/speed-insights/react"
 import "./globals.css";
 import { Providers } from "./providers";
 import Footer from "../components/Footer";
@@ -24,7 +24,6 @@ export default function RootLayout({
         <link rel="icon" href="./favicon.ico" />
       </head>
       <body className={inter.className}>
-      <SpeedInsights/>
         <Providers>
           <ThemeProvider 
             attribute="class" 
