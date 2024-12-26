@@ -21,13 +21,11 @@ const formSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
-type FormSchema = z.infer<typeof formSchema>;
-
-const ContactSection: React.FC = React.memo(() => {
+const ContactSection: React.FC = React.memo(function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const form = useForm<FormSchema>({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -37,7 +35,7 @@ const ContactSection: React.FC = React.memo(() => {
     },
   });
 
-  async function onSubmit(values: FormSchema) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     try {
       const response = await fetch('/api/contact', {
@@ -70,7 +68,7 @@ const ContactSection: React.FC = React.memo(() => {
   }
 
   return (
-    <section className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
+    <section id='contactus' className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -192,7 +190,5 @@ const ContactSection: React.FC = React.memo(() => {
     </section>
   );
 });
-
-ContactSection.displayName = 'ContactSection';
 
 export default ContactSection;
