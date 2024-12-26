@@ -1,9 +1,5 @@
-// app/layout.tsx
-
 "use client"; // Marking this file as a client component
 
-// globals.css includes @tailwind directives
-// adjust the path if necessary
 import Navbar from "../components/Navbar";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -23,21 +19,25 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-  <body className={inter.className}>
-    <Providers>
-      <ThemeProvider 
-        attribute="class" 
-        defaultTheme="system" 
-        enableSystem 
-        disableTransitionOnChange
-      >
-        <Navbar/>
-        {children}
-        <Footer/>
-        <Toaster />
-      </ThemeProvider>
-    </Providers>
-  </body>
-</html>
+      <head>
+        <title>KoolNotes</title>
+        <link rel="icon" href="./favicon.ico" />
+      </head>
+      <body className={inter.className}>
+        <Providers>
+          <ThemeProvider 
+            attribute="class" 
+            defaultTheme="system" 
+            enableSystem 
+            disableTransitionOnChange
+          >
+            <Navbar/>
+            {children}
+            <Footer/>
+            <Toaster />
+          </ThemeProvider>
+        </Providers>
+      </body>
+    </html>
   )
 }

@@ -47,7 +47,7 @@ export default function AboutAndReviews() {
           <div className="grid lg:grid-cols-2 gap-4 items-center">
             <div className="space-y-6 text-center vlg:pl-28">
               <p className="text-lg font-newLuck text-muted-foreground leading-relaxed">
-                CollegeED is your comprehensive platform for accessing academic materials across various engineering disciplines. 
+                KoolNotes is your comprehensive platform for accessing academic materials across various engineering disciplines. 
                 We understand the importance of having the right resources at your fingertips during your academic journey.
               </p>
               <div className="grid grid-cols-2 gap-4 w-92 lg:w-auto">
