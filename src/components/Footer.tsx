@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { FaTwitter, FaFacebook, FaDribbble, FaGithub, FaInstagram } from 'react-icons/fa';
 
 const Footer: React.FC = React.memo(() => {
-  const [year] = useState<number>(new Date().getFullYear());
+  const [year, setYear] = useState<number>(new Date().getFullYear());
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setYear(new Date().getFullYear());
     setIsClient(true);
   }, []);
 
@@ -196,7 +197,7 @@ const Footer: React.FC = React.memo(() => {
         </div>
         <hr className="my-6 border-blueGray-300" />
         <div className="flex flex-wrap items-center md:justify-between justify-center">
-          <div className="w-full px-4 mx-auto text-center">
+          <div className="w-full  px-4 mx-auto text-center">
             <div className="text-blueGray-500 text-xl py-1 font-newGab font-bold">
               ©{year} Made With ❤️ by&nbsp;
               <a

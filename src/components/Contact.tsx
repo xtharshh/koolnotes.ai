@@ -23,7 +23,7 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>;
 
-const ContactSection: React.FC = React.memo(function ContactSection() {
+const ContactSection: React.FC = React.memo(() => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -70,7 +70,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
   }
 
   return (
-    <section id='contactus' className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
+    <section className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -192,5 +192,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
     </section>
   );
 });
+
+ContactSection.displayName = 'ContactSection';
 
 export default ContactSection;

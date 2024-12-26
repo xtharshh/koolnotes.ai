@@ -37,11 +37,16 @@ const SellectCollege = () => {
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [branchClicked, setBranchClicked] = useState<boolean>(false);
+  const [isClient, setIsClient] = useState<boolean>(false);
 
   const collegeRef = useRef<HTMLDivElement | null>(null);
   const branchRef = useRef<HTMLDivElement | null>(null);
   const semesterRef = useRef<HTMLDivElement | null>(null);
   const subjectRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleCollegeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const index = parseInt(event.target.value, 10);
@@ -49,9 +54,11 @@ const SellectCollege = () => {
     setSelectedBranchIndex(null);
     setSelectedSemesterIndex(null);
     setBranchClicked(false);
-    setTimeout(() => {
-      branchRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
+    if (isClient) {
+      setTimeout(() => {
+        branchRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,9 +77,11 @@ const SellectCollege = () => {
       setSelectedBranchIndex(null);
       setSelectedSemesterIndex(null);
       setBranchClicked(false);
-      setTimeout(() => {
-        branchRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      if (isClient) {
+        setTimeout(() => {
+          branchRef.current?.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+      }
     }
   };
 
@@ -102,9 +111,11 @@ const SellectCollege = () => {
     } else {
       setSelectedBranchIndex(branchIndex);
       setBranchClicked(true);
-      setTimeout(() => {
-        semesterRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      if (isClient) {
+        setTimeout(() => {
+          semesterRef.current?.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+      }
     }
     setSelectedSemesterIndex(null);
   };
@@ -114,9 +125,11 @@ const SellectCollege = () => {
       setSelectedSemesterIndex(null);
     } else {
       setSelectedSemesterIndex(semesterIndex);
-      setTimeout(() => {
-        subjectRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 300);
+      if (isClient) {
+        setTimeout(() => {
+          subjectRef.current?.scrollIntoView({ behavior: "smooth" });
+        }, 300);
+      }
     }
   };
 
