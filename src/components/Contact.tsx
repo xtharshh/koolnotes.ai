@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -68,7 +68,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
   }
 
   return (
-    <section id='contactus' className=" container mx-auto py-16 px-4  bg-white dark:bg-black text-black dark:text-white font-newLuck">
+    <section id='contactus' className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
