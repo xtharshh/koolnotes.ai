@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 interface Subject {
   name: string;
@@ -26,38 +26,49 @@ const SemesterComponent: React.FC<SemesterProps> = ({
   const [selectedSemesterIndex, setSelectedSemesterIndex] = useState<number | null>(null);
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isClient, setIsClient] = useState<boolean>(false);
 
   const subjectRef = useRef<HTMLDivElement | null>(null);
   const descriptionRef = useRef<HTMLDivElement | null>(null);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   const handleSemesterButtonClick = (index: number) => {
     setSelectedSemesterIndex(selectedSemesterIndex === index ? null : index);
     handleSemesterClick(index);
-    setTimeout(() => {
-      subjectRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
+    if (isClient) {
+      setTimeout(() => {
+        subjectRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
   };
 
   const handleSubjectButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) => {
     setSelectedSubjectIndex(index);
     setIsOpen(true);
     handleSubjectClick(index);
-    setTimeout(() => {
-      descriptionRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
+    if (isClient) {
+      setTimeout(() => {
+        descriptionRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
   };
 
   const closeModal = () => {
     setIsOpen(false);
     setSelectedSubjectIndex(null);
-    setTimeout(() => {
-      subjectRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, 300);
+    if (isClient) {
+      setTimeout(() => {
+        subjectRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
   };
 
   return (
     <div className="relative p-5">
-      <div className={`w-full ${isOpen ? "blur-md" : ""}`}>
+      <div className={`w-full ${isOpen ? "blur-md" : ""}`} suppressHydrationWarning={true}>
         <h1 className="text-4xl font-bold font-newLuck text-center">Semesters</h1>
         <div className="sm:grid-cols-2 custom-lg:grid-cols-4 gap-4 grid grid-cols-1 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
           {semesters.map((semester, index) => (

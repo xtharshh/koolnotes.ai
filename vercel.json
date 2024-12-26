@@ -1,7 +1,10 @@
+
 {
-    "build": {
-      "env": {
-        "NODE_ENV": "production"
-      }
-    }
-  }
+  "builds": [
+    { "src": "next.config.js", "use": "@vercel/node" },
+    { "src": "pages/**/*", "use": "@vercel/next" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/" }
+  ]
+}

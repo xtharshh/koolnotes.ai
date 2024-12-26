@@ -11,23 +11,30 @@ import ContactSection from "@/components/Contact"
 
 export default function AboutAndReviews() {
   const [currentReview, setCurrentReview] = useState(0)
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const images = document.querySelectorAll('.review-image');
-    images.forEach((img) => {
-      const width = (img as HTMLImageElement).style.width;
-      const height = (img as HTMLImageElement).style.height;
-      if ((width && width !== 'auto') || (height && height !== 'auto')) {
-        if (width && width !== 'auto') {
-          (img as HTMLImageElement).style.height = 'auto';
-        }
-        if (height && height !== 'auto') {
-          (img as HTMLImageElement).style.width = 'auto';
-        }
-        console.warn('Image with src', (img as HTMLImageElement).src, 'has either width or height modified, but not the other. Both are now set to "auto" to maintain the aspect ratio.');
-      }
-    });
+    setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      const images = document.querySelectorAll('.review-image');
+      images.forEach((img) => {
+        const width = (img as HTMLImageElement).style.width;
+        const height = (img as HTMLImageElement).style.height;
+        if ((width && width !== 'auto') || (height && height !== 'auto')) {
+          if (width && width !== 'auto') {
+            (img as HTMLImageElement).style.height = 'auto';
+          }
+          if (height && height !== 'auto') {
+            (img as HTMLImageElement).style.width = 'auto';
+          }
+          console.warn('Image with src', (img as HTMLImageElement).src, 'has either width or height modified, but not the other. Both are now set to "auto" to maintain the aspect ratio.');
+        }
+      });
+    }
+  }, [isClient]);
 
   const nextReview = () => {
     setCurrentReview((prev) => (prev + 1) % reviews.length)
@@ -35,6 +42,10 @@ export default function AboutAndReviews() {
 
   const prevReview = () => {
     setCurrentReview((prev) => (prev - 1 + reviews.length) % reviews.length)
+  }
+
+  if (!isClient) {
+    return null;
   }
 
   return (
@@ -47,7 +58,7 @@ export default function AboutAndReviews() {
           <div className="grid lg:grid-cols-2 gap-4 items-center">
             <div className="space-y-6 text-center vlg:pl-28">
               <p className="text-lg font-newLuck text-muted-foreground leading-relaxed">
-                KoolNotes is your comprehensive platform for accessing academic materials across various engineering disciplines. 
+                CollegeED is your comprehensive platform for accessing academic materials across various engineering disciplines. 
                 We understand the importance of having the right resources at your fingertips during your academic journey.
               </p>
               <div className="grid grid-cols-2 gap-4 w-92 lg:w-auto">

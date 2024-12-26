@@ -13,6 +13,15 @@ import {
 
 const ThemeToggle: React.FC = React.memo(function ThemeToggle() {
   const { setTheme } = useTheme()
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <DropdownMenu>

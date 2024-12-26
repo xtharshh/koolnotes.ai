@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, MailIcon, MessageSquare, Send, User } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,6 +24,11 @@ const formSchema = z.object({
 const ContactSection: React.FC = React.memo(function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -65,6 +70,10 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
     } finally {
       setIsSubmitting(false);
     }
+  }
+
+  if (!isClient) {
+    return null;
   }
 
   return (
