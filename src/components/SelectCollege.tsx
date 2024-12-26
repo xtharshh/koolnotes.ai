@@ -42,7 +42,8 @@ const SellectCollege = () => {
   const branchRef = useRef<HTMLDivElement | null>(null);
   const semesterRef = useRef<HTMLDivElement | null>(null);
   const subjectRef = useRef<HTMLDivElement | null>(null);
-
+  const descriptionRef = useRef<HTMLDivElement | null>(null);
+  
   const handleCollegeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const index = parseInt(event.target.value, 10);
     setSelectedCollegeIndex(index);
@@ -146,6 +147,7 @@ const SellectCollege = () => {
       </div>
       {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
         <div ref={branchRef}>
+          <div ref={descriptionRef}>
           <Branch
             branches={colleges[selectedCollegeIndex].branches}
             selectedCollegeIndex={selectedCollegeIndex}
@@ -167,6 +169,7 @@ const SellectCollege = () => {
           )}
           </div>
         </div>
+      </div>
       </div>
       )}
       {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
