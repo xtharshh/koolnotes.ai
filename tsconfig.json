@@ -8,8 +8,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["src/components/*"],
-      "@/lib/*": ["src/lib/*"]
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/lib/*": [
+        "src/lib/*"
+      ]
     },
     "plugins": [
       {
@@ -26,7 +30,8 @@
     "skipLibCheck": true,
     "strict": false,
     "noEmit": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
