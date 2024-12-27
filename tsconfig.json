@@ -1,5 +1,10 @@
 {
-  "compilerOptions": {
+  "compilerOptions": 
+  { 
+  "baseUrl": "./", 
+  "paths": { "@/*": ["src/*"], 
+  "@components/*": ["src/components/*"], 
+  "@lib/*": ["src/lib/*"] },
     "target": "esnext",
     "lib": [
       "dom",
@@ -23,7 +28,6 @@
       "react",
       "react-dom"
     ],
-    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
@@ -31,8 +35,8 @@
     ]
   },
   "include": [
-    "**/*.ts",
-    "**/*.tsx",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "next-env.d.ts",
     ".next/types/**/*.ts"
   ],

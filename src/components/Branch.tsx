@@ -10,10 +10,10 @@ interface BranchProps {
 
 // Map branch titles to Cloudinary background image URLs
 const branchBackgrounds: Record<string, string> = {
-  "Information Technology": "https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile-1_apro5p.jpg",
-  "Computer Science & Engineering": "https://res.cloudinary.com/djcbdfehg/image/upload/v1735150674/freepik__upload__86904_y0tpuy.jpg",
-  "AI & DS": "https://res.cloudinary.com/djcbdfehg/image/upload/v1711614281/samples/chair-and-coffee-table.jpg",
-  "Mechanical":"https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile-1_apro5p.jpg",// Add other branches with their respective Cloudinary images
+  "Information Technology": "https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/information-technology.jpg",
+  "Computer Science & Engineering": "https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/cse.jpg",
+  "AI & DS": "https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/aids.jpg",
+  "Mechanical":"https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/mechanical.jpg",// Add other branches with their respective Cloudinary images
 };
 
 const Branch: React.FC<BranchProps> = React.memo(({ branches, selectedCollegeIndex, handleBranchClick }) => {
@@ -22,7 +22,7 @@ const Branch: React.FC<BranchProps> = React.memo(({ branches, selectedCollegeInd
       {branches.map((branch, branchIndex) => (
         <div key={branch._id} className="pt-4 pb-4">
           <button
-            className="shadow-lg text-black font-newLuck rounded-lg cursor-pointer text-center h-60 w-52 font-bold text-2xl"
+            className="shadow-lg text-black font-newLuck rounded-lg cursor-pointer text-center h-60 w-72 font-bold text-2xl"
             onClick={() => handleBranchClick(selectedCollegeIndex, branchIndex)}
             style={{ 
               backgroundImage: `url(${branchBackgrounds[branch.title]})`, 
@@ -31,7 +31,7 @@ const Branch: React.FC<BranchProps> = React.memo(({ branches, selectedCollegeInd
               color: 'white'
             }}
           >
-            {branch.title}
+            
           </button>
         </div>
       ))}

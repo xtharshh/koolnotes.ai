@@ -1,22 +1,25 @@
+'use client';
+
 import React from 'react';
 import { Card, CardFooter, Image, Button } from '@nextui-org/react';
 
 interface FeatureCardProps {
   name: string;
+  src: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name }) => {
+const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name, src }) => {
   return (
     <Card
       isFooterBlurred
-      className="border-none w-52 h-auto text-left"
+      className="border-none w-64 h-auto text-left" // Increased width to 64
       radius="lg"
     >
       <Image
         alt="Feature Image"
         className="object-cover"
         height="auto" // Set height to auto
-        src="https://nextui.org/images/hero-card.jpeg"
+        src={src}
         width="auto" // Set width to auto
       />
       <CardFooter
@@ -30,7 +33,7 @@ const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name }) => {
           size="sm"
           variant="flat"
         >
-          Notify me
+          Visit
         </Button>
       </CardFooter>
     </Card>
