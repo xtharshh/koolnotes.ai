@@ -3,10 +3,10 @@ import { College } from '../../../models/models';
 import { NextRequest, NextResponse } from 'next/server';
 import { middleware } from '../../../middleware/middleware';
 
-// Connect to the database
-await dbConnect();
-
 export async function POST(req: NextRequest) {
+  // Connect to the database
+  await dbConnect();
+
   const middlewareResponse = middleware(req);
   if (middlewareResponse.status === 401) {
     return middlewareResponse; // Return the 401 response from middleware
@@ -36,6 +36,9 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest) {
+  // Connect to the database
+  await dbConnect();
+
   const middlewareResponse = middleware(req);
   if (middlewareResponse.status === 401) {
     return middlewareResponse; // Return the 401 response from middleware
@@ -55,6 +58,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
+  // Connect to the database
+  await dbConnect();
+
   const middlewareResponse = middleware(req);
   if (middlewareResponse.status === 401) {
     return middlewareResponse; // Return the 401 response from middleware

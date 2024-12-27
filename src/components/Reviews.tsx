@@ -4,10 +4,10 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, GraduationCap, Library, Star, Users } from 'lucide-react'
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "../components/ui/card"
+import { Button } from "../components/ui/button"
 import { reviews } from "../data/reviews"
-import ContactSection from "@/components/Contact"
+import ContactSection from "../components/Contact"
 
 export default function AboutAndReviews() {
   const [currentReview, setCurrentReview] = useState(0)

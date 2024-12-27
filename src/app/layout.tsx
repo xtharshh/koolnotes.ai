@@ -6,8 +6,8 @@ import { Providers } from "./providers";
 import Footer from "../components/Footer";
 import React from 'react';
 import { Inter } from 'next/font/google'
-import { ThemeProvider } from "@/components/ThemeProvider"
-import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "../components/ThemeProvider"
+import { Toaster } from "../components/ui/toaster"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })

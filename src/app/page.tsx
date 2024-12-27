@@ -2,8 +2,8 @@
 import React from "react";
 import Introduction from "../components/Introduction";
 import SellectCollege from "../components/SelectCollege";
-import AboutAndReviews from "@/components/Reviews";
-import NewFeatures from "@/components/newFeatures";
+import AboutAndReviews from "../components/Reviews";
+import NewFeatures from "../components/newFeatures";
 
 
 export default function Home() {
