@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, MailIcon, MessageSquare, Send, User } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { useForm, Control } from 'react-hook-form';
 import * as z from 'zod';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -21,11 +21,13 @@ const formSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
-const ContactSection: React.FC = React.memo(function ContactSection() {
+type FormSchema = z.infer<typeof formSchema>;
+
+const ContactSection: React.FC = React.memo(() => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -35,7 +37,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: FormSchema) {
     setIsSubmitting(true);
     try {
       const response = await fetch('/api/contact', {
@@ -68,7 +70,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
   }
 
   return (
-    <section id='contactus' className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
+    <section className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -99,7 +101,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 border-gray-700">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
-                      control={form.control}
+                      control={form.control as Control<FormSchema>}
                       name="name"
                       render={({ field }) => (
                         <FormItem>
@@ -115,7 +117,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
                       )}
                     />
                     <FormField
-                      control={form.control}
+                      control={form.control as Control<FormSchema>}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
@@ -132,7 +134,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
                     />
                   </div>
                   <FormField
-                    control={form.control}
+                    control={form.control as Control<FormSchema>}
                     name="subject"
                     render={({ field }) => (
                       <FormItem>
@@ -148,7 +150,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
                     )}
                   />
                   <FormField
-                    control={form.control}
+                    control={form.control as Control<FormSchema>}
                     name="message"
                     render={({ field }) => (
                       <FormItem>
@@ -190,5 +192,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
     </section>
   );
 });
+
+ContactSection.displayName = 'ContactSection';
 
 export default ContactSection;
