@@ -79,7 +79,7 @@ export default function TypingAnimation({
     <MotionComponent
       ref={elementRef}
       className={cn(
-        "text-4xl font-bold leading-[5rem] tracking-[-0.02em]",
+        "text-5xl font-bold leading-[5rem] tracking-[-0.02em]",
         className,
       )}
       {...props}

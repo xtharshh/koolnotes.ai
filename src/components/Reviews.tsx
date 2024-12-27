@@ -8,6 +8,7 @@ import { Card, CardContent } from "../components/ui/card"
 import { Button } from "../components/ui/button"
 import { reviews } from "../data/reviews"
 import ContactSection from "../components/Contact"
+// import { VelocityScroll } from "./ui/scroll-based-velocity"
 
 export default function AboutAndReviews() {
   const [currentReview, setCurrentReview] = useState(0)
@@ -97,6 +98,7 @@ export default function AboutAndReviews() {
       </section>
 
       {/* Reviews  */}
+      {/* <VelocityScroll text={"Harsh kumar"} className="font-newLuck font-extrabold "></VelocityScroll> */}
       <section id='reviews' className="container mx-auto mb-20 font-newLuck">
         <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-black dark:text-white">
           What Our Users Say

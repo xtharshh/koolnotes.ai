@@ -95,7 +95,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
               <button 
                 key={subjectIndex} 
                 onClick={(event) => handleSubjectButtonClick(event, subjectIndex)} 
-                className="p-2 bg-eclipse bg-center rounded-lg cursor-pointer text-center h-16 w-30 font-bold font-newLuck text-lg text-white backdrop-blur-md"
+                className="p-2 dark:bg-newEclipse bg-eclipse bg-center bg-cover rounded-lg cursor-pointer text-center h-16 w-30 font-bold font-newLuck text-lg text-white backdrop-blur-md"
               >
                 <h2>{subject.name}</h2>
               </button>
@@ -109,7 +109,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
           <div
             className="fixed inset-0 flex justify-center items-center z-50"
           >
-            <div className="relative bg-white dark:bg-black text-black dark:text-white p-5 text-center w-full max-w-xl mx-auto rounded-lg border-t border-gray-400 shadow-lg overflow-y-auto">
+            <div className="relative bg-eclipse dark:bg-newEclipse  text-black dark:text-white p-5 text-center w-full max-w-xl mx-auto rounded-lg border-t border-gray-400 shadow-lg overflow-y-auto">
               <button onClick={closeModal} className="absolute top-2 right-2 p-2 rounded-lg cursor-pointer font-bold font-newLuck">X</button>
               <div ref={descriptionRef}>
                 <h2 className="text-2xl mb-2 font-bold font-newLuck">
