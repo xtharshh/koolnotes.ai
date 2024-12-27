@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useRef, useState, useEffect } from 'react';
 
 interface Subject {
@@ -67,7 +67,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
   };
 
   return (
-    <div className="relative p-5">
+    <div  className="relative p-5">
       <div className={`w-full ${isOpen ? "blur-md" : ""}`} suppressHydrationWarning={true}>
         <h1 className="text-4xl font-bold font-newLuck text-center">Semesters</h1>
         <div className="sm:grid-cols-2 custom-lg:grid-cols-4 gap-4 grid grid-cols-1 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
@@ -75,7 +75,8 @@ const SemesterComponent: React.FC<SemesterProps> = ({
             <button 
               key={index} 
               onClick={() => handleSemesterButtonClick(index)}  
-              className="p-2 bg-eclipse bg-cover bg-center shadow-lg text-3xl rounded-lg font-newLuck cursor-pointer text-center h-44 w-25 font-bold"
+              className="p-2 dark:bg-eclipse bg-newEclipse bg-cover bg-transparent shadow-lg text-3xl rounded-lg 
+              font-newLuck text-white cursor-pointer text-center h-36 w-25 font-bold backdrop-blur-md"
             >
               <h3>{semester.name}</h3> 
             </button>
@@ -94,7 +95,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
               <button 
                 key={subjectIndex} 
                 onClick={(event) => handleSubjectButtonClick(event, subjectIndex)} 
-                className="p-2 bg-eclipse rounded-lg cursor-pointer text-center h-16 w-30 font-bold font-newLuck text-lg"
+                className="p-2 bg-eclipse bg-center rounded-lg cursor-pointer text-center h-16 w-30 font-bold font-newLuck text-lg text-white backdrop-blur-md"
               >
                 <h2>{subject.name}</h2>
               </button>

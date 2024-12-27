@@ -11,9 +11,10 @@ export default {
   ],
   theme: {
     extend: {
+      
       backgroundImage: {
-        'eclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1734984686/downloadfile-1_apro5p.jpg')",
-        'newEclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1735150674/freepik__upload__86904_y0tpuy.jpg')",
+        'eclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1735325203/sem.jpg')",
+        'newEclipse': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1735325195/sem2.jpg')",
         'newImage': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1711614281/samples/chair-and-coffee-table.jpg')",
       },
       colors: {
