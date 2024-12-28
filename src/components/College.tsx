@@ -1,8 +1,6 @@
-"use client";
+"use client"
 
-import React, { useEffect, useRef } from 'react';
-import LocomotiveScroll from 'locomotive-scroll';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
+import React from 'react';
 
 interface CollegeProps {
   colleges: { _id: string; name: string }[];
@@ -11,28 +9,12 @@ interface CollegeProps {
 }
 
 const College: React.FC<CollegeProps> = React.memo(function College({ colleges, selectedCollegeIndex, handleCollegeClick }) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      const scroll = new LocomotiveScroll({
-        el: scrollRef.current,
-        smooth: true,
-        multiplier: 1.2,
-      });
-
-      return () => {
-        scroll.destroy();
-      };
-    }
-  }, []);
-
   return (
-    <div ref={scrollRef} data-scroll-container className="text-center ">
-      <p className="text-red-500 font-bold font-newMono text-4xl py-10" data-scroll-section>
+    <div className="text-center ">
+      <p className="text-red-500 font-bold font-newMono text-4xl py-10">
         <span className='p-2'>Discover the amazing features we offer to enhance your study.</span>
       </p>
-      <h1 className="text-4xl mb-5 font-newLuck" data-scroll-section>SELECT YOUR COLLEGE</h1>
+      <h1 className="text-4xl mb-5 font-newLuck ">SELECT YOUR COLLEGE</h1>
       
       <div className="flex justify-center">
         <select

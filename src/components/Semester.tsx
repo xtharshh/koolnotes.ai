@@ -1,7 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import LocomotiveScroll from 'locomotive-scroll';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
+import React, { useRef, useState, useEffect } from 'react';
 
 interface Subject {
   name: string;
@@ -30,23 +28,8 @@ const SemesterComponent: React.FC<SemesterProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isClient, setIsClient] = useState<boolean>(false);
 
-  const scrollRef = useRef<HTMLDivElement>(null);
   const subjectRef = useRef<HTMLDivElement | null>(null);
   const descriptionRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      const scroll = new LocomotiveScroll({
-        el: scrollRef.current,
-        smooth: true,
-        multiplier: 1.2,
-      });
-
-      return () => {
-        scroll.destroy();
-      };
-    }
-  }, []);
 
   useEffect(() => {
     setIsClient(true);
@@ -84,7 +67,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
   };
 
   return (
-    <div ref={scrollRef} data-scroll-container className="relative p-5">
+    <div  className="relative p-5">
       <div className={`w-full ${isOpen ? "blur-md" : ""}`} suppressHydrationWarning={true}>
         <h1 className="text-4xl font-bold font-newLuck text-center">Semesters</h1>
         <div className="sm:grid-cols-2 custom-lg:grid-cols-4 gap-4 grid grid-cols-1 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">

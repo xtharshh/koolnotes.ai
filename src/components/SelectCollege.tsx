@@ -2,8 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import LocomotiveScroll from 'locomotive-scroll';
-import 'locomotive-scroll/dist/locomotive-scroll.css';
 import College from '../components/College';
 import Branch from '../components/Branch';
 import SemesterComponent from '../components/Semester';
@@ -41,25 +39,10 @@ const SellectCollege = () => {
   const [branchClicked, setBranchClicked] = useState<boolean>(false);
   const [isClient, setIsClient] = useState<boolean>(false);
 
-  const scrollRef = useRef<HTMLDivElement>(null);
   const collegeRef = useRef<HTMLDivElement | null>(null);
   const branchRef = useRef<HTMLDivElement | null>(null);
   const semesterRef = useRef<HTMLDivElement | null>(null);
   const subjectRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      const scroll = new LocomotiveScroll({
-        el: scrollRef.current,
-        smooth: true,
-        multiplier: 1.2,
-      });
-
-      return () => {
-        scroll.destroy();
-      };
-    }
-  }, []);
 
   useEffect(() => {
     setIsClient(true);
@@ -155,8 +138,8 @@ const SellectCollege = () => {
   };
 
   return (
-    <div ref={scrollRef} data-scroll-container className="p-5 text-center backdrop-blur-2xl bg-white dark:bg-black text-black dark:text-white">
-      <div id="select-college-section" ref={collegeRef} data-scroll-section>
+    <div className="p-5 text-center backdrop-blur-2xl bg-white dark:bg-black text-black dark:text-white">
+      <div id="select-college-section" ref={collegeRef}>
         <College
           colleges={filteredColleges}
           selectedCollegeIndex={selectedCollegeIndex}
@@ -175,7 +158,7 @@ const SellectCollege = () => {
         <button className="bg-yellow-500 p-2 rounded-r mt-4">🔍</button>
       </div>
       {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
-        <div ref={branchRef} data-scroll-section>
+        <div ref={branchRef}>
           <Branch
             branches={colleges[selectedCollegeIndex].branches}
             selectedCollegeIndex={selectedCollegeIndex}
