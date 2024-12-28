@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Loader2, MailIcon, MessageSquare, Send, User } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import * as z from 'zod';
+import LocomotiveScroll from 'locomotive-scroll';
+import 'locomotive-scroll/dist/locomotive-scroll.css';
 import { NextUIProvider } from '@nextui-org/react';
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
@@ -25,6 +27,22 @@ type FormValues = z.infer<typeof formSchema>;
 const ContactSection: React.FC = React.memo(function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const scroll = new LocomotiveScroll({
+        el: scrollRef.current,
+        smooth: true,
+        multiplier: 1.2,
+      });
+
+      return () => {
+        scroll.destroy();
+      };
+    }
+  }, []);
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -70,14 +88,14 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
 
   return (
     <NextUIProvider>
-      <section id='contactus' className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
+      <section ref={scrollRef} data-scroll-container id='contactus' className="container mx-auto py-16 px-4 bg-white dark:bg-black text-black dark:text-white font-newLuck">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <div className="text-center mb-12">
+          <div className="text-center mb-12" data-scroll-section>
             <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/50 bg-clip-text">
               Get in Touch
             </h2>
@@ -87,7 +105,7 @@ const ContactSection: React.FC = React.memo(function ContactSection() {
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto relative">
+          <div className="max-w-2xl mx-auto relative" data-scroll-section>
             <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-3xl blur-3xl dark:from-primary/5 dark:to-secondary/5" />
             <Card className="backdrop-blur-md bg-background/60 border-gradient dark:bg-background/40 border-gray-700">
               <CardHeader>

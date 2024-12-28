@@ -1,13 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { FaTwitter, FaFacebook, FaDribbble, FaGithub, FaInstagram } from 'react-icons/fa';
+import React, { useEffect, useRef, useState } from 'react';
+import LocomotiveScroll from 'locomotive-scroll';
+import 'locomotive-scroll/dist/locomotive-scroll.css';
+import { FaTwitter, FaFacebook, FaGithub, FaInstagram } from 'react-icons/fa';
 
 const Footer: React.FC = React.memo(() => {
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [isClient, setIsClient] = useState(false);
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     setYear(new Date().getFullYear());
     setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      const scroll = new LocomotiveScroll({
+        el: scrollRef.current,
+        smooth: true,
+        multiplier: 1.2,
+      });
+
+      return () => {
+        scroll.destroy();
+      };
+    }
   }, []);
 
   useEffect(() => {
@@ -34,7 +52,7 @@ const Footer: React.FC = React.memo(() => {
   }
 
   return (
-    <footer className="relative bg-white dark:bg-black pt-8 pb-6 text-black dark:text-white">
+    <footer ref={scrollRef} data-scroll-container className="relative bg-white dark:bg-black pt-8 pb-6 text-black dark:text-white">
       <div
         className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
         style={{ transform: 'translateZ(0)' }}
@@ -77,14 +95,6 @@ const Footer: React.FC = React.memo(() => {
                 className="text-lightBlue-600 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2 text-2xl"
               >
                 <FaFacebook />
-              </a>
-              <a
-                href="https://www.dribbble.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2 text-2xl"
-              >
-                <FaDribbble />
               </a>
               <a
                 href="https://www.github.com"
@@ -226,5 +236,7 @@ const Footer: React.FC = React.memo(() => {
     </footer>
   );
 });
+
 Footer.displayName = 'Footer';
+
 export default Footer;

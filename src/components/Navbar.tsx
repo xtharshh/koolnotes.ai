@@ -22,7 +22,9 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
     >
       <div className="flex items-center justify-between w-full text-black dark:text-white">
-        <div className="logo font-sans font-bold  dark:text-yellow-400  text-black">KoolNotes</div>
+        <div className="logo font-sans font-bold  dark:text-yellow-400  text-black">
+          <a href='#introduction'>KoolNotes</a>
+          </div>
         <div className="hidden custom-md:flex space-x-4 nav-links text-black dark:text-white font-newLuck font-semibold ">
           <a href="#select-college-section" className="">Colleges</a>
           <a href="#aboutus" className="">About</a>
