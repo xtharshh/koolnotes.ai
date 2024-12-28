@@ -65,9 +65,7 @@
   body {
     @apply bg-background text-foreground;
   }
-  html {
-    scroll-behavior: smooth;
-  }
+  html { @apply scroll-smooth; }
 }
 
 @layer utilities {
