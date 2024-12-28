@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaTwitter, FaFacebook, FaDribbble, FaGithub, FaInstagram } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaGithub, FaInstagram } from 'react-icons/fa';
 
 const Footer: React.FC = React.memo(() => {
   const [year, setYear] = useState<number>(new Date().getFullYear());
@@ -78,14 +78,7 @@ const Footer: React.FC = React.memo(() => {
               >
                 <FaFacebook />
               </a>
-              <a
-                href="https://www.dribbble.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-400 shadow-lg font-normal h-12 w-12 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2 text-2xl"
-              >
-                <FaDribbble />
-              </a>
+              
               <a
                 href="https://www.github.com"
                 target="_blank"
