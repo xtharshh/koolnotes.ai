@@ -1,9 +1,9 @@
 "use client"; // Marking this file as a client component
-import Navbar from "../components/Navbar";
-import { SpeedInsights } from "@vercel/speed-insights/react"
+
+
 import "./globals.css";
 import { Providers } from "./providers";
-import Footer from "../components/Footer";
+
 import React from 'react';
 import { Inter } from 'next/font/google'
 import { ThemeProvider } from "../components/ThemeProvider"
@@ -24,7 +24,7 @@ export default function RootLayout({
         <link rel="icon" href="./favicon.ico" />
       </head>
       <body className={inter.className}>
-      <SpeedInsights/>
+
         <Providers>
           <ThemeProvider 
             attribute="class" 
@@ -32,9 +32,9 @@ export default function RootLayout({
             enableSystem 
             disableTransitionOnChange
           >
-            <Navbar/>
+          
             {children}
-            <Footer/>
+            
             <Toaster />
           </ThemeProvider>
         </Providers>

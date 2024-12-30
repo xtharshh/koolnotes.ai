@@ -138,7 +138,7 @@ const SellectCollege = () => {
   };
 
   return (
-    <div className="p-5 text-center backdrop-blur-2xl bg-white dark:bg-black text-black dark:text-white">
+    <div className="p-5 mb-16 mt-8 text-center backdrop-blur-2xl bg-white dark:bg-black text-black dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg">
       <div id="select-college-section" ref={collegeRef}>
         <College
           colleges={filteredColleges}

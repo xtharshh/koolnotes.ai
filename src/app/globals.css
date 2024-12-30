@@ -5,6 +5,12 @@
 
 @layer base {
   :root {
+    --cream-50: #FDFBF7;
+    --cream-100: #FAF7F0;
+    --cream-200: #F5EDE0;
+    --cream-800: #8B7355;
+    --cream-900: #6B583F;
+    --cream-950: #463524;
     --background: hsl(0, 0%, 100%);
     --foreground: hsl(240, 10%, 3.9%);
     --card: hsl(0, 0%, 100%);
@@ -33,6 +39,12 @@
   }
 
   .dark {
+    --cream-50: #FDFBF7;
+    --cream-100: #FAF7F0;
+    --cream-200: #F5EDE0;
+    --cream-800: #8B7355;
+    --cream-900: #6B583F;
+    --cream-950: #463524;
     --background: hsl(240, 10%, 3.9%);
     --foreground: hsl(0, 0%, 98%);
     --card: hsl(240, 10%, 3.9%);
@@ -58,14 +70,30 @@
     --chart-4: hsl(280, 65%, 60%);
     --chart-5: hsl(340, 75%, 55%);
   }
-
+  
   * {
     @apply border-border;
   }
   body {
+      @apply font-sans m-0 p-0 text-white;
+      color: var(--foreground);
+      background: var(--background);
+    
     @apply bg-background text-foreground;
+    @apply antialiased;
   }
   html { @apply scroll-smooth; }
+  .animated-gradient {
+    background: linear-gradient(
+      -45deg,
+      var(--cream-50),
+      var(--cream-100),
+      var(--cream-200),
+      var(--cream-100)
+    );
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+  }
 }
 
 @layer utilities {
@@ -81,17 +109,23 @@
     mask-composite: exclude;
   }
 }
+.dark .animated-gradient {
+  background: linear-gradient(
+    -45deg,
+    var(--cream-950),
+    var(--cream-900),
+    var(--cream-800),
+    var(--cream-900)
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
   @apply bg-[#030303] bg-no-repeat bg-center bg-fixed;
   @apply backdrop-blur-lg transition ease-in-out;
-}
-body {
-  @apply font-sans m-0 p-0 text-white;
-  color: var(--foreground);
-  background: var(--background);
 }
 .light {
   @apply bg-cover bg-no-repeat bg-center bg-fixed;
@@ -103,3 +137,48 @@ body {
     --foreground: #ededed;
   }
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.button-glow {
+  animation: button-glow 2s ease-in-out infinite;
+}
+
+@keyframes button-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(139, 115, 85, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(139, 115, 85, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(139, 115, 85, 0.2);
+  }
+}
+
+.dark .button-glow {
+  animation: button-glow-dark 2s ease-in-out infinite;
+}
+
+@keyframes button-glow-dark {
+  0% {
+    box-shadow: 0 0 5px rgba(250, 247, 240, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(250, 247, 240, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(250, 247, 240, 0.2);
+  }
+}
+

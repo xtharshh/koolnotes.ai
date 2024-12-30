@@ -18,6 +18,14 @@ export default {
         'newImage': "url('https://res.cloudinary.com/djcbdfehg/image/upload/v1711614281/samples/chair-and-coffee-table.jpg')",
       },
       colors: {
+        cream: {
+          50: 'var(--cream-50)',
+          100: 'var(--cream-100)',
+          200: 'var(--cream-200)',
+          800: 'var(--cream-800)',
+          900: 'var(--cream-900)',
+          950: 'var(--cream-950)',
+        },
         customBeige: 'rgba(156, 132, 73, 0.9)',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

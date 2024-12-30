@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
+import Link from "next/link"
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons for menu
-import './Navbar.css'; // Importing the CSS file
-import  ThemeToggle  from './ThemeToggle'; // Import the ThemeToggle component
+import { motion } from "framer-motion"
 
-// Correctly use the Props interface for the Navbar component
-export default function Navbar() {
+import  ThemeToggle  from "../components/ThemeToggle"
+
+export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -15,23 +15,46 @@ export default function Navbar() {
   };
 
   return (
-    <motion.nav 
-      className="navbar"
+    <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      className="fixed w-full z-50 px-4 py-3 backdrop-blur-md bg-cream-100/75 dark:bg-cream-950/75 border-b border-cream-200 dark:border-cream-800"
     >
-      <div className="flex items-center justify-between w-full text-black dark:text-white">
-        <div className="logo font-sans font-bold  dark:text-yellow-400  text-black">
-          <a href='#introduction'>KoolNotes</a>
-          </div>
-        <div className="hidden custom-md:flex space-x-4 nav-links text-black dark:text-white font-newLuck font-semibold ">
-          <a href="#select-college-section" className="">Colleges</a>
-          <a href="#aboutus" className="">About</a>
-          <a href="#reviews" className="">Reviews</a>     
-          <a href="#contactus" className="">Contact</a>
-          <a href="#contributers" className="">Contributers</a>
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <svg
+            className="h-8 w-8 text-cream-950 dark:text-cream-50"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+          </svg>
+          <span className="text-xl font-bold text-cream-950 dark:text-cream-50">KoolNotes</span>
         </div>
+        <div className="hidden md:flex items-center gap-6 text-cream-950 dark:text-cream-50">
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#select-college-section">
+            Colleges
+          </Link>
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#aboutus">
+            About Us
+          </Link>
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#reviews">
+            Reviews
+          </Link>
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#contactus">
+            Contacts
+          </Link>
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#contributers">
+            Contributors
+          </Link>
+        </div>
+        <div className="flex items-center gap-4">
         <ThemeToggle /> {/* Add the ThemeToggle component here */}
         <div className="custom-md:hidden  ">
           <button onClick={toggleMenu} className="focus:outline-none">
@@ -49,6 +72,13 @@ export default function Navbar() {
           <a href="#contributers" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Contributers</a>
         </div>
       )}
+        </div>
+      
     </motion.nav>
-  );
+  )
 }
+
+
+
+// import './Navbar.css'; // Importing the CSS file
+
