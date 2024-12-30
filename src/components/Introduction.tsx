@@ -20,7 +20,7 @@ export function Introduction() {
             sequence={[
               'KoolNotes,',
               1000,
-              'KoolNotes, Start acing your exams today!.',
+              'KoolNotes, Start acing your exams today!.',
             ]}
             wrapper="span"
             speed={50}
@@ -50,7 +50,8 @@ export function Introduction() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button 
+            <Button as="a"
+              href="#select-college-section"
               variant="outline" 
               className="border-2 border-cream-950 text-cream-950 dark:border-cream-50 dark:text-cream-50 
                          hover:bg-cream-200 dark:hover:bg-cream-800 transition-all duration-300
