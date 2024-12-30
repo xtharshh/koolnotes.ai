@@ -18,7 +18,8 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed w-full z-50 px-4 py-3 backdrop-blur-md bg-cream-100/75 dark:bg-cream-950/75 border-b border-cream-200 dark:border-cream-800"
+      className="fixed w-full z-50 px-4 py-3 backdrop-blur-md bg-cream-100/75 font-newLuck
+      dark:bg-cream-950/75 border-b border-cream-200 dark:border-cream-800"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">

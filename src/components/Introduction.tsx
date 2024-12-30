@@ -7,7 +7,8 @@ import { TypeAnimation } from 'react-type-animation'
 
 export function Introduction() {
   return (
-    <div className="flex flex-col-reverse md:flex-row items-center justify-between px-4 py-12 md:py-32 gap-8">
+    <div className="flex  font-newLuck
+    flex-col-reverse md:flex-row items-center justify-between px-4 py-12 md:py-32 gap-8">
       <motion.div 
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -17,9 +18,9 @@ export function Introduction() {
         <h1 className="text-4xl md:text-6xl font-bold text-cream-950 dark:text-cream-50">
           <TypeAnimation
             sequence={[
-              'Study Notes You Can Count On,',
+              'KoolNotes,',
               1000,
-              'Study Notes You Can Count On, Start to Finish.',
+              'KoolNotes, Start acing your exams today!.',
             ]}
             wrapper="span"
             speed={50}
@@ -27,8 +28,10 @@ export function Introduction() {
           />
         </h1>
         <p className="text-lg text-cream-800 dark:text-cream-200">
-          We provide a platform for students to share and access quality study notes. With a commitment to
-          academic excellence, we ensure your study materials are reliable, organized, and easily accessible.
+        Access study notes, past papers, AI summaries, 
+        and chat support for all subjects and semesters. We&apos;re continuously expanding with 
+        new colleges and materials.
+
         </p>
         <div className="flex gap-4 flex-col-reverse md:flex-row md:gap-4">
           <motion.div
@@ -65,11 +68,11 @@ export function Introduction() {
         className="mt-8 md:mt-0"
       >
         <Image
-          src="/placeholder.svj.png"
+          src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735581531/student.png"
           alt="3D cartoon of a smiling boy holding books"
           width={500}
           height={500}
-          className="max-w-[300px] md:max-w-md mx-auto object-contain"
+          className="max-w-[300px] md:max-w-[1000px] mx-auto object-contain"
           priority
         />
       </motion.div>
