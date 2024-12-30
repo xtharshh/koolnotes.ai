@@ -39,7 +39,7 @@ export function Introduction() {
             whileTap={{ scale: 0.95 }}
           >
             <Button 
-              className="bg-cream-950 text-cream-50 dark:bg-cream-50 dark:text-cream-950 
+              className="w-full md:w-auto bg-cream-950 text-cream-50 dark:bg-cream-50 dark:text-cream-950 
                          hover:bg-cream-800 dark:hover:bg-cream-200 transition-all duration-300
                          button-glow transform hover:-translate-y-1 "
             >
@@ -53,7 +53,7 @@ export function Introduction() {
             <Button as="a"
               href="#select-college-section"
               variant="outline" 
-              className="border-2 border-cream-950 text-cream-950 dark:border-cream-50 dark:text-cream-50 
+              className="w-full md:w-auto border-2 border-cream-950 text-cream-950 dark:border-cream-50 dark:text-cream-50 
                          hover:bg-cream-200 dark:hover:bg-cream-800 transition-all duration-300
                          transform hover:-translate-y-1 hover:shadow-lg"
             >
