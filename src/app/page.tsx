@@ -7,7 +7,7 @@ import NewFeatures from "../components/newFeatures";
 import { Navbar } from "@/components/Navbar";
 import { StatsSection } from "@/components/StatsSection";
 import Footer from "@/components/Footer";
-
+import ChatBox from "@/components/ChatBox";
 
 export default function Home() {
   return (   
@@ -16,6 +16,7 @@ export default function Home() {
     <Navbar />
     <main className="max-w-7xl mx-auto pt-16">
       <Introduction />
+      <ChatBox />
       <StatsSection />
       <SellectCollege/>
     </main>
