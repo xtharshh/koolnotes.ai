@@ -11,8 +11,8 @@ export function StatsSection() {
 
   const stats = [
     { number: 50000, label: "Study Notes Shared" },
-    { number: 10000, label: "Active Students" },
-    { number: 7000, label: "Student Satisfaction" }
+    { number: 12000, label: "Active Students" },
+    { number: 10000, label: "Student Satisfaction" }
   ];
 
   return (
