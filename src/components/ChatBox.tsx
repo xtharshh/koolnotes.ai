@@ -88,9 +88,10 @@ const ChatBox = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
-            className="fixed font-newLuck bottom-20 right-4 z-50 w-[95%] md:w-[500px]"
+            className="fixed font-newGab bottom-20 right-4 z-50 w-[95%] md:w-[500px]"
           >
-            <Card className="border-2 border-gray-300 dark:border-gray-700 dark:text-yellow-100 text-black dark:bg-black bg-white">
+            <Card className="border-2 border-gray-300 dark:border-gray-700 dark:text-yellow-100
+             text-black dark:bg-black bg-white">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                 <CardTitle className="text-lg font-bold">
                   Chat with KoolNotes.ai
@@ -135,7 +136,7 @@ const ChatBox = () => {
                             ul: ({ children }) => <ul className="list-disc ml-4">{children}</ul>,
                             ol: ({ children }) => <ol className="list-decimal ml-4">{children}</ol>,
                             a: ({ href, children, ...props }) => (
-                              <a href={href} target="_blank" rel="noopener noreferrer" {...props} className="text-blue-600 break-words">
+                              <a href={href} target="_blank" rel="noopener noreferrer" {...props} className="text-blue-800 break-words">
                                 {children}
                               </a>
                             )
