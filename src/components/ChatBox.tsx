@@ -6,7 +6,7 @@ import { Button } from "src/components/ui/button";
 import { Card, CardContent, CardHeader, CardFooter, CardTitle } from "@/components/ui/card";
 import { Input } from "src/components/ui/input";
 import { ScrollArea } from "src/components/ui/scroll-area";
-import { X, MessageCircle, Send, Loader2, ArrowDownCircleIcon } from "lucide-react";
+import { X,  Send, Loader2, Bot, BotMessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChat } from "@ai-sdk/react";
 
@@ -29,7 +29,7 @@ const ChatBox = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      if (window.scrollY > 100) {
         setShowChatIcon(true);
       } else {
         setShowChatIcon(false);
@@ -68,12 +68,13 @@ const ChatBox = () => {
               ref={chatIconRef}
               onClick={toggleChat}
               size="icon"
-              className="dark:bg-beige bg-cream text-black dark:text-white dark:text-cream rounded-full size-14 p-2 shadow-lg"
+              className="dark:bg-beige bg-cream text-black dark:text-white dark:text-cream rounded-full size-16
+               p-2 shadow-lg"
             >
               {!isChatOpen ? (
-                <MessageCircle className="size-18 text-black dark:text-white" style={{ width: "26px", height: "26px" }} />
+                <BotMessageSquare className="size-18 text-black dark:text-white" style={{ width: "28px", height: "28px" }} />
               ) : (
-                <ArrowDownCircleIcon className="dark:text-white text-black" style={{ width: "26px", height: "26px"}} />
+                <X className="dark:text-white text-black" style={{ width: "28px", height: "28px"}} />
                 
               )}
             </Button>
@@ -107,8 +108,9 @@ const ChatBox = () => {
               <CardContent>
                 <ScrollArea className="h-[300px] pr-4">
                   {messages?.length === 0 && !isLoading && !error && (
-                    <div className="w-full wt-32 text-gray-500 items-center justify-center flex gap-3">
-                      No Messages Yet
+                    <div className="flex flex-col pt-16 items-center justify-center h-full">
+                      <Bot width={100} height={100} />
+                      <h3 className="text-lg font-bold">Kool! Kool! Type Something</h3>
                     </div>
                   )}
                   {messages?.map((message, index) => (
@@ -180,7 +182,7 @@ const ChatBox = () => {
                     value={input}
                     onChange={handleInputChange}
                     className="flex-1"
-                    placeholder="Type Your Query Here..."
+                    placeholder="Ask Anything...?"
                   />
                   <Button
                     type="submit"

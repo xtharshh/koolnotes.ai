@@ -58,8 +58,8 @@ export function Navbar() {
         <div className="flex items-center gap-4">
         <ThemeToggle /> {/* Add the ThemeToggle component here */}
         <div className="custom-md:hidden  ">
-          <button onClick={toggleMenu} className="focus:outline-none">
-            {isOpen ? <FaTimes color='text-black dark:text-white' size={24} /> : <FaBars color='text-black dark:text-white' size={24} />}
+          <button onClick={toggleMenu} className="focus:outline-none pt-2">
+            {isOpen ? <FaTimes color='text-black dark:text-white' size={26} /> : <FaBars color='text-black dark:text-white' size={26} />}
           </button>
         </div>
       </div>

@@ -1,18 +1,19 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef } from "react"
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
+import CountUp from '@/components/ui/CountUp';
 
 export function StatsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
   const stats = [
-    { number: "50K+", label: "Study Notes Shared" },
-    { number: "10K+", label: "Active Students" },
-    { number: "95%", label: "Student Satisfaction" }
-  ]
+    { number: 50000, label: "Study Notes Shared" },
+    { number: 10000, label: "Active Students" },
+    { number: 2000, label: "Student Satisfaction" }
+  ];
 
   return (
     <div 
@@ -27,11 +28,19 @@ export function StatsSection() {
           transition={{ duration: 0.5, delay: index * 0.2 }}
           className="text-center"
         >
-          <div className="text-5xl font-bold text-cream-950 dark:text-cream-50">{stat.number}</div>
+          <div className="text-5xl font-bold text-cream-950 dark:text-cream-50">
+            <CountUp
+              from={0}
+              to={stat.number}
+              separator=","
+              direction="up"
+              duration={1 + index * 0.5}
+              className="count-up-text"
+            />
+          </div>
           <div className="text-cream-800 dark:text-cream-200 mt-2 font-newLuck">{stat.label}</div>
         </motion.div>
       ))}
     </div>
-  )
+  );
 }
-
