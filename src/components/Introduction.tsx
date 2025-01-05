@@ -7,8 +7,7 @@ import { TypeAnimation } from 'react-type-animation'
 
 export function Introduction() {
   return (
-    <div className="flex  font-newLuck
-    flex-col-reverse md:flex-row items-center justify-between px-4 py-12 md:py-32 gap-8">
+    <div className="flex font-newLuck flex-col-reverse md:flex-row items-center justify-between px-4 py-12 md:py-32 gap-8">
       <motion.div 
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
@@ -28,10 +27,9 @@ export function Introduction() {
           />
         </h1>
         <p className="text-lg text-cream-800 dark:text-cream-200">
-        Access study notes, past papers, AI summaries, 
-        and chat support for all subjects and semesters. We&apos;re continuously expanding with 
-        new colleges and materials.
-
+          Access study notes, past papers, AI summaries, 
+          and chat support for all subjects and semesters. We&apos;re continuously expanding with 
+          new colleges and materials.
         </p>
         <div className="flex gap-4 flex-col-reverse md:flex-row md:gap-4">
           <motion.div
@@ -41,7 +39,7 @@ export function Introduction() {
             <Button 
               className="w-full md:w-auto bg-cream-950 text-cream-50 dark:bg-cream-50 dark:text-cream-950 
                          hover:bg-cream-800 dark:hover:bg-cream-200 transition-all duration-300
-                         button-glow transform hover:-translate-y-1 "
+                         button-glow transform hover:-translate-y-1"
             >
               Upload Notes
             </Button>
@@ -50,14 +48,15 @@ export function Introduction() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Button as="a"
-              href="#select-college-section"
+            <Button 
               variant="outline" 
               className="w-full md:w-auto border-2 border-cream-950 text-cream-950 dark:border-cream-50 dark:text-cream-50 
                          hover:bg-cream-200 dark:hover:bg-cream-800 transition-all duration-300
                          transform hover:-translate-y-1 hover:shadow-lg"
             >
-              Browse Notes
+              <a href="#select-college-section" className="w-full h-full flex items-center justify-center p-0">
+                Browse Notes
+              </a>
             </Button>
           </motion.div>
         </div>
