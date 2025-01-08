@@ -18,7 +18,7 @@ export interface Contributor {
       name: "Raghav Gupta",
       department: "Engineering",
       review: "Raghav Gupta is an exceptional problem solver and a great team player. His innovative approaches to complex challenges have significantly improved the website's performance. He has provided the entire Computer Science Engineering (CSE) content material for the students of CGC College (CEC). His dedication and contributions have been invaluable to our success.",
-      photo: "https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/jobfinder.jpg",//photo to be pastedhere
+      photo: "https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/information-technology.jpg",//photo to be pastedhere
       specialisation: "Android Developer",
       socialLinks: {
         instagram: "https://instagram.com/raghavgupta.04",
