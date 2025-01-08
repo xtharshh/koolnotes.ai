@@ -1,13 +1,18 @@
-"use client"
+"use client";
 
-import Link from "next/link"
+import Link from "next/link";
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons for menu
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
-import  ThemeToggle  from "../components/ThemeToggle"
+import ThemeToggle from "../components/ThemeToggle";
 
-export function Navbar() {
+interface NavbarProps {
+  setShowContributors: (show: boolean) => void;
+  handleNavigation: () => void;
+}
+
+export function Navbar({ setShowContributors, handleNavigation }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -18,8 +23,7 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed w-full z-50 px-4 py-3 backdrop-blur-md bg-cream-100/75 font-newLuck
-      dark:bg-cream-950/75 border-b border-cream-200 dark:border-cream-800 top-0"
+      className="fixed w-full z-50 px-4 py-3 backdrop-blur-md bg-cream-100/75 font-newLuck dark:bg-cream-950/75 border-b border-cream-200 dark:border-cream-800 top-0"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -39,47 +43,52 @@ export function Navbar() {
           <span className="text-xl font-bold text-cream-950 dark:text-cream-50">KoolNotes</span>
         </div>
         <div className="hidden md:flex items-center gap-6 text-cream-950 dark:text-cream-50">
-          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#select-college-section">
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#select-college-section" onClick={handleNavigation}>
             Colleges
           </Link>
-          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#aboutus">
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#aboutus" onClick={handleNavigation}>
             About Us
           </Link>
-          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#reviews">
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#reviews" onClick={handleNavigation}>
             Reviews
           </Link>
-          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#contactus">
+          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#contactus" onClick={handleNavigation}>
             Contacts
           </Link>
-          <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#contributers">
+          <button
+            className="hover:text-cream-800 dark:hover:text-cream-200"
+            onClick={() => setShowContributors(true)}
+          >
             Contributors
-          </Link>
-        </div>
-        <div className="flex items-center gap-4">
-        <ThemeToggle /> {/* Add the ThemeToggle component here */}
-        <div className="custom-md:hidden  ">
-          <button onClick={toggleMenu} className="focus:outline-none pt-2">
-            {isOpen ? <FaTimes color='text-black dark:text-white' size={26} /> : <FaBars color='text-black dark:text-white' size={26} />}
           </button>
         </div>
+        <div className="flex items-center gap-4">
+          <ThemeToggle /> {/* Add the ThemeToggle component here */}
+          <div className="custom-md:hidden">
+            <button onClick={toggleMenu} className="focus:outline-none pt-2">
+              {isOpen ? <FaTimes color='text-black dark:text-white' size={26} /> : <FaBars color='text-black dark:text-white' size={26} />}
+            </button>
+          </div>
+        </div>
+        {isOpen && (
+          <div className="absolute top-14 left-0 w-full bg-customBeige font-newLuck
+            flex flex-col items-center custom-md:hidden hover:text-gray-400 dark:hover:bg-gray-700 border border-gray-400 rounded-xl backdrop-blur-5xl bg-white dark:bg-black text-black dark:text-white">
+            <a href="#select-college-section" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={handleNavigation}>Colleges</a>
+            <a href="#aboutus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={handleNavigation}>About</a>
+            <a href="#reviews" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={handleNavigation}>Reviews</a>
+            <a href="#contactus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={handleNavigation}>Contact</a>
+            <button
+              className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white"
+              onClick={() => {
+                setShowContributors(true);
+                toggleMenu();
+              }}
+            >
+              Contributors
+            </button>
+          </div>
+        )}
       </div>
-      {isOpen && (
-        <div className="absolute top-14 left-0 w-full bg-customBeige font-newLuck
-         flex flex-col items-center custom-md:hidden hover:text-gray-400 dark:hover:bg-gray-700 border border-gray-400 rounded-xl backdrop-blur-5xl bg-white dark:bg-black text-black dark:text-white">
-          <a href="#select-college-section" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Colleges</a>
-          <a href="#aboutus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">About</a>
-          <a href="#reviews" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Reviews</a>
-          <a href="#contactus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Contact</a>
-          <a href="#contributers" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white">Contributers</a>
-        </div>
-      )}
-        </div>
-      
     </motion.nav>
-  )
+  );
 }
-
-
-
-// import './Navbar.css'; // Importing the CSS file
-
