@@ -72,7 +72,7 @@ const ChatBox = () => {
                p-2 shadow-lg"
             >
               {!isChatOpen ? (
-                <BotMessageSquare className="size-18 text-black dark:text-white" style={{ width: "28px", height: "28px" }} />
+                <BotMessageSquare className="size-18 text-black dark:text-white" style={{ width: "28px", height: "28px" }} /> 
               ) : (
                 <X className="dark:text-white text-black" style={{ width: "28px", height: "28px"}} />
                 
@@ -94,7 +94,7 @@ const ChatBox = () => {
              text-black dark:bg-black bg-white">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                 <CardTitle className="text-lg font-bold">
-                  Chat with KoolNotes.ai
+                  Chat with Kool.ai
                 </CardTitle>
                 <Button
                   onClick={toggleChat}
