@@ -1,20 +1,4 @@
-
-
-export interface Contributor {
-  id: number
-  name: string
-  department: string
-  description: string
-  photo: string
-  specialisation: string
-  projects: number
-  experience: string
-  socialLinks: {
-    instagram?: string
-    linkedin?: string
-    github?: string
-  }
-}
+import { Contributor } from '../types/conributors'
 
 export const contributors: Contributor[] = [
   {
@@ -64,7 +48,7 @@ export const contributors: Contributor[] = [
   },
   {
     id: 4,
-    name: "Amit Kumar",
+    name: "Yash Goyal",
     department: "Marketing",
     description: "Amit's innovative marketing strategies have boosted our brand visibility. Her data-driven approach and creative campaigns have significantly increased our market reach and user engagement.",
     photo: "https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/information-technology.jpg",
@@ -72,7 +56,7 @@ export const contributors: Contributor[] = [
     projects: 22,
     experience: '3+ years',
     socialLinks: {
-      instagram: "https://instagram.com/amitioholics",
+      instagram: "https://instagram.com/yashgoyal28_",
       linkedin: "https://linkedin.com/in/raghaavgupta2004",
       github: "https://github.com/raghavg2004"
     }

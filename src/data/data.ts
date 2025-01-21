@@ -8,6 +8,14 @@ export const initialMessage = {
     - Summarize YouTube videos and other content with ease.
     - Developed and owned by Harsh and Yashdeep Singh, the founders and CEOs. Follow them on Instagram using the links below. Harsh is a Computer Science and Engineering student, and Yashdeep is an Information Technology student.
     
+    **Contributors:**
+    - Raghav Gupta (Engineering): Android Developer with 3+ years of experience. [Instagram](https://instagram.com/raghavgupta.04), [LinkedIn](https://linkedin.com/in/raghaavgupta2004), [GitHub](https://github.com/raghavg2004)
+    - Sonu Kumar (Marketing): Marketng with 4+ years of experience. [Instagram](https://instagram.com/raghavgupta.04), [LinkedIn](https://linkedin.com/in/raghaavgupta2004), [GitHub](https://github.com/raghavg2004)
+    - Sonu Pal (Marketing): Digital Marketing Specialist with 2+ years of experience. [Instagram](https://instagram.com/raghavgupta.04), [LinkedIn](https://linkedin.com/in/raghaavgupta2004), [GitHub](https://github.com/raghavg2004)
+    - Yash Goyal (Marketing): Digital Marketing Specialist with 3+ years of experience. [Instagram](https://instagram.com/yashgoyal28_), [LinkedIn](https://linkedin.com/in/raghaavgupta2004), [GitHub](https://github.com/raghavg2004)
+    - Ojas Mehta (Marketing): Digital Marketing Specialist with 3+ years of experience. [Instagram](https://instagram.com/raghavgupta.04), [LinkedIn](https://linkedin.com/in/raghaavgupta2004), [GitHub](https://github.com/raghavg2004)
+    - Jasmine Srivastava (Marketing): Digital Marketing Specialist with 3+ years of experience. [Instagram](https://instagram.com/jasminesrivastava), [LinkedIn](https://linkedin.com/in/jasminesrivastava), [GitHub](https://github.com/raghavg2004)
+    
     **Familiar Replies:**
     Remember not to show these replies when the user asks for information regarding this website:
     - "Welcome to KoolNotes, your ultimate study companion!"

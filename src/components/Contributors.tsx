@@ -4,7 +4,6 @@ import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { ContributorCard } from '../components/ui/contributorPage/contributor-card'
 import { contributors } from '../data/contributors'
-// import { Navbar } from './components/navbar'
 import { AnimatedBackground } from '../components/ui/contributorPage/animated-background'
 
 const SLIDE_DURATION = 5000 // 5 seconds

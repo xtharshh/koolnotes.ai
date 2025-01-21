@@ -10,6 +10,15 @@ import { X,  Send, Loader2, Bot, BotMessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useChat } from "@ai-sdk/react";
 
+const CodeBlock: React.FC<{ inline?: boolean; children?: React.ReactNode } & React.HTMLAttributes<HTMLElement>> = ({ inline = false, children, ...props }) => {
+  return inline ? (
+    <code {...props} className="bg-gray-200 px-1 rounded">{children}</code>
+  ) : (
+    <pre {...props} className="bg-gray-200 p-2 rounded">
+      <code>{children}</code>
+    </pre>
+  );
+};
 const ChatBox = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [showChatIcon, setShowChatIcon] = useState(false);
@@ -81,7 +90,6 @@ const ChatBox = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    <div id="chatbox">
       <AnimatePresence>
         {isChatOpen && (
           <motion.div
@@ -122,29 +130,21 @@ const ChatBox = () => {
                       style={{ wordWrap: "break-word" }}
                     >
                       <div className={`inline-block rounded-lg p-4 border ${message.role === "user" ? "dark:bg-gray-700 bg-black text-white border-black" : "dark:bg-cream-900 dark:text-white bg-gray-200 text-black border-gray-200"}`}>
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            code({ inline, children, ...props }) {
-                              return inline ? (
-                                <code {...props} className="bg-gray-200 px-1 rounded">{children}</code>
-                              ) : (
-                                <pre {...props} className="bg-gray-200 p-2 rounded">
-                                  <code>{children}</code>
-                                </pre>
-                              );
-                            },
-                            ul: ({ children }) => <ul className="list-disc ml-4">{children}</ul>,
-                            ol: ({ children }) => <ol className="list-decimal ml-4">{children}</ol>,
-                            a: ({ href, children, ...props }) => (
-                              <a href={href} target="_blank" rel="noopener noreferrer" {...props} className="text-blue-800 break-words">
-                                {children}
-                              </a>
-                            )
-                          }}
-                        >
-                          {message.content}
-                        </ReactMarkdown>
+                      <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
+      components={{
+        code: CodeBlock,
+        ul: ({ children }) => <ul className="list-disc ml-4">{children}</ul>,
+        ol: ({ children }) => <ol className="list-decimal ml-4">{children}</ol>,
+        a: ({ href, children, ...props }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer" {...props} className="text-blue-800 break-words">
+            {children}
+          </a>
+        )
+      }}
+    >
+      {message.content}
+    </ReactMarkdown>
                       </div>
                     </div>
                   ))}
@@ -200,7 +200,6 @@ const ChatBox = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
     </>
   );
 };

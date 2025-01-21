@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { SocialLinks } from './social-links'
-import type { Contributor } from '../../../data/contributors'
-import { Badge } from '@/components/ui/badge'
+import { Contributor } from '../../../types/conributors'
+
 
 interface ContributorCardProps {
   contributor: Contributor
@@ -13,6 +13,9 @@ interface ContributorCardProps {
   onSlideComplete: () => void
   totalTime: number
 }
+
+// Removed local Contributor interface declaration
+
 
 export function ContributorCard({ 
   contributor, 
@@ -86,9 +89,7 @@ export function ContributorCard({
                     {contributor.name}
                   </h2>
                   <div className="flex gap-2 mt-2">
-                    <Badge variant="secondary" className="text-lg">
-                      {contributor.type}
-                    </Badge>
+                    {/* Removed the Badge component that references contributor.type */}
                   </div>
                 </motion.div>
 
