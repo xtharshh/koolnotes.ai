@@ -33,9 +33,8 @@ const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name, src, link })
           radius="lg"
           size="sm"
           variant="flat"
-          
         >
-          <a alt="/redirect" href={link}>Visit</a>
+          <a href={link}>Visit</a>
         </Button>
       </CardFooter>
     </Card>
