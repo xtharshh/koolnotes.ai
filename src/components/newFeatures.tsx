@@ -13,18 +13,28 @@ const NewFeatures = React.memo(() => {
             <FeatureCard
               name="Jobs & Internships"
               src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/jobs2.jpg"
+              link="https://job-seeking-web-application-hp.netlify.app"
             />
             <FeatureCard
               name="Ai Summary"
               src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/ai-summary.jpg"
+              link="#chatbot"
             />
             <FeatureCard
               name="Upload & Earn"
               src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/uploadearn.jpg"
+              link="/upload-earn"
             />
             <FeatureCard
               name="PixelWalls"
               src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/pixelwalls.jpg"
+              link="/pixelwalls"
+
+            />
+            <FeatureCard
+              name="DSA Algorithms"
+              src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/jobs.jpg"
+              link="https://dsa-sortingvisualizer.vercel.app/"
             />
           </div>
         </div>

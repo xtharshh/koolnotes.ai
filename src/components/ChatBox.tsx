@@ -81,6 +81,7 @@ const ChatBox = () => {
           </motion.div>
         )}
       </AnimatePresence>
+    <div id="chatbox">
       <AnimatePresence>
         {isChatOpen && (
           <motion.div
@@ -199,6 +200,7 @@ const ChatBox = () => {
           </motion.div>
         )}
       </AnimatePresence>
+    </div>
     </>
   );
 };

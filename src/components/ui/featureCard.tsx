@@ -6,9 +6,10 @@ import { Card, CardFooter, Image, Button } from '@nextui-org/react';
 interface FeatureCardProps {
   name: string;
   src: string;
+  link?: string;
 }
 
-const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name, src }) => {
+const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name, src, link }) => {
   return (
     <Card
       isFooterBlurred
@@ -32,8 +33,9 @@ const FeatureCard: React.FC<FeatureCardProps> = React.memo(({ name, src }) => {
           radius="lg"
           size="sm"
           variant="flat"
+          
         >
-          Visit
+          <a alt="/redirect" href={link}>Visit</a>
         </Button>
       </CardFooter>
     </Card>
