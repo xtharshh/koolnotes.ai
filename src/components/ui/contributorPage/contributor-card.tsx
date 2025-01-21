@@ -89,7 +89,7 @@ export function ContributorCard({
                     {contributor.name}
                   </h2>
                   <div className="flex gap-2 mt-2">
-                    {/* Removed the Badge component that references contributor.type */}
+                  
                   </div>
                 </motion.div>
 

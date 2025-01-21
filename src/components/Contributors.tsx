@@ -25,7 +25,7 @@ export default function ContributorsPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent mb-4">
+          <h1 className="text-5xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent mb-2">
             Our Contributors
           </h1>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
@@ -34,7 +34,7 @@ export default function ContributorsPage() {
           </p>
         </motion.div>
 
-        <div className="relative min-h-[600px] mb-8">
+        <div className="relative min-h-[800px] mb-8 mt-24 md:mt-0" id='contributors'>
           {contributors.map((contributor, index) => (
             <div
               key={contributor.id}

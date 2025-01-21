@@ -41,7 +41,7 @@ export function Introduction() {
                          hover:bg-cream-800 dark:hover:bg-cream-200 transition-all duration-300
                          button-glow transform hover:-translate-y-1"
             >
-              Upload Notes
+              Kool.Ai
             </Button>
           </motion.div>
           <motion.div

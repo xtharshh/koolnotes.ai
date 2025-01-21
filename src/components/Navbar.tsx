@@ -59,7 +59,7 @@ export function Navbar({ setShowContributors, handleNavigation }: NavbarProps) {
             className="hover:text-cream-800 dark:hover:text-cream-200"
             onClick={() => setShowContributors(true)}
           >
-            Contributors
+            <a href="#contributors">Contributors</a>
           </button>
         </div>
         <div className="flex items-center gap-4">
@@ -84,7 +84,7 @@ export function Navbar({ setShowContributors, handleNavigation }: NavbarProps) {
                 toggleMenu();
               }}
             >
-              Contributors
+              <a href="#contributors">Contributors</a>
             </button>
           </div>
         )}
