@@ -1,5 +1,12 @@
 'use client';
+
 import React, { useRef, useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import { IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface Subject {
   name: string;
@@ -18,6 +25,16 @@ interface SemesterProps {
   handleSubjectClick: (subjectIndex: number | null) => void;
 }
 
+const style = {
+  position: 'absolute' as const,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  boxShadow: 24,
+  p: 4,
+};
+
 const SemesterComponent: React.FC<SemesterProps> = ({
   semesters,
   handleSemesterClick,
@@ -27,7 +44,6 @@ const SemesterComponent: React.FC<SemesterProps> = ({
   const [selectedSubjectIndex, setSelectedSubjectIndex] = useState<number | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isClient, setIsClient] = useState<boolean>(false);
-
   const subjectRef = useRef<HTMLDivElement | null>(null);
   const descriptionRef = useRef<HTMLDivElement | null>(null);
 
@@ -47,7 +63,7 @@ const SemesterComponent: React.FC<SemesterProps> = ({
 
   const handleSubjectButtonClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, index: number) => {
     setSelectedSubjectIndex(index);
-    setIsOpen(true);
+    setIsOpen(true); // Open the modal when a subject is selected
     handleSubjectClick(index);
     if (isClient) {
       setTimeout(() => {
@@ -66,8 +82,13 @@ const SemesterComponent: React.FC<SemesterProps> = ({
     }
   };
 
+  // Toggle between dark and light mode
+
+
   return (
-    <div  className="relative p-5">
+    <div className="relative p-5">
+      
+
       <div className={`w-full ${isOpen ? "blur-md" : ""}`} suppressHydrationWarning={true}>
         <h1 className="text-4xl font-bold font-newLuck text-center">Semesters</h1>
         <div className="sm:grid-cols-2 custom-lg:grid-cols-4 gap-4 grid grid-cols-1 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
@@ -103,35 +124,55 @@ const SemesterComponent: React.FC<SemesterProps> = ({
           </div>
         )}
       </div>
-      {isOpen && selectedSubjectIndex !== null && (
-        <>
-          <div className="fixed inset-0 bg-black bg-opacity-50 z-40"></div> {/* Full-screen blur background */}
-          <div
-            className="fixed inset-0 flex justify-center items-center z-50"
+      
+      {/* MUI Modal (Basic Modal) */}
+      <Modal
+        open={isOpen}
+        onClose={closeModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ 
+          ...style, 
+          bgcolor: 'white', // Light mode background
+          color: 'black', // Light mode text color
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          flexDirection: 'column' 
+        }} className="dark:bg-black dark:text-cream dark:text-white text-black font-bold font-newLuck">
+          {/* Close Button */}
+          <IconButton
+            onClick={closeModal}
+            sx={{ position: 'absolute', top: 10, right: 10 }}
+            aria-label="close"
           >
-            <div className="relative bg-eclipse dark:bg-newEclipse  text-black dark:text-white p-5 text-center w-full max-w-xl mx-auto rounded-lg border-t border-gray-400 shadow-lg overflow-y-auto">
-              <button onClick={closeModal} className="absolute top-2 right-2 p-2 rounded-lg cursor-pointer font-bold font-newLuck">X</button>
-              <div ref={descriptionRef}>
-                <h2 className="text-2xl mb-2 font-bold font-newLuck">
-                  {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].name}
-                </h2>
-                <p className='font-bold font-newLuck'>{selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].description}</p>
-                <div className="mt-5">
-                  {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].descriptionButtons?.map((button, index) => (
-                    <button
-                      key={index}
-                      onClick={() => window.open(button.link, '_blank')}
-                      className="block w-full max-w-xs p-2 my-1 bg-yellow-600 text-black rounded-lg cursor-pointer text-center font-newLuck mx-auto"
-                    >
-                      {button.title}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <CloseIcon />
+          </IconButton>
+
+          <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ textAlign: 'center' }}>
+            {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].name}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2, textAlign: 'center' }}>
+            {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].description}
+          </Typography>
+          <div className="mt-5">
+            {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].descriptionButtons?.map((button, index) => (
+              <Button
+                key={index}
+                onClick={() => window.open(button.link, '_blank')}
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2, width: '100%' }}
+                className="dark:bg-eclipse dark:text-white text-black bg-newEclipse font-bold font-newLuck"
+              >
+                {button.title}
+              </Button>
+
+            ))}
           </div>
-        </>
-      )}
+        </Box>
+      </Modal>
     </div>
   );
 };
