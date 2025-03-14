@@ -57,26 +57,26 @@ const ChatBox = () => {
         <Button
           onClick={() => setIsOpen(true)}
           size="lg"
-          className="rounded-full p-4 bg-black text-white hover:bg-gray-800 dark:bg-cream-50 dark:text-black dark:hover:bg-cream-200 shadow-lg transition-colors"
+          className="rounded-full p-6 bg-black text-white hover:bg-gray-800 dark:bg-cream-50 dark:text-black dark:hover:bg-cream-200 shadow-lg transition-colors"
         >
-          <Bot className="h-6 w-6" />
+          <Bot className="h-12 w-12" />
         </Button>
       ) : (
         <Card className="w-[380px] h-[550px] bg-cream-50 dark:bg-cream-800 shadow-2xl border border-gray-200 dark:border-gray-700 transition-colors">
-          <CardHeader className="flex justify-between items-center bg-black text-white p-4 rounded-t-lg">
+          <CardHeader className="flex  justify-between bg-black text-white p-4 rounded-t-lg">
             <div className="flex items-center gap-2">
               <Bot className="h-6 w-6" />
               <span className="text-lg font-semibold">Chat with Kool.ai</span>
-            </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(false)}
-              className="text-white hover:bg-gray-800 dark:hover:bg-gray-700 rounded-full h-8 w-8 p-0 transition-colors"
+              className="text-white hover:bg-gray-800 dark:hover:bg-gray-700 rounded-full ml-28 transition-colors"
               aria-label="Close Chat"
             >
-              <X className="h-8 w-8 flex flex-col" />
+              <X className="h-6 w-6" />
             </Button>
+            </div>
           </CardHeader>
 
           <CardContent className="p-4 h-[420px] bg-gray-50 dark:bg-cream-800">
