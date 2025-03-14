@@ -52,7 +52,7 @@ const ChatBox = () => {
   }, [messages]);
 
   return (
-    <div className="fixed bottom-14 right-6 z-50">
+    <div className="fixed bottom-14 md:bottom-14 right-2 md:right-10 z-50">
       {!isOpen ? (
         <Button
           onClick={() => setIsOpen(true)}
@@ -60,27 +60,33 @@ const ChatBox = () => {
           className="rounded-full p-6 bg-black text-white hover:bg-gray-800 dark:bg-cream-50 dark:text-black dark:hover:bg-cream-200 shadow-lg transition-colors"
         >
           <Bot className="h-12 w-12" />
-          <span>Kool.AI</span> 
+          <span>Kool.AI</span>
         </Button>
       ) : (
-        <Card className="w-[380px] h-[550px] bg-cream-50 dark:bg-cream-800 shadow-2xl border border-gray-200 dark:border-gray-700 transition-colors">
-          <CardHeader className="flex  justify-between bg-black text-white p-4 rounded-t-lg">
+        <Card
+          className="bg-cream-50 dark:bg-cream-800 shadow-2xl border border-gray-200 dark:border-gray-700 transition-colors"
+          style={{
+            width: 'min(90vw, 380px)', // Responsive width with max
+            height: 'min(80vh, 550px)', // Responsive height with max
+          }}
+        >
+          <CardHeader className="flex items-center justify-between bg-black text-white p-4 rounded-t-lg">
             <div className="flex items-center gap-2">
               <Bot className="h-6 w-6" />
               <span className="text-lg font-semibold">Chat with Kool.ai</span>
+            </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsOpen(false)}
-              className="text-white hover:bg-gray-800 dark:hover:bg-gray-700 rounded-full ml-28 transition-colors"
+              className="text-white hover:bg-gray-800 dark:hover:bg-gray-700 rounded-full transition-colors"
               aria-label="Close Chat"
             >
               <X className="h-6 w-6" />
             </Button>
-            </div>
           </CardHeader>
 
-          <CardContent className="p-4 h-[420px] bg-gray-50 dark:bg-cream-800">
+          <CardContent className="p-4" style={{ height: 'calc(min(80vh, 550px) - 130px)' }}>
             <ScrollArea className="h-full pr-4">
               {messages.length === 0 && !isLoading && (
                 <div className="flex flex-col items-center justify-center h-full text-gray-500 dark:text-gray-400">
@@ -109,7 +115,7 @@ const ChatBox = () => {
           </CardContent>
 
           <CardFooter className="p-4 bg-cream-50 dark:bg-cream-800 border-t">
-            <form onSubmit={handleSubmit} className="flex flex-col md:flex-row items-center w-full gap-2">
+            <form onSubmit={handleSubmit} className="flex items-center w-full gap-2">
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
