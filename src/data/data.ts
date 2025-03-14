@@ -10,7 +10,7 @@ export const faq: FAQ[] = [
   },
   {
     question: "How do I contact support?",
-    answer: "You can reach our support team at support@kool.ai."
+ answer: "You can reach our support team at koolnotes.ai@gmail.com"
   }
 ];
 
