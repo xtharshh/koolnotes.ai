@@ -52,7 +52,7 @@ const ChatBox = () => {
   }, [messages]);
 
   return (
-    <div className="fixed bottom-14 right-10 z-50">
+    <div className="fixed bottom-14 right-6 z-50">
       {!isOpen ? (
         <Button
           onClick={() => setIsOpen(true)}
