@@ -60,6 +60,7 @@ const ChatBox = () => {
           className="rounded-full p-6 bg-black text-white hover:bg-gray-800 dark:bg-cream-50 dark:text-black dark:hover:bg-cream-200 shadow-lg transition-colors"
         >
           <Bot className="h-12 w-12" />
+          <span>Kool.AI</span> 
         </Button>
       ) : (
         <Card className="w-[380px] h-[550px] bg-cream-50 dark:bg-cream-800 shadow-2xl border border-gray-200 dark:border-gray-700 transition-colors">
