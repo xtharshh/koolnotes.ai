@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import CountUp from '@/components/ui/CountUp';
+import CountUp from '../components/ui/CountUp';
 
 export function StatsSection() {
   const ref = useRef(null);

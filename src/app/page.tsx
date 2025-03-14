@@ -4,11 +4,11 @@ import { Introduction } from "../components/Introduction";
 import SellectCollege from "../components/SelectCollege";
 import AboutAndReviews from "../components/Reviews";
 import NewFeatures from "../components/newFeatures";
-import { Navbar } from "@/components/Navbar";
-import { StatsSection } from "@/components/StatsSection";
-import Footer from "@/components/Footer";
-import ChatBox from "@/components/ChatBox";
-import AutoScrollContributorPage from "@/components/Contributors";
+import { Navbar } from "../components/Navbar";
+import { StatsSection } from "../components/StatsSection";
+import Footer from "../components/Footer";
+import ChatBox from "../components/ChatBox";
+import AutoScrollContributorPage from "../components/Contributors";
 
 export default function Home() {
   const [showContributors, setShowContributors] = useState(false);

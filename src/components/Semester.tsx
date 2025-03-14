@@ -82,13 +82,9 @@ const SemesterComponent: React.FC<SemesterProps> = ({
     }
   };
 
-  // Toggle between dark and light mode
-
 
   return (
     <div className="relative p-5">
-      
-
       <div className={`w-full ${isOpen ? "blur-md" : ""}`} suppressHydrationWarning={true}>
         <h1 className="text-4xl font-bold font-newLuck text-center">Semesters</h1>
         <div className="sm:grid-cols-2 custom-lg:grid-cols-4 gap-4 grid grid-cols-1 mt-5 custom-md:grid-cols-4 custom-nmd:grid-cols-2">
@@ -140,15 +136,17 @@ const SemesterComponent: React.FC<SemesterProps> = ({
           justifyContent: 'center', 
           alignItems: 'center', 
           flexDirection: 'column' 
-        }} className="dark:bg-black dark:text-cream dark:text-white text-black font-bold font-newLuck">
+        }} className="dark:bg-black dark:text-white text-black font-bold font-newLuck">
           {/* Close Button */}
           <IconButton
             onClick={closeModal}
             sx={{ position: 'absolute', top: 10, right: 10 }}
             aria-label="close"
+            className="dark:text-white text-black"
           >
             <CloseIcon />
           </IconButton>
+
 
           <Typography id="modal-modal-title" variant="h6" component="h2" sx={{ textAlign: 'center' }}>
             {selectedSemesterIndex !== null && selectedSubjectIndex !== null && semesters[selectedSemesterIndex].subjects[selectedSubjectIndex].name}

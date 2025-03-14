@@ -17,8 +17,8 @@ export async function POST(req: NextRequest) {
     const { name, branches } = reqBody;
 
     // Check if the college already exists
-    const colleges = await College.findOne({ name });
-    if (colleges) {
+    const college = await College.findOne({ name });
+    if (college) {
       return NextResponse.json({ error: "College already exists" }, { status: 400 });
     }
 
