@@ -2,7 +2,7 @@
 import { NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
 import { dbConnect } from '../../../../utils/dbConfig';
-import { User } from '../../../../models/user';
+import { User } from '../../../../models/models';
 import { Model } from 'mongoose';
 import { IUser } from '../../../../models/models';
 
@@ -44,6 +44,14 @@ export async function POST(request: Request) {
 
     const { email, password, secret } = await request.json();
 
+    // Validate input
+    if (!email || !password || !secret) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
+
     if (secret !== ADMIN_SECRET) {
       return NextResponse.json(
         { error: 'Unauthorized setup attempt' },
@@ -54,7 +62,7 @@ export async function POST(request: Request) {
     await dbConnect();
 
     // Check if admin exists
-    const existingAdmin = await (User as Model<IUser>).findOne({ role: 'ADMIN' });
+    const existingAdmin = await User.findOne({ role: 'ADMIN' });
     if (existingAdmin) {
       return NextResponse.json(
         { error: 'Admin already exists' },
@@ -64,18 +72,22 @@ export async function POST(request: Request) {
 
     // Create admin user
     const hashedPassword = await hash(password, 12);
-    const admin = await (User as Model<IUser>).findOneAndUpdate(
-      { email },
-      { role: 'ADMIN' },
-      { new: true }
+    await User.create({
+      email,
+      password: hashedPassword,
+      name: 'Admin',
+      role: 'ADMIN',
+      balance: 0,
+      uploads: []
+    });
+
+    return NextResponse.json(
+      { message: 'Admin created successfully' },
+      { status: 201 }
     );
 
-    if (!admin) {
-      return NextResponse.json({ error: 'Failed to set admin role' }, { status: 500 });
-    }
-
-    return NextResponse.json({ message: 'Admin role set successfully' });
   } catch (error) {
+    console.error('Admin setup error:', error);
     return NextResponse.json(
       { error: 'Failed to create admin' },
       { status: 500 }

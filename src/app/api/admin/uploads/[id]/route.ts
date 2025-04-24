@@ -19,64 +19,45 @@ export async function PATCH(
 
     await dbConnect();
     const { status } = await request.json();
-    const reward = 5; // Amount to add per approved upload
+    const reward = 5;
 
-    // Find the upload first
-    const upload = await (Upload as Model<IUpload>).findById(params.id);
-    if (!upload) {
-      return NextResponse.json({ error: 'Upload not found' }, { status: 404 });
+    // Update upload and user in one transaction
+    const [upload, user] = await Promise.all([
+      (Upload as Model<IUpload>).findById(params.id),
+      (User as Model<IUser>).findOne({ 'uploads': params.id })
+    ]);
+
+    if (!upload || !user) {
+      return NextResponse.json({ error: 'Upload or user not found' }, { status: 404 });
     }
 
-    // If approving and not already approved, update user balance first
+    // Update user balance and upload status atomically
     if (status === 'APPROVED' && upload.status !== 'APPROVED') {
-      const user = await (User as Model<IUser>).findById(upload.userId);
-      if (!user) {
-        return NextResponse.json({ error: 'User not found' }, { status: 404 });
-      }
-
       user.balance = (user.balance || 0) + reward;
       await user.save();
     }
 
-    // Update upload status
     upload.status = status;
     await upload.save();
 
-    // Get fresh data including total approved uploads and balance
-    const [updatedUploads, stats, updatedUser] = await Promise.all([
-      (Upload as Model<IUpload>).find()
-        .populate('userId', 'name email balance')
-        .sort({ createdAt: -1 }),
-      Upload.aggregate([
-        { $group: { _id: '$status', count: { $sum: 1 } } }
-      ]),
-      (User as Model<IUser>).findById(upload.userId._id)
+    // Get updated data
+    const [updatedUploads, stats] = await Promise.all([
+      Upload.find().populate('userId', 'name email balance').sort({ createdAt: -1 }),
+      Upload.aggregate([{ $group: { _id: '$status', count: { $sum: 1 } } }])
     ]);
-
-    // Get user's current balance
-    const currentBalance = await (User as Model<IUser>)
-      .findById(upload.userId)
-      .select('balance');
-
-    // Calculate total earnings (number of approved uploads * reward)
-    const approvedCount = stats.find(s => s._id === 'APPROVED')?.count || 0;
-    const totalEarnings = approvedCount * reward;
 
     return NextResponse.json({
       success: true,
       uploads: updatedUploads,
-      stats: stats.reduce((acc, curr) => {
-        acc[curr._id.toLowerCase()] = curr.count;
-        return acc;
-      }, { pending: 0, approved: 0, rejected: 0 }),
-      updatedBalance: currentBalance?.balance || 0,
-      totalEarnings,
-      message: `Upload ${status.toLowerCase()} successfully${status === 'APPROVED' ? ` and balance updated (+₹${reward})` : ''}`
+      stats: { pending: 0, approved: 0, rejected: 0, ...stats.reduce((acc, {_id, count}) => ({ ...acc, [_id.toLowerCase()]: count }), {}) },
+      userBalance: user.balance,
+      message: `Upload ${status.toLowerCase()} successfully${status === 'APPROVED' ? ` (+₹${reward})` : ''}`
     });
+
   } catch (error) {
     console.error('Error updating upload:', error);
     return NextResponse.json(
-      { error: 'Failed to update upload: ' + error.message },
+      { error: 'Failed to update: ' + (error instanceof Error ? error.message : 'Unknown error') },
       { status: 500 }
     );
   }
