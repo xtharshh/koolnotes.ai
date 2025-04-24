@@ -40,16 +40,6 @@ export function UploadForm() {
     e.preventDefault();
     setIsLoading(true);
 
-    if (status === 'unauthenticated') {
-      toast({
-        title: "Unauthorized",
-        description: "Please sign in to upload files",
-        variant: "destructive",
-      });
-      router.push('/auth/signin');
-      return;
-    }
-
     if (!file) {
       toast({
         title: "Error",
@@ -62,25 +52,20 @@ export function UploadForm() {
 
     const data = new FormData();
     data.append('file', file);
-    Object.entries(formData).forEach(([key, value]) => {
-      data.append(key, value);
-    });
+    data.append('title', formData.title);
+    data.append('description', formData.description);
+    data.append('subject', formData.subject);
+    data.append('price', formData.price.toString());
 
     try {
-      console.log('Uploading file:', file.name);
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: data,
       });
 
       if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        console.error('Upload failed:', {
-          status: response.status,
-          statusText: response.statusText,
-          error: errorData
-        });
-        throw new Error(errorData?.error || 'Upload failed');
+        const error = await response.json();
+        throw new Error(error.error || 'Upload failed');
       }
 
       const responseData = await response.json();
