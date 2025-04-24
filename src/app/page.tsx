@@ -8,7 +8,6 @@ import { Navbar } from "../components/Navbar";
 import { StatsSection } from "../components/StatsSection";
 import Footer from "../components/Footer";
 import ChatBox from "../components/ChatBox";
-import AutoScrollContributorPage from "../components/Contributors";
 
 export default function Home() {
   const [showContributors, setShowContributors] = useState(false);

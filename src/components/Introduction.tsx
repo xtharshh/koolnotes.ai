@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
-import { Button } from "../components/ui/button"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { TypeAnimation } from 'react-type-animation'
+import { Button } from "../components/ui/button";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+import Link from "next/link";
 
 export function Introduction() {
   return (
     <div className="flex font-newLuck flex-col-reverse md:flex-row items-center justify-between px-4 py-12 md:py-32 gap-8">
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
@@ -17,9 +18,9 @@ export function Introduction() {
         <h1 className="text-4xl md:text-6xl font-bold text-cream-950 dark:text-cream-50">
           <TypeAnimation
             sequence={[
-              'KoolNotes,',
+              "KoolNotes,",
               1000,
-              'KoolNotes, Start acing your exams today!.',
+              "KoolNotes, Start acing your exams today!.",
             ]}
             wrapper="span"
             speed={50}
@@ -27,41 +28,41 @@ export function Introduction() {
           />
         </h1>
         <p className="text-lg text-cream-800 dark:text-cream-200">
-          Access study notes, past papers, AI summaries, 
-          and chat support for all subjects and semesters. We&apos;re continuously expanding with 
-          new colleges and materials.
+          Access study notes, past papers, AI summaries, and chat support for
+          all subjects and semesters. We&apos;re continuously expanding with new
+          colleges and materials.
         </p>
         <div className="flex gap-4 flex-col-reverse md:flex-row md:gap-4">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button 
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
               className="w-full md:w-auto bg-cream-950 text-cream-50 dark:bg-cream-50 dark:text-cream-950 
                          hover:bg-cream-800 dark:hover:bg-cream-200 transition-all duration-300
                          button-glow transform hover:-translate-y-1"
+              asChild
             >
-              Kool.Ai
+              <Link href="/upload">
+                Upload Notes
+              </Link>
             </Button>
           </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button 
-              variant="outline" 
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="outline"
               className="w-full md:w-auto border-2 border-cream-950 text-cream-950 dark:border-cream-50 dark:text-cream-50 
                          hover:bg-cream-200 dark:hover:bg-cream-800 transition-all duration-300
                          transform hover:-translate-y-1 hover:shadow-lg"
             >
-              <a href="#select-college-section" className="w-full h-full flex items-center justify-center p-0">
+              <a
+                href="#select-college-section"
+                className="w-full h-full flex items-center justify-center p-0"
+              >
                 Browse Notes
               </a>
             </Button>
           </motion.div>
         </div>
       </motion.div>
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -77,5 +78,5 @@ export function Introduction() {
         />
       </motion.div>
     </div>
-  )
+  );
 }
