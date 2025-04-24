@@ -1,7 +1,7 @@
 "use client"
 import { useSession } from "next-auth/react"
 import { Label } from "../../components/ui/label"
-
+import {  signOut } from "next-auth/react";
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "../../components/ui/card"
@@ -89,12 +89,19 @@ export default function AdminPage() {
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
   const { toast } = useToast()
 
+
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/' });
+  };
+  
   useEffect(() => {
     if (!session) {
       router.push("/auth/signin")
       return
     }
 
+ 
+    
     if (session?.user?.role !== "ADMIN") {
       router.push("/")
       return
@@ -155,6 +162,7 @@ export default function AdminPage() {
         })
         return
       }
+      
 
       // Only update states if we have valid data
       if (data.uploads) {
@@ -225,16 +233,16 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="container mx-auto py-10 px-4 max-w-7xl">
+    <div className="container mx-auto py-28 px-4 max-w-7xl">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <h1 className="text-4xl font-bold tracking-tight">Admin Panel</h1>
           <p className="text-muted-foreground mt-1">Manage uploads, review content, and monitor platform activity</p>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" className="gap-2">
+          <Button variant="outline" onClick={handleLogout} className="gap-2">
             <Download className="h-4 w-4" />
-            Export Data
+            Logout
           </Button>
           <Button className="gap-2">
             <Users className="h-4 w-4" />

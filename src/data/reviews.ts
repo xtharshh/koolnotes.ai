@@ -3,10 +3,10 @@ import { Review } from "../models/Reviews";
 export const reviews: Review[] = [
   {
     id: 1,
-    name: "Raghav Gupta",
+    name: "Yash Goyal",
     role: "Student",
     college: "Chandigarh Engineering College",
-    branch: "Computer Science And Engineering",
+    branch: "Information Technology",
     year: "3rd Year",
     content: "This platform has been invaluable for my studies. Having access to previous years' question papers helped me understand the exam pattern better. The notes section is well-organized and comprehensive.",
     avatar: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg",

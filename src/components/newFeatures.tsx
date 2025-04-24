@@ -31,11 +31,11 @@ const NewFeatures = React.memo(() => {
               link="/pixelwalls"
 
             />
-            <FeatureCard
+            {/* <FeatureCard
               name="DSA Algorithms"
               src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/jobs.jpg"
               link="https://dsa-sortingvisualizer.vercel.app/"
-            />
+            /> */}
           </div>
         </div>
       </div>
