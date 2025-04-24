@@ -12,7 +12,7 @@ interface NavbarProps {
   handleNavigation: () => void;
 }
 
-export function Navbar({ setShowContributors, handleNavigation }: NavbarProps) {
+export function Navbar({ handleNavigation }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -55,12 +55,12 @@ export function Navbar({ setShowContributors, handleNavigation }: NavbarProps) {
           <Link className="hover:text-cream-800 dark:hover:text-cream-200" href="#contactus" onClick={handleNavigation}>
             Contacts
           </Link>
-          <button
+          {/* <button
             className="hover:text-cream-800 dark:hover:text-cream-200"
             onClick={() => setShowContributors(true)}
           >
             <a href="#contributors">Contributors</a>
-          </button>
+          </button> */}
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle /> {/* Add the ThemeToggle component here */}
@@ -77,7 +77,7 @@ export function Navbar({ setShowContributors, handleNavigation }: NavbarProps) {
             <a href="#aboutus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={handleNavigation}>About</a>
             <a href="#reviews" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={handleNavigation}>Reviews</a>
             <a href="#contactus" className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={handleNavigation}>Contact</a>
-            <button
+            {/* <button
               className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white"
               onClick={() => {
                 setShowContributors(true);
@@ -85,7 +85,7 @@ export function Navbar({ setShowContributors, handleNavigation }: NavbarProps) {
               }}
             >
               <a href="#contributors">Contributors</a>
-            </button>
+            </button> */}
           </div>
         )}
       </div>

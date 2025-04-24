@@ -19,6 +19,11 @@ const nextConfig = {
       },
     ],
   },
+  output: 'standalone',
+  poweredByHeader: false,
+  generateBuildId: async () => {
+    return 'koolnotes-build'
+  },
 }
 
 export default nextConfig;

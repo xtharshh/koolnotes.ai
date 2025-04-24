@@ -20,7 +20,7 @@ export default function Home() {
   return (   
     <div className="min-h-screen animated-gradient">
       <Navbar setShowContributors={setShowContributors} handleNavigation={handleNavigation} />
-        {!showContributors ? (
+        {/* {!showContributors ? ( */}
           <>
           <main className="max-w-7xl mx-auto pt-16">
             <Introduction />
@@ -31,9 +31,9 @@ export default function Home() {
             <AboutAndReviews />
             <NewFeatures />
           </>
-        ) : (
+        {/* ) : (
           <AutoScrollContributorPage />
-        )}
+        )} */}
       <Footer />
     </div>
   );
