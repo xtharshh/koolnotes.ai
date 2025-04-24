@@ -48,8 +48,8 @@ const SellectCollege = () => {
     setIsClient(true);
   }, []);
 
-  const handleCollegeSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const index = parseInt(event.target.value, 10);
+  const handleCollegeSelect = (value: string) => {
+    const index = parseInt(value, 10);
     setSelectedCollegeIndex(index);
     setSelectedBranchIndex(null);
     setSelectedSemesterIndex(null);
@@ -138,9 +138,9 @@ const SellectCollege = () => {
   };
 
   return (
-    <div className="p-5 ml-6 mr-6 pb-16  rounded-2xl mb-16 mt-8 text-center backdrop-blur-2xl bg-white
-     dark:bg-black text-black dark:text-white border border-gray-300
-      dark:border-customBeige">
+    <div className="p-5 ml-6 mr-6 pb-16  rounded-2xl mb-16 mt-8 text-center backdrop-blur-2xl 
+      text-black dark:text-white border border-gray-300 hover:border-gray-500 dark:hover:border-gray-600 hover:shadow-lg shadow-sm
+      dark:border-customBeige bg-white dark:bg-black">
       <div id="select-college-section" ref={collegeRef}>
         <College
           colleges={filteredColleges}
@@ -148,16 +148,15 @@ const SellectCollege = () => {
           handleCollegeClick={handleCollegeSelect}
         />
       </div>
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-center mb-4 ">
         <input
           type="text"
           placeholder="Search..."
-          className="border p-2 rounded-l mt-4"
+          className="border p-2 rounded-l mt-4 bg-white dark:bg-black dark:text-white text-black "
           onChange={handleSearchChange}
           onKeyPress={handleSearchKeyPress}
           value={searchTerm}
         />
-        <button className="bg-yellow-500 p-2 rounded-r mt-4">🔍</button>
       </div>
       {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
         <div ref={branchRef}>
