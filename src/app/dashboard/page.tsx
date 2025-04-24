@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter, CardDescription } from "../../components/ui/card";
@@ -8,7 +8,7 @@ import { Button } from "../../components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { Skeleton } from "../../components/ui/skeleton";
 import { Progress } from "../../components/ui/progress";
-import { ArrowUpRight, Clock, FileText, TrendingUp, Wallet, CheckCircle2, XCircle } from 'lucide-react';
+import { ArrowUpRight, Clock, FileText, TrendingUp, Wallet, CheckCircle2, XCircle, LogOut } from 'lucide-react';
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
 import { BarChart, Bar, ResponsiveContainer } from 'recharts';
@@ -32,6 +32,10 @@ export default function DashboardPage() {
   const [approvedCount, setApprovedCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+
+  const handleLogout = async () => {
+    await signOut({ callbackUrl: '/' });
+  };
 
   // Mock data for chart
   const chartData = [
@@ -128,10 +132,16 @@ export default function DashboardPage() {
             Welcome back, {session?.user?.name || 'User'}! Here&apos;s what&apos;s happening with your notes.
           </p>
         </div>
-        <Button onClick={() => router.push('/upload')} className="gap-2">
-          <FileText className="h-4 w-4" />
-          Upload New Notes
-        </Button>
+        <div className="flex gap-2">
+          <Button onClick={() => router.push('/upload')} className="gap-2">
+            <FileText className="h-4 w-4" />
+            Upload New Notes
+          </Button>
+          <Button onClick={handleLogout} variant="outline" className="gap-2">
+            <LogOut className="h-4 w-4" />
+            Logout
+          </Button>
+        </div>
       </div>
 
       {/* Stats Cards */}
