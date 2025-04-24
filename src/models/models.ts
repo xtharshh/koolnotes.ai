@@ -129,7 +129,8 @@ const UserSchema = new Schema<IUser>({
   stripeId: String,
   uploads: [{ type: Schema.Types.ObjectId, ref: 'Upload' }],
   earnings: { type: Number, default: 0 },
-  role: { type: String, default: 'USER' }
+  role: { type: String, default: 'USER' },
+  balance: { type: Number, default: 0 }
 });
 
 const College = mongoose.models.College || model<ICollege>('College', CollegeSchema);

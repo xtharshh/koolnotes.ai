@@ -6,7 +6,7 @@ import { ThemeProvider } from "../components/ThemeProvider"
 import { Toaster } from "../components/ui/toaster"
 import { Metadata } from 'next'
 import { AuthProvider } from "../components/AuthProvider"
-import { Navbar } from "../components/Navbar"
+import  Navbar from "../components/Navbar"
 
 const inter = Inter({ subsets: ["latin"] })
 

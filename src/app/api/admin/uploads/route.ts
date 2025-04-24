@@ -5,7 +5,7 @@ import { IUpload, Upload } from '../../../../models/models';
 import { dbConnect } from '../../../../utils/dbConfig';
 import { Model } from 'mongoose';
 
-export async function GET(request: Request) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     

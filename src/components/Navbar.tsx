@@ -1,5 +1,5 @@
 "use client";
-
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons for menu
 import { motion } from "framer-motion";
@@ -8,7 +8,12 @@ import { useSession } from "next-auth/react";
 
 import ThemeToggle from "./ThemeToggle";
 
-export function Navbar() {
+interface NavbarProps {
+  setShowContributors?: React.Dispatch<React.SetStateAction<boolean>>;
+  handleNavigation?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ setShowContributors, handleNavigation: parentHandleNavigation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
@@ -20,6 +25,9 @@ export function Navbar() {
 
   const handleNavigation = async (sectionId: string) => {
     setIsOpen(false);
+    if (parentHandleNavigation) {
+      parentHandleNavigation();
+    }
     
     // If not on home page, redirect first
     if (pathname !== '/') {
@@ -44,7 +52,7 @@ export function Navbar() {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed w-full z-50 px-4 py-3 backdrop-blur-md bg-cream-100/75 font-newLuck dark:bg-cream-950/75 border-b border-cream-200 dark:border-cream-800 top-0"
+      className="fixed w-full z-50 px-4 py-3 backdrop-blur-md bg-background/95 border-b border-border"
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -63,7 +71,7 @@ export function Navbar() {
           </svg>
           <span className="text-xl font-bold text-cream-950 dark:text-cream-50">KoolNotes</span>
         </div>
-        <div className="hidden md:flex items-center gap-6 text-cream-950 dark:text-cream-50">
+        <div className="hidden md:flex items-center gap-6">
           <button 
             className="hover:text-cream-800 dark:hover:text-cream-200" 
             onClick={() => handleNavigation('select-college-section')}
@@ -106,8 +114,10 @@ export function Navbar() {
           </div>
         </div>
         {isOpen && (
-          <div className="absolute top-14 left-0 w-full bg-customBeige font-newLuck
-            flex flex-col items-center custom-md:hidden hover:text-gray-400 dark:hover:bg-gray-700 border border-gray-400 rounded-xl backdrop-blur-5xl bg-white dark:bg-black text-black dark:text-white">
+          <div className="absolute top-14 left-0 w-full 
+            flex flex-col items-center custom-md:hidden 
+            bg-background/95 backdrop-blur-md border border-border 
+            rounded-b-lg shadow-lg">
             <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('select-college-section')}>Colleges</button>
             <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('aboutus')}>About</button>
             <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('reviews')}>Reviews</button>
@@ -125,4 +135,6 @@ export function Navbar() {
       </div>
     </motion.nav>
   );
-}
+};
+
+export default Navbar;

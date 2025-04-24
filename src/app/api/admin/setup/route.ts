@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
 import { dbConnect } from '../../../../utils/dbConfig';
@@ -24,7 +25,6 @@ export async function GET() {
 
     return NextResponse.json({ exists: false });
     
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to check admin status' },
@@ -64,18 +64,17 @@ export async function POST(request: Request) {
 
     // Create admin user
     const hashedPassword = await hash(password, 12);
-    const admin = await (User as Model<IUser>).create({
-      email,
-      password: hashedPassword,
-      name: 'Admin',
-      role: 'ADMIN'
-    });
-
-    return NextResponse.json(
-      { message: 'Admin created successfully' },
-      { status: 201 }
+    const admin = await (User as Model<IUser>).findOneAndUpdate(
+      { email },
+      { role: 'ADMIN' },
+      { new: true }
     );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+    if (!admin) {
+      return NextResponse.json({ error: 'Failed to set admin role' }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: 'Admin role set successfully' });
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to create admin' },
