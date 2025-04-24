@@ -63,6 +63,7 @@ interface IUpload extends Document {
 }
 
 interface IUser extends Document {
+  balance: number;
   email: string;
   name: string;
   stripeId?: string;

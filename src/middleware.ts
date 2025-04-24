@@ -1,25 +1,22 @@
-import { withAuth } from "next-auth/middleware"
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
-export default withAuth({
-  callbacks: {
-    authorized: ({ req, token }) => {
-      const path = req.nextUrl.pathname
-      
-      // Public routes
-      if (path === "/" || path === "#select-college-section" || path.startsWith("/auth")) {
-        return true
-      }
-      
-      // Protected routes require authentication
-      return !!token
-    },
+export default withAuth(
+  function middleware(req) {
+    const token = req.nextauth.token;
+    const isAdminRoute = req.nextUrl.pathname.startsWith('/admin');
+
+    if (isAdminRoute && token?.role !== 'ADMIN') {
+      return NextResponse.redirect(new URL('/', req.url));
+    }
   },
-})
+  {
+    callbacks: {
+      authorized: ({ token }) => !!token
+    },
+  }
+);
 
 export const config = {
-  matcher: [
-    "/upload/:path*",
-    "/my-notes/:path*",
-    "/dashboard/:path*",
-  ],
-}
+  matcher: ['/admin/:path*', '/dashboard/:path*']
+};

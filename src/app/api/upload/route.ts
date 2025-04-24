@@ -11,6 +11,7 @@ import { uploadToGoogleDrive } from '../../../lib/storage';
 declare module 'next-auth' {
   interface Session {
     user: {
+      role: unknown;
       id: string;
       name?: string | null;
       email?: string | null;

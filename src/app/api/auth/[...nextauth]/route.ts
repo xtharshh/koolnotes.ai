@@ -1,6 +1,12 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, DefaultUser } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcryptjs";
+
+declare module "next-auth" {
+    interface User extends DefaultUser {
+        role?: string;
+    }
+}
 import { User } from "../../../../models/user";
 import { Model } from 'mongoose';
 import { dbConnect } from "../../../../utils/dbConfig";
@@ -10,6 +16,7 @@ export interface IUser {
   email: string;
   name: string;
   password?: string;
+  role?: string;
 }
 
 export { User };
@@ -32,7 +39,7 @@ export const authOptions: NextAuthOptions = {
                 throw new Error('Please provide email and password');
             }
     
-            const user = await (User as Model<IUser>).findOne({ email: credentials.email.toLowerCase() }).select('+password');
+            const user = await (User as Model<IUser>).findOne({ email: credentials.email.toLowerCase() }).select('+password').lean();
             console.log('User found:', user);
     
             if (!user) {
@@ -55,6 +62,7 @@ export const authOptions: NextAuthOptions = {
                 id: user._id.toString(),
                 email: user.email,
                 name: user.name,
+                role: user.role
             };
         } catch (error) {
             console.error('Error during authorization:', error);
@@ -67,12 +75,14 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.role = user.role;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
+        session.user.role = token.role;
       }
       return session;
     }

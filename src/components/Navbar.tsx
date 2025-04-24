@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa'; // Importing icons for menu
 import { motion } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import ThemeToggle from "./ThemeToggle";
 
@@ -11,6 +12,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -86,6 +88,14 @@ export function Navbar() {
           >
             Contact
           </button>
+          {session && (
+            <button
+              className="hover:text-cream-800 dark:hover:text-cream-200"
+              onClick={() => router.push('/dashboard')}
+            >
+              Dashboard
+            </button>
+          )}
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle /> {/* Add the ThemeToggle component here */}
@@ -102,6 +112,14 @@ export function Navbar() {
             <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('aboutus')}>About</button>
             <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('reviews')}>Reviews</button>
             <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('contactus')}>Contact</button>
+            {session && (
+              <button 
+                className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" 
+                onClick={() => router.push('/dashboard')}
+              >
+                Dashboard
+              </button>
+            )}
           </div>
         )}
       </div>
