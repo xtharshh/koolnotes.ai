@@ -77,16 +77,25 @@ export default function AdminPage() {
 
       const data = await response.json();
 
-      if (!response.ok) throw new Error(data.error || 'Failed to update status');
+      if (!response.ok) {
+        toast({
+          title: "Error",
+          description: data.error || 'Failed to update status',
+          variant: "destructive",
+        });
+        return;
+      }
 
-      setPendingUploads(data.uploads.filter(upload => upload.status === 'PENDING'));
-      setAllUploads(data.uploads);
-      setStats(data.stats);
+      // Only update states if we have valid data
+      if (data.uploads) {
+        setPendingUploads(data.uploads.filter(upload => upload.status === 'PENDING'));
+        setAllUploads(data.uploads);
+        setStats(data.stats || { pending: 0, approved: 0, rejected: 0 });
+      }
 
       toast({
         title: "Success",
         description: data.message,
-        variant: status === 'APPROVED' ? 'default' : 'destructive',
       });
     } catch (error) {
       console.error('Error updating upload:', error);

@@ -11,6 +11,7 @@ interface Upload {
   status: 'PENDING' | 'APPROVED' | 'REJECTED';
   price: number;
   createdAt: string;
+  balance?: number;
 }
 
 export default function DashboardPage() {
@@ -18,6 +19,8 @@ export default function DashboardPage() {
   const router = useRouter();
   const [uploads, setUploads] = useState<Upload[]>([]);
   const [earnings, setEarnings] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [approvedCount, setApprovedCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -41,15 +44,25 @@ export default function DashboardPage() {
       setIsLoading(true);
       const response = await fetch('/api/user/uploads');
       const data = await response.json();
-      setUploads(data.uploads || []); // Ensure uploads is always an array
+      setUploads(data.uploads || []);
       setEarnings(data.earnings || 0);
+      setBalance(data.balance || 0);
+      setApprovedCount(data.approvedCount || 0);
     } catch (error) {
       console.error('Failed to fetch user data:', error);
-      setUploads([]); // Set empty array on error
+      setUploads([]);
+      setBalance(0);
+      setApprovedCount(0);
     } finally {
       setIsLoading(false);
     }
   };
+
+  // Add auto-refresh every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(fetchUserData, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   if (isLoading) {
     return (
@@ -63,7 +76,16 @@ export default function DashboardPage() {
     <div className="container mx-auto py-20 px-4">
       <h1 className="text-3xl font-bold mb-6">User Dashboard</h1>
       
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-3">
+        <Card>
+          <CardHeader>
+            <CardTitle>Balance (₹5 × {approvedCount} approved)</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-3xl font-bold">₹{balance}</p>
+          </CardContent>
+        </Card>
+
         <Card>
           <CardHeader>
             <CardTitle>Total Earnings</CardTitle>

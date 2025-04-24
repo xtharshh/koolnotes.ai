@@ -21,17 +21,27 @@ export async function PATCH(
     const { status } = await request.json();
     const reward = 5;
 
-    // Update upload and user in one transaction
-    const [upload, user] = await Promise.all([
-      (Upload as Model<IUpload>).findById(params.id),
-      (User as Model<IUser>).findOne({ 'uploads': params.id })
-    ]);
-
-    if (!upload || !user) {
-      return NextResponse.json({ error: 'Upload or user not found' }, { status: 404 });
+    // First find the upload
+    const upload = await (Upload as Model<IUpload>).findById(params.id);
+    if (!upload) {
+      return NextResponse.json({ 
+        error: `Upload with ID ${params.id} not found`,
+        uploads: [], 
+        stats: { pending: 0, approved: 0, rejected: 0 } 
+      }, { status: 404 });
     }
 
-    // Update user balance and upload status atomically
+    // Then find the user
+    const user = await (User as Model<IUser>).findById(upload.userId);
+    if (!user) {
+      return NextResponse.json({ 
+        error: `User not found for upload ${params.id}`,
+        uploads: [],
+        stats: { pending: 0, approved: 0, rejected: 0 }
+      }, { status: 404 });
+    }
+
+    // Update user balance and upload status
     if (status === 'APPROVED' && upload.status !== 'APPROVED') {
       user.balance = (user.balance || 0) + reward;
       await user.save();
@@ -42,15 +52,17 @@ export async function PATCH(
 
     // Get updated data
     const [updatedUploads, stats] = await Promise.all([
-      Upload.find().populate('userId', 'name email balance').sort({ createdAt: -1 }),
+      (Upload as Model<IUpload>).find().populate('userId', 'name email balance').sort({ createdAt: -1 }),
       Upload.aggregate([{ $group: { _id: '$status', count: { $sum: 1 } } }])
     ]);
 
     return NextResponse.json({
       success: true,
       uploads: updatedUploads,
-      stats: { pending: 0, approved: 0, rejected: 0, ...stats.reduce((acc, {_id, count}) => ({ ...acc, [_id.toLowerCase()]: count }), {}) },
-      userBalance: user.balance,
+      stats: stats.reduce((acc, curr) => {
+        acc[curr._id.toLowerCase()] = curr.count;
+        return acc;
+      }, { pending: 0, approved: 0, rejected: 0 }),
       message: `Upload ${status.toLowerCase()} successfully${status === 'APPROVED' ? ` (+₹${reward})` : ''}`
     });
 

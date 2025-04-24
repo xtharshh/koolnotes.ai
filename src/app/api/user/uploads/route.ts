@@ -11,6 +11,7 @@ export interface IUser {
   email: string;
   name: string;
   earnings: number;
+  balance: number;  // Add balance to interface
 }
 
 export async function GET() {
@@ -22,14 +23,24 @@ export async function GET() {
 
     await dbConnect();
 
-    const user = await (User as Model<IUser>).findById(session.user.id);
-    const uploads = await (Upload as Model<IUpload>).find({ userId: session.user.id })
-      .sort({ createdAt: -1 })
-      .select('title status price createdAt');
+    const [user, uploads, approvedCount] = await Promise.all([
+      (User as Model<IUser>).findById(session.user.id),
+      (Upload as Model<IUpload>).find({ userId: session.user.id })
+        .sort({ createdAt: -1 })
+        .select('title status price createdAt'),
+      (Upload as Model<IUpload>).countDocuments({
+        userId: session.user.id,
+        status: 'APPROVED'
+      })
+    ]);
+
+    const calculatedBalance = approvedCount * 5; // ₹5 per approved upload
 
     return NextResponse.json({
       uploads,
-      earnings: user.earnings || 0
+      earnings: user?.earnings || 0,
+      balance: calculatedBalance,
+      approvedCount
     });
 
   } catch (error) {
