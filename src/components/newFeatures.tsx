@@ -23,7 +23,7 @@ const NewFeatures = React.memo(() => {
             <FeatureCard
               name="Upload & Earn"
               src="https://res.cloudinary.com/djcbdfehg/image/upload/v1735296984/uploadearn.jpg"
-              link="/upload-earn"
+              link="/upload"
             />
             <FeatureCard
               name="PixelWalls"
