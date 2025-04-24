@@ -1,9 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import { IUpload, Upload } from '../../../../models/models';
 import { dbConnect } from '../../../../utils/dbConfig';
 import { Model } from 'mongoose';
+import 'next-auth';
+
+declare module 'next-auth' {
+  interface Session {
+    user: {
+      id: any;
+      name?: string;
+      email?: string;
+      image?: string;
+      role?: string;
+    }
+  }
+  
+  interface User {
+    role?: string;
+  }
+}
 
 export async function GET() {
   try {

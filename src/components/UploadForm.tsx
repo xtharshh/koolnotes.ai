@@ -1,6 +1,8 @@
 "use client";
 import { useDropzone } from 'react-dropzone';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Card, CardContent, CardHeader } from "./ui/card";
@@ -8,6 +10,8 @@ import { useToast } from "../hooks/use-toast";
 
 export function UploadForm() {
   const { toast } = useToast();
+  const router = useRouter();
+  const { status } = useSession();
   const [file, setFile] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     title: '',
@@ -26,9 +30,25 @@ export function UploadForm() {
     onDrop: acceptedFiles => setFile(acceptedFiles[0])
   });
 
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/auth/signin');
+    }
+  }, [status, router]);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+
+    if (status === 'unauthenticated') {
+      toast({
+        title: "Unauthorized",
+        description: "Please sign in to upload files",
+        variant: "destructive",
+      });
+      router.push('/auth/signin');
+      return;
+    }
 
     if (!file) {
       toast({
@@ -92,6 +112,11 @@ export function UploadForm() {
       setIsLoading(false);
     }
   };
+
+  // Show loading state while checking session
+  if (status === 'loading') {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Card className="w-full max-w-2xl mx-auto">
