@@ -269,6 +269,7 @@ export function UploadForm() {
                     <Label htmlFor="description">Description</Label>
                     <Textarea
                       id="description"
+                      className="dark:text-white text-black bg-white dark:bg-black"
                       placeholder="Provide details about what's included in your notes"
                       value={formData.description}
                       onChange={(e) => setFormData({ ...formData, description: e.target.value })}
@@ -287,7 +288,7 @@ export function UploadForm() {
                       <SelectTrigger id="subject">
                         <SelectValue placeholder="Select a subject" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="max-h-80 backdrop-blur-md bg-white/90 dark:bg-gray-800/90">
                         {subjectOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
