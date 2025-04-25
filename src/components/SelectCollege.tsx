@@ -141,8 +141,8 @@ const SellectCollege = () => {
     <div className="w-full min-h-screen">
       <div className="w-full max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 
         backdrop-blur-2xl bg-white dark:bg-black text-black dark:text-white 
-        border-x border-t border-gray-300 dark:border-gray-800">
-        <div id="select-college-section" ref={collegeRef}>
+        border-x border-t border-gray-300 dark:border-gray-800 ">
+        <div id="select-college-section " ref={collegeRef}>
           <College
             colleges={filteredColleges}
             selectedCollegeIndex={selectedCollegeIndex}
@@ -167,7 +167,7 @@ const SellectCollege = () => {
               selectedBranchIndex={selectedBranchIndex}
               handleBranchClick={handleBranchClick}
             />
-            <div className='border-red p-6'>
+            <div className='border-red p-6 text-center'>
               <h2 className="mt-2 text-4xl text-blue-700 font-newLuck-extrabold">{colleges[selectedCollegeIndex].name}</h2>
               {!branchClicked && (
                 <h3 className="mt-2 text-3xl cursor-pointer" onClick={() => setBranchClicked(true)}>

@@ -18,7 +18,7 @@ const branchBackgrounds: Record<string, string> = {
 
 const Branch: React.FC<BranchProps> = React.memo(({ branches, selectedCollegeIndex, handleBranchClick }) => {
   return (
-    <div className="grid grid-cols-1 mt-5 custom-md:grid-cols-2 custom-lg:grid-cols-3 vlg:grid-cols-4 ">
+    <div className="grid grid-cols-1 mt-5 custom-md:grid-cols-2 custom-lg:grid-cols-3 vlg:grid-cols-4 text-center">
       {branches.map((branch, branchIndex) => (
         <div key={branch._id} className="pt-4 pb-4">
           <button
