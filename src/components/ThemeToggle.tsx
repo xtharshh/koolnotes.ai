@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { Moon, Sun, Settings } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "../components/ui/button";
-import { motion } from "framer-motion"; // Import framer-motion
+import { motion } from "framer-motion";
 
 const ThemeToggle: React.FC = React.memo(function ThemeToggle() {
   const { setTheme, theme } = useTheme();
   const [expanded, setExpanded] = useState(false);
   const [currentIcon, setCurrentIcon] = useState<React.ReactNode>(<Settings />);
 
+  // Set the icon based on the current theme
   useEffect(() => {
     if (theme === "light") {
       setCurrentIcon(<Sun className="h-[1.2rem] w-[1.2rem] text-black" />);
@@ -42,15 +43,16 @@ const ThemeToggle: React.FC = React.memo(function ThemeToggle() {
         <span className="sr-only">Toggle theme</span>
       </Button>
 
-      {/* Expanded Options with Animation */}
+      {/* Expanded Options Positioned Just to the Left */}
       {expanded && (
         <motion.div
-          className="flex items-center gap-4 transition-all"
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
+          className="absolute right-[calc(100%+1rem)] flex items-center gap-2"
+          initial={{ x: 20, opacity: 0 }} // Animate from the right
+          animate={{ x: 0, opacity: 1 }} // Final position
+          exit={{ x: 20, opacity: 0 }} // Exit animation
           transition={{ type: "spring", stiffness: 300 }}
         >
+          {/* Light Mode Button */}
           {theme !== "light" && (
             <Button
               variant="ghost"
@@ -65,6 +67,8 @@ const ThemeToggle: React.FC = React.memo(function ThemeToggle() {
               <span className="sr-only">Light Mode</span>
             </Button>
           )}
+
+          {/* Dark Mode Button */}
           {theme !== "dark" && (
             <Button
               variant="ghost"
@@ -79,6 +83,8 @@ const ThemeToggle: React.FC = React.memo(function ThemeToggle() {
               <span className="sr-only">Dark Mode</span>
             </Button>
           )}
+
+          {/* System Mode Button */}
           {theme !== "system" && (
             <Button
               variant="ghost"
