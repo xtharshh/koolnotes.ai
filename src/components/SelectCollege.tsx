@@ -138,58 +138,60 @@ const SellectCollege = () => {
   };
 
   return (
-    <div className="p-5 ml-6 mr-6 pb-16  rounded-2xl mb-16 mt-8 text-center backdrop-blur-2xl 
-      text-black dark:text-white border border-gray-300 hover:border-gray-500 dark:hover:border-gray-600 hover:shadow-lg shadow-sm
-      dark:border-customBeige bg-white dark:bg-black">
-      <div id="select-college-section" ref={collegeRef}>
-        <College
-          colleges={filteredColleges}
-          selectedCollegeIndex={selectedCollegeIndex}
-          handleCollegeClick={handleCollegeSelect}
-        />
-      </div>
-      <div className="flex justify-center mb-4 ">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="border p-2 rounded-l mt-4 bg-white dark:bg-black dark:text-white text-black "
-          onChange={handleSearchChange}
-          onKeyPress={handleSearchKeyPress}
-          value={searchTerm}
-        />
-      </div>
-      {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
-        <div ref={branchRef}>
-          <Branch
-            branches={colleges[selectedCollegeIndex].branches}
+    <div className="w-full min-h-screen">
+      <div className="w-full max-w-[2000px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 
+        backdrop-blur-2xl bg-white dark:bg-black text-black dark:text-white 
+        border-x border-t border-gray-300 dark:border-gray-800">
+        <div id="select-college-section" ref={collegeRef}>
+          <College
+            colleges={filteredColleges}
             selectedCollegeIndex={selectedCollegeIndex}
-            selectedBranchIndex={selectedBranchIndex}
-            handleBranchClick={handleBranchClick}
+            handleCollegeClick={handleCollegeSelect}
           />
-          <div className='border-red p-6'>
-          <h2 className="mt-2 text-4xl text-blue-700 font-newLuck-extrabold">{colleges[selectedCollegeIndex].name}</h2>
-          {!branchClicked && (
-            <h3 className="mt-2 text-3xl cursor-pointer" onClick={() => setBranchClicked(true)}>
-              Select Branch
-            </h3>
-          )}
-              <div ref={semesterRef}>
-          {branchClicked && selectedBranchIndex !== null && (
-            <h3 className="mt-2 text-2xl cursor-pointer" onClick={() => setBranchClicked(false)}>
-              Branch Selected: <span className='font-semibold text-blue-700'>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].title}</span>
-            </h3>
-          )}
-          </div>
         </div>
-      </div>
-      )}
-      {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
+        <div className="flex justify-center mb-4 ">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="border p-2 rounded-l mt-4 bg-white dark:bg-black dark:text-white text-black "
+            onChange={handleSearchChange}
+            onKeyPress={handleSearchKeyPress}
+            value={searchTerm}
+          />
+        </div>
+        {selectedCollegeIndex !== null && colleges[selectedCollegeIndex] && (
+          <div ref={branchRef}>
+            <Branch
+              branches={colleges[selectedCollegeIndex].branches}
+              selectedCollegeIndex={selectedCollegeIndex}
+              selectedBranchIndex={selectedBranchIndex}
+              handleBranchClick={handleBranchClick}
+            />
+            <div className='border-red p-6'>
+              <h2 className="mt-2 text-4xl text-blue-700 font-newLuck-extrabold">{colleges[selectedCollegeIndex].name}</h2>
+              {!branchClicked && (
+                <h3 className="mt-2 text-3xl cursor-pointer" onClick={() => setBranchClicked(true)}>
+                  Select Branch
+                </h3>
+              )}
+              <div ref={semesterRef}>
+                {branchClicked && selectedBranchIndex !== null && (
+                  <h3 className="mt-2 text-2xl cursor-pointer" onClick={() => setBranchClicked(false)}>
+                    Branch Selected: <span className='font-semibold text-blue-700'>{colleges[selectedCollegeIndex].branches[selectedBranchIndex].title}</span>
+                  </h3>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+        {selectedBranchIndex !== null && selectedCollegeIndex !== null && colleges[selectedCollegeIndex]?.branches[selectedBranchIndex] && (
           <SemesterComponent
             semesters={colleges[selectedCollegeIndex].branches[selectedBranchIndex].semesters}
             handleSemesterClick={handleSemesterClick}
             handleSubjectClick={handleSubjectClick}
           />
-      )}
+        )}
+      </div>
     </div>
   );
 };

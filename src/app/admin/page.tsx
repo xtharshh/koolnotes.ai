@@ -1,7 +1,7 @@
 "use client"
 import { useSession } from "next-auth/react"
 import { Label } from "../../components/ui/label"
-import {  signOut } from "next-auth/react";
+import { signOut } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "../../components/ui/card"
@@ -11,7 +11,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/ta
 import { Badge } from "../../components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/avatar"
 import { Input } from "../../components/ui/input"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../../components/ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../components/ui/dropdown-menu"
 import {
   Dialog,
   DialogContent,
@@ -87,21 +92,26 @@ export default function AdminPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedUpload, setSelectedUpload] = useState<Upload | null>(null)
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false)
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null)
   const { toast } = useToast()
 
+  // Reset dropdown state when dialog closes
+  useEffect(() => {
+    if (!isViewDialogOpen) {
+      setOpenDropdownId(null)
+    }
+  }, [isViewDialogOpen])
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: '/' });
-  };
-  
+    await signOut({ callbackUrl: "/" })
+  }
+
   useEffect(() => {
     if (!session) {
       router.push("/auth/signin")
       return
     }
 
- 
-    
     if (session?.user?.role !== "ADMIN") {
       router.push("/")
       return
@@ -162,7 +172,6 @@ export default function AdminPage() {
         })
         return
       }
-      
 
       // Only update states if we have valid data
       if (data.uploads) {
@@ -233,7 +242,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="container mx-auto py-28 px-4 max-w-7xl">
+    <div className="container mx-auto py-16 md:py-28 px-4 max-w-7xl">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
         <div>
           <h1 className="text-4xl font-bold tracking-tight">Admin Panel</h1>
@@ -365,8 +374,8 @@ export default function AdminPage() {
             <CardDescription>Platform activity and content distribution</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="col-span-2">
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              <div className="col-span-1 md:col-span-2">
                 <h3 className="text-sm font-medium mb-4">Weekly Activity</h3>
                 <div className="h-[250px]">
                   <ResponsiveContainer width="100%" height="100%">
@@ -403,7 +412,7 @@ export default function AdminPage() {
                   </ResponsiveContainer>
                 </div>
               </div>
-              <div>
+              <div className="col-span-1">
                 <h3 className="text-sm font-medium mb-4">Content Status</h3>
                 <div className="h-[250px] flex items-center justify-center">
                   <ResponsiveContainer width="100%" height="100%">
@@ -467,7 +476,7 @@ export default function AdminPage() {
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="pending">
-              <TabsList className="mb-4">
+              <TabsList className="mb-4 w-full overflow-x-auto flex whitespace-nowrap">
                 <TabsTrigger value="pending" className="flex items-center gap-2">
                   <Clock className="h-4 w-4" />
                   Pending
@@ -495,23 +504,20 @@ export default function AdminPage() {
                 {pendingUploads.length > 0 ? (
                   <div className="rounded-md border overflow-hidden">
                     <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-4">Title</div>
-                      <div className="col-span-3">Uploader</div>
-                      <div className="col-span-2">Date</div>
-                      <div className="col-span-3 text-right">Actions</div>
+                      <div className="col-span-6 md:col-span-4">Title</div>
+                      <div className="hidden md:block md:col-span-3">Uploader</div>
+                      <div className="hidden md:block md:col-span-2">Date</div>
+                      <div className="col-span-6 md:col-span-3 text-right">Actions</div>
                     </div>
                     <div className="divide-y">
                       <AnimatePresence>
                         {pendingUploads.map((upload) => (
-                          <motion.div
+                          <div
                             key={upload._id}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
                             className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors"
                           >
-                            <div className="col-span-4 font-medium truncate pr-4">{upload.title}</div>
-                            <div className="col-span-3">
+                            <div className="col-span-6 md:col-span-4 font-medium truncate pr-4">{upload.title}</div>
+                            <div className="hidden md:block md:col-span-3">
                               <div className="flex items-center gap-2">
                                 <Avatar className="h-8 w-8">
                                   <AvatarImage src={`https://avatar.vercel.sh/${upload.userId.email}`} />
@@ -523,44 +529,46 @@ export default function AdminPage() {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-span-2 text-sm text-muted-foreground">
+                            <div className="hidden md:block md:col-span-2 text-sm text-muted-foreground">
                               {new Date(upload.createdAt).toLocaleDateString("en-US", {
                                 year: "numeric",
                                 month: "short",
                                 day: "numeric",
                               })}
                             </div>
-                            <div className="col-span-3 flex justify-end gap-2">
+                            <div className="col-span-6 md:col-span-3 flex justify-end gap-1 md:gap-2">
                               <Button
                                 size="sm"
                                 variant="outline"
+                                className="px-2 md:px-3"
                                 onClick={() => {
                                   setSelectedUpload(upload)
                                   setIsViewDialogOpen(true)
                                 }}
                               >
-                                <Eye className="h-4 w-4 mr-1" />
-                                View
+                                <Eye className="h-4 w-4 md:mr-1" />
+                                <span className="hidden md:inline">View</span>
                               </Button>
                               <Button
                                 size="sm"
                                 variant="default"
-                                className="bg-green-600 hover:bg-green-700"
+                                className="bg-green-600 hover:bg-green-700 px-2 md:px-3"
                                 onClick={() => handleApproval(upload._id, "APPROVED")}
                               >
-                                <CheckCircle2 className="h-4 w-4 mr-1" />
-                                Approve
+                                <CheckCircle2 className="h-4 w-4 md:mr-1" />
+                                <span className="hidden md:inline">Approve</span>
                               </Button>
                               <Button
                                 size="sm"
                                 variant="destructive"
+                                className="px-2 md:px-3"
                                 onClick={() => handleApproval(upload._id, "REJECTED")}
                               >
-                                <XCircle className="h-4 w-4 mr-1" />
-                                Reject
+                                <XCircle className="h-4 w-4 md:mr-1" />
+                                <span className="hidden md:inline">Reject</span>
                               </Button>
                             </div>
-                          </motion.div>
+                          </div>
                         ))}
                       </AnimatePresence>
                     </div>
@@ -578,11 +586,11 @@ export default function AdminPage() {
                 {filteredUploads.length > 0 ? (
                   <div className="rounded-md border overflow-hidden">
                     <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-4">Title</div>
-                      <div className="col-span-3">Uploader</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Date</div>
-                      <div className="col-span-1 text-right">Actions</div>
+                      <div className="col-span-6 md:col-span-4">Title</div>
+                      <div className="hidden md:block md:col-span-3">Uploader</div>
+                      <div className="col-span-4 md:col-span-2">Status</div>
+                      <div className="hidden md:block md:col-span-2">Date</div>
+                      <div className="col-span-2 md:col-span-1 text-right">Actions</div>
                     </div>
                     <div className="divide-y">
                       {filteredUploads.map((upload) => (
@@ -590,8 +598,8 @@ export default function AdminPage() {
                           key={upload._id}
                           className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors"
                         >
-                          <div className="col-span-4 font-medium truncate pr-4">{upload.title}</div>
-                          <div className="col-span-3">
+                          <div className="col-span-6 md:col-span-4 font-medium truncate pr-4">{upload.title}</div>
+                          <div className="hidden md:block md:col-span-3">
                             <div className="flex items-center gap-2">
                               <Avatar className="h-8 w-8">
                                 <AvatarImage src={`https://avatar.vercel.sh/${upload.userId.email}`} />
@@ -603,26 +611,35 @@ export default function AdminPage() {
                               </div>
                             </div>
                           </div>
-                          <div className="col-span-2">{getStatusBadge(upload.status)}</div>
-                          <div className="col-span-2 text-sm text-muted-foreground">
+                          <div className="col-span-4 md:col-span-2">{getStatusBadge(upload.status)}</div>
+                          <div className="hidden md:block md:col-span-2 text-sm text-muted-foreground">
                             {new Date(upload.createdAt).toLocaleDateString("en-US", {
                               year: "numeric",
                               month: "short",
                               day: "numeric",
                             })}
                           </div>
-                          <div className="col-span-1 text-right">
-                            <DropdownMenu>
+                          <div className="col-span-2 md:col-span-1 text-right">
+                            <DropdownMenu
+                              open={openDropdownId === upload._id}
+                              onOpenChange={(open) => {
+                                setOpenDropdownId(open ? upload._id : null)
+                              }}
+                            >
                               <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" size="icon" className="h-8 w-8">
                                   <MoreVertical className="h-4 w-4" />
                                 </Button>
                               </DropdownMenuTrigger>
-                              <DropdownMenuContent align="end">
+                              <DropdownMenuContent
+                                align="end"
+                                className="bg-white/95 backdrop-blur-sm border shadow-lg"
+                              >
                                 <DropdownMenuItem
                                   onClick={() => {
                                     setSelectedUpload(upload)
                                     setIsViewDialogOpen(true)
+                                    setOpenDropdownId(null)
                                   }}
                                 >
                                   <Eye className="h-4 w-4 mr-2" />
@@ -664,11 +681,11 @@ export default function AdminPage() {
                 {filteredUploads.filter((u) => u.status === "APPROVED").length > 0 ? (
                   <div className="rounded-md border overflow-hidden">
                     <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-4">Title</div>
-                      <div className="col-span-3">Uploader</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Date</div>
-                      <div className="col-span-1 text-right">Actions</div>
+                      <div className="col-span-6 md:col-span-4">Title</div>
+                      <div className="hidden md:block md:col-span-3">Uploader</div>
+                      <div className="col-span-4 md:col-span-2">Status</div>
+                      <div className="hidden md:block md:col-span-2">Date</div>
+                      <div className="col-span-2 md:col-span-1 text-right">Actions</div>
                     </div>
                     <div className="divide-y">
                       {filteredUploads
@@ -678,8 +695,8 @@ export default function AdminPage() {
                             key={upload._id}
                             className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors"
                           >
-                            <div className="col-span-4 font-medium truncate pr-4">{upload.title}</div>
-                            <div className="col-span-3">
+                            <div className="col-span-6 md:col-span-4 font-medium truncate pr-4">{upload.title}</div>
+                            <div className="hidden md:block md:col-span-3">
                               <div className="flex items-center gap-2">
                                 <Avatar className="h-8 w-8">
                                   <AvatarImage src={`https://avatar.vercel.sh/${upload.userId.email}`} />
@@ -691,31 +708,43 @@ export default function AdminPage() {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-span-2">
-                              <Badge variant="default" className="flex w-fit items-center gap-1 bg-green-500 hover:bg-green-600">
+                            <div className="col-span-4 md:col-span-2">
+                              <Badge
+                                variant="default"
+                                className="flex w-fit items-center gap-1 bg-green-500 hover:bg-green-600"
+                              >
                                 <CheckCircle2 className="h-3 w-3" />
                                 APPROVED
                               </Badge>
                             </div>
-                            <div className="col-span-2 text-sm text-muted-foreground">
+                            <div className="hidden md:block md:col-span-2 text-sm text-muted-foreground">
                               {new Date(upload.createdAt).toLocaleDateString("en-US", {
                                 year: "numeric",
                                 month: "short",
                                 day: "numeric",
                               })}
                             </div>
-                            <div className="col-span-1 text-right">
-                              <DropdownMenu>
+                            <div className="col-span-2 md:col-span-1 text-right">
+                              <DropdownMenu
+                                open={openDropdownId === upload._id}
+                                onOpenChange={(open) => {
+                                  setOpenDropdownId(open ? upload._id : null)
+                                }}
+                              >
                                 <DropdownMenuTrigger asChild>
                                   <Button variant="ghost" size="icon" className="h-8 w-8">
                                     <MoreVertical className="h-4 w-4" />
                                   </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
+                                <DropdownMenuContent
+                                  align="end"
+                                  className="bg-white/95 backdrop-blur-sm border shadow-lg"
+                                >
                                   <DropdownMenuItem
                                     onClick={() => {
                                       setSelectedUpload(upload)
                                       setIsViewDialogOpen(true)
+                                      setOpenDropdownId(null)
                                     }}
                                   >
                                     <Eye className="h-4 w-4 mr-2" />
@@ -745,11 +774,11 @@ export default function AdminPage() {
                 {filteredUploads.filter((u) => u.status === "REJECTED").length > 0 ? (
                   <div className="rounded-md border overflow-hidden">
                     <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-4">Title</div>
-                      <div className="col-span-3">Uploader</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Date</div>
-                      <div className="col-span-1 text-right">Actions</div>
+                      <div className="col-span-6 md:col-span-4">Title</div>
+                      <div className="hidden md:block md:col-span-3">Uploader</div>
+                      <div className="col-span-4 md:col-span-2">Status</div>
+                      <div className="hidden md:block md:col-span-2">Date</div>
+                      <div className="col-span-2 md:col-span-1 text-right">Actions</div>
                     </div>
                     <div className="divide-y">
                       {filteredUploads
@@ -759,8 +788,8 @@ export default function AdminPage() {
                             key={upload._id}
                             className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors"
                           >
-                            <div className="col-span-4 font-medium truncate pr-4">{upload.title}</div>
-                            <div className="col-span-3">
+                            <div className="col-span-6 md:col-span-4 font-medium truncate pr-4">{upload.title}</div>
+                            <div className="hidden md:block md:col-span-3">
                               <div className="flex items-center gap-2">
                                 <Avatar className="h-8 w-8">
                                   <AvatarImage src={`https://avatar.vercel.sh/${upload.userId.email}`} />
@@ -772,31 +801,40 @@ export default function AdminPage() {
                                 </div>
                               </div>
                             </div>
-                            <div className="col-span-2">
+                            <div className="col-span-4 md:col-span-2">
                               <Badge variant="destructive" className="flex w-fit items-center gap-1">
                                 <XCircle className="h-3 w-3" />
                                 REJECTED
                               </Badge>
                             </div>
-                            <div className="col-span-2 text-sm text-muted-foreground">
+                            <div className="hidden md:block md:col-span-2 text-sm text-muted-foreground">
                               {new Date(upload.createdAt).toLocaleDateString("en-US", {
                                 year: "numeric",
                                 month: "short",
                                 day: "numeric",
                               })}
                             </div>
-                            <div className="col-span-1 text-right">
-                              <DropdownMenu>
+                            <div className="col-span-2 md:col-span-1 text-right">
+                              <DropdownMenu
+                                open={openDropdownId === upload._id}
+                                onOpenChange={(open) => {
+                                  setOpenDropdownId(open ? upload._id : null)
+                                }}
+                              >
                                 <DropdownMenuTrigger asChild>
                                   <Button variant="ghost" size="icon" className="h-8 w-8">
                                     <MoreVertical className="h-4 w-4" />
                                   </Button>
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent align="end">
+                                <DropdownMenuContent
+                                  align="end"
+                                  className="bg-white/95 backdrop-blur-sm border shadow-lg"
+                                >
                                   <DropdownMenuItem
                                     onClick={() => {
                                       setSelectedUpload(upload)
                                       setIsViewDialogOpen(true)
+                                      setOpenDropdownId(null)
                                     }}
                                   >
                                     <Eye className="h-4 w-4 mr-2" />
@@ -827,8 +865,14 @@ export default function AdminPage() {
       </motion.div>
 
       {/* View Upload Dialog */}
-      <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
-        <DialogContent className="max-w-3xl">
+      <Dialog
+        open={isViewDialogOpen}
+        onOpenChange={(open) => {
+          setIsViewDialogOpen(open)
+          if (!open) setOpenDropdownId(null) // Reset dropdown state when dialog closes
+        }}
+      >
+        <DialogContent className="max-w-3xl bg-white/95 backdrop-blur-sm w-[95vw] md:w-auto max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Upload Details</DialogTitle>
             <DialogDescription>Review the details of this upload</DialogDescription>
@@ -837,11 +881,11 @@ export default function AdminPage() {
           {selectedUpload && (
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label className="text-right">Title</Label>
-                <div className="col-span-3 font-medium">{selectedUpload.title}</div>
+                <Label className="text-right text-sm md:text-base">Title</Label>
+                <div className="col-span-3 font-medium text-sm md:text-base">{selectedUpload.title}</div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label className="text-right">Uploader</Label>
+                <Label className="text-right text-sm md:text-base">Uploader</Label>
                 <div className="col-span-3">
                   <div className="flex items-center gap-2">
                     <Avatar className="h-8 w-8">
@@ -849,19 +893,19 @@ export default function AdminPage() {
                       <AvatarFallback>{selectedUpload.userId.name.charAt(0)}</AvatarFallback>
                     </Avatar>
                     <div>
-                      <div className="font-medium">{selectedUpload.userId.name}</div>
-                      <div className="text-sm text-muted-foreground">{selectedUpload.userId.email}</div>
+                      <div className="font-medium text-sm md:text-base">{selectedUpload.userId.name}</div>
+                      <div className="text-xs md:text-sm text-muted-foreground">{selectedUpload.userId.email}</div>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label className="text-right">Status</Label>
+                <Label className="text-right text-sm md:text-base">Status</Label>
                 <div className="col-span-3">{getStatusBadge(selectedUpload.status)}</div>
               </div>
               <div className="grid grid-cols-4 items-center gap-4">
-                <Label className="text-right">Upload Date</Label>
-                <div className="col-span-3">
+                <Label className="text-right text-sm md:text-base">Upload Date</Label>
+                <div className="col-span-3 text-sm md:text-base">
                   {new Date(selectedUpload.createdAt).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
@@ -881,10 +925,10 @@ export default function AdminPage() {
             </div>
           )}
 
-          <DialogFooter>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
             {selectedUpload && selectedUpload.status === "PENDING" && (
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={() => setIsViewDialogOpen(false)}>
+              <>
+                <Button variant="outline" onClick={() => setIsViewDialogOpen(false)} className="w-full sm:w-auto">
                   Cancel
                 </Button>
                 <Button
@@ -893,12 +937,13 @@ export default function AdminPage() {
                     handleApproval(selectedUpload._id, "REJECTED")
                     setIsViewDialogOpen(false)
                   }}
+                  className="w-full sm:w-auto"
                 >
                   <XCircle className="h-4 w-4 mr-2" />
                   Reject
                 </Button>
                 <Button
-                  className="bg-green-600 hover:bg-green-700"
+                  className="bg-green-600 hover:bg-green-700 w-full sm:w-auto"
                   onClick={() => {
                     handleApproval(selectedUpload._id, "APPROVED")
                     setIsViewDialogOpen(false)
@@ -907,10 +952,12 @@ export default function AdminPage() {
                   <CheckCircle2 className="h-4 w-4 mr-2" />
                   Approve
                 </Button>
-              </div>
+              </>
             )}
             {selectedUpload && selectedUpload.status !== "PENDING" && (
-              <Button onClick={() => setIsViewDialogOpen(false)}>Close</Button>
+              <Button onClick={() => setIsViewDialogOpen(false)} className="w-full sm:w-auto">
+                Close
+              </Button>
             )}
           </DialogFooter>
         </DialogContent>

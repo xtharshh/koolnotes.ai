@@ -84,10 +84,11 @@ export default function DashboardPage() {
   };
 
   // Add auto-refresh every 10 seconds
-  useEffect(() => {
-    const interval = setInterval(fetchUserData, 10000);
-    return () => clearInterval(interval);
-  }, []);
+  // Disabled auto-refresh to prevent multiple page refreshes
+  // useEffect(() => {
+  //   const interval = setInterval(fetchUserData, 10000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   // Animate progress bar
   useEffect(() => {
@@ -296,16 +297,16 @@ export default function DashboardPage() {
               <TabsContent value="all" className="mt-0">
                 {uploads && uploads.length > 0 ? (
                   <div className="rounded-md border">
-                    <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-5">Title</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Price</div>
-                      <div className="col-span-3">Date</div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
+                      <div className="col-span-1 md:col-span-5 mb-2 md:mb-0">Title</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Status</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Price</div>
+                      <div className="col-span-1 md:col-span-3">Date</div>
                     </div>
                     {uploads.map((upload) => (
-                      <div key={upload._id} className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t">
-                        <div className="col-span-5 font-medium">{upload.title}</div>
-                        <div className="col-span-2">
+                      <div key={upload._id} className="grid grid-cols-1 md:grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t gap-2 md:gap-0">
+                        <div className="col-span-1 md:col-span-5 font-medium">{upload.title}</div>
+                        <div className="col-span-1 md:col-span-2">
                           <Badge variant={
                             upload.status === 'APPROVED' ? 'default' :
                             upload.status === 'REJECTED' ? 'destructive' : 'outline'
@@ -314,8 +315,8 @@ export default function DashboardPage() {
                             {upload.status}
                           </Badge>
                         </div>
-                        <div className="col-span-2">₹{upload.price}</div>
-                        <div className="col-span-3 text-muted-foreground text-sm">
+                        <div className="col-span-1 md:col-span-2">₹{upload.price}</div>
+                        <div className="col-span-1 md:col-span-3 text-muted-foreground text-sm">
                           {new Date(upload.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',
@@ -338,23 +339,23 @@ export default function DashboardPage() {
               <TabsContent value="approved" className="mt-0">
                 {uploads.filter(u => u.status === 'APPROVED').length > 0 ? (
                   <div className="rounded-md border">
-                    <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-5">Title</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Price</div>
-                      <div className="col-span-3">Date</div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
+                      <div className="col-span-1 md:col-span-5 mb-2 md:mb-0">Title</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Status</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Price</div>
+                      <div className="col-span-1 md:col-span-3">Date</div>
                     </div>
                     {uploads.filter(u => u.status === 'APPROVED').map((upload) => (
-                      <div key={upload._id} className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t">
-                        <div className="col-span-5 font-medium">{upload.title}</div>
-                        <div className="col-span-2">
+                      <div key={upload._id} className="grid grid-cols-1 md:grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t gap-2 md:gap-0">
+                        <div className="col-span-1 md:col-span-5 font-medium">{upload.title}</div>
+                        <div className="col-span-1 md:col-span-2">
                           <Badge variant="default" className="flex w-fit items-center gap-1">
                             <CheckCircle2 className="h-4 w-4" />
                             APPROVED
                           </Badge>
                         </div>
-                        <div className="col-span-2">₹{upload.price}</div>
-                        <div className="col-span-3 text-muted-foreground text-sm">
+                        <div className="col-span-1 md:col-span-2">₹{upload.price}</div>
+                        <div className="col-span-1 md:col-span-3 text-muted-foreground text-sm">
                           {new Date(upload.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',
@@ -376,23 +377,23 @@ export default function DashboardPage() {
               <TabsContent value="pending" className="mt-0">
                 {uploads.filter(u => u.status === 'PENDING').length > 0 ? (
                   <div className="rounded-md border">
-                    <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-5">Title</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Price</div>
-                      <div className="col-span-3">Date</div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
+                      <div className="col-span-1 md:col-span-5 mb-2 md:mb-0">Title</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Status</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Price</div>
+                      <div className="col-span-1 md:col-span-3">Date</div>
                     </div>
                     {uploads.filter(u => u.status === 'PENDING').map((upload) => (
-                      <div key={upload._id} className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t">
-                        <div className="col-span-5 font-medium">{upload.title}</div>
-                        <div className="col-span-2">
+                      <div key={upload._id} className="grid grid-cols-1 md:grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t gap-2 md:gap-0">
+                        <div className="col-span-1 md:col-span-5 font-medium">{upload.title}</div>
+                        <div className="col-span-1 md:col-span-2">
                           <Badge variant="outline" className="flex w-fit items-center gap-1">
                             <Clock className="h-4 w-4 text-yellow-500" />
                             PENDING
                           </Badge>
                         </div>
-                        <div className="col-span-2">₹{upload.price}</div>
-                        <div className="col-span-3 text-muted-foreground text-sm">
+                        <div className="col-span-1 md:col-span-2">₹{upload.price}</div>
+                        <div className="col-span-1 md:col-span-3 text-muted-foreground text-sm">
                           {new Date(upload.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',
@@ -414,23 +415,23 @@ export default function DashboardPage() {
               <TabsContent value="rejected" className="mt-0">
                 {uploads.filter(u => u.status === 'REJECTED').length > 0 ? (
                   <div className="rounded-md border">
-                    <div className="grid grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
-                      <div className="col-span-5">Title</div>
-                      <div className="col-span-2">Status</div>
-                      <div className="col-span-2">Price</div>
-                      <div className="col-span-3">Date</div>
+                    <div className="grid grid-cols-1 md:grid-cols-12 bg-muted/50 p-4 text-sm font-medium">
+                      <div className="col-span-1 md:col-span-5 mb-2 md:mb-0">Title</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Status</div>
+                      <div className="col-span-1 md:col-span-2 mb-2 md:mb-0">Price</div>
+                      <div className="col-span-1 md:col-span-3">Date</div>
                     </div>
                     {uploads.filter(u => u.status === 'REJECTED').map((upload) => (
-                      <div key={upload._id} className="grid grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t">
-                        <div className="col-span-5 font-medium">{upload.title}</div>
-                        <div className="col-span-2">
+                      <div key={upload._id} className="grid grid-cols-1 md:grid-cols-12 items-center p-4 hover:bg-muted/50 transition-colors border-t gap-2 md:gap-0">
+                        <div className="col-span-1 md:col-span-5 font-medium">{upload.title}</div>
+                        <div className="col-span-1 md:col-span-2">
                           <Badge variant="destructive" className="flex w-fit items-center gap-1">
                             <XCircle className="h-4 w-4" />
                             REJECTED
                           </Badge>
                         </div>
-                        <div className="col-span-2">₹{upload.price}</div>
-                        <div className="col-span-3 text-muted-foreground text-sm">
+                        <div className="col-span-1 md:col-span-2">₹{upload.price}</div>
+                        <div className="col-span-1 md:col-span-3 text-muted-foreground text-sm">
                           {new Date(upload.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'short',

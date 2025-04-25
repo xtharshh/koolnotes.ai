@@ -41,16 +41,9 @@ const College: React.FC<CollegeProps> = React.memo(function College({
       variants={containerVariants}
     >
       <motion.div className="mb-12" variants={itemVariants}>
-        {/* <motion.p 
-          className="text-primary font-bold font-newMono text-4xl py-10"
-          variants={itemVariants}
-        >
-          <span className="p-2">Discover the amazing features we offer to enhance your study.</span>
-        </motion.p> */}
-
-        <div className="flex items-center justify-center gap-3 mb-6 pt-24">
-          <School className="h-8 w-8 text-purple-600 dark:text-red-200" />
-          <h1 className="text-3xl font-bold text-gray-800 dark:text-white font-newLuck">SELECT YOUR COLLEGE</h1>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-6 pt-24">
+          <School className="h-10 w-10 sm:h-8 sm:w-8 text-purple-600 dark:text-red-200 mb-2 sm:mb-0" />
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white font-newLuck text-center sm:text-left">SELECT YOUR COLLEGE</h1>
         </div>
 
         <div className="grid grid-cols-1 gap-6 items-center">

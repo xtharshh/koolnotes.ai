@@ -107,25 +107,60 @@ const Navbar: React.FC<NavbarProps> = ({ setShowContributors, handleNavigation: 
         </div>
         <div className="flex items-center gap-4">
           <ThemeToggle /> {/* Add the ThemeToggle component here */}
-          <div className="custom-md:hidden">
-            <button onClick={toggleMenu} className="focus:outline-none pt-2">
-              {isOpen ? <FaTimes color='text-black dark:text-white' size={26} /> : <FaBars color='text-black dark:text-white' size={26} />}
+          <div className="md:hidden"> {/* Changed from custom-md to md */}
+            <button onClick={toggleMenu} className="focus:outline-none pt-2 text-foreground">
+              {isOpen ? <FaTimes size={26} /> : <FaBars size={26} />}
             </button>
           </div>
         </div>
         {isOpen && (
           <div className="absolute top-14 left-0 w-full 
-            flex flex-col items-center custom-md:hidden 
-            bg-background/95 backdrop-blur-md border border-border 
-            rounded-b-lg shadow-lg">
-            <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('select-college-section')}>Colleges</button>
-            <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('aboutus')}>About</button>
-            <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('reviews')}>Reviews</button>
-            <button className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" onClick={() => handleNavigation('contactus')}>Contact</button>
+            flex flex-col items-center md:hidden 
+            bg-white/95 dark:bg-gray-950/95 backdrop-blur-3xl border border-border 
+            rounded-b-lg shadow-xl divide-y divide-border">
+            <button 
+              className="py-3 w-full text-center hover:bg-muted transition-colors duration-200" 
+              onClick={() => {
+                handleNavigation('select-college-section');
+                setIsOpen(false);
+              }}
+            >
+              Colleges
+            </button>
+            <button 
+              className="py-3 w-full text-center hover:bg-muted transition-colors duration-200" 
+              onClick={() => {
+                handleNavigation('aboutus');
+                setIsOpen(false);
+              }}
+            >
+              About
+            </button>
+            <button 
+              className="py-3 w-full text-center hover:bg-muted transition-colors duration-200" 
+              onClick={() => {
+                handleNavigation('reviews');
+                setIsOpen(false);
+              }}
+            >
+              Reviews
+            </button>
+            <button 
+              className="py-3 w-full text-center hover:bg-muted transition-colors duration-200" 
+              onClick={() => {
+                handleNavigation('contactus');
+                setIsOpen(false);
+              }}
+            >
+              Contact
+            </button>
             {session && (
               <button 
-                className="py-2 w-full text-center dark:hover:bg-gray-700 hover:bg-white" 
-                onClick={() => router.push('/dashboard')}
+                className="py-3 w-full text-center hover:bg-muted transition-colors duration-200" 
+                onClick={() => {
+                  router.push('/dashboard');
+                  setIsOpen(false);
+                }}
               >
                 Dashboard
               </button>
