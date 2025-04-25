@@ -70,19 +70,19 @@
     --chart-4: hsl(280, 65%, 60%);
     --chart-5: hsl(340, 75%, 55%);
   }
-  
+
   * {
     @apply border-border;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensure consistent layout */
   }
-  body {
-      @apply font-sans m-0 p-0 text-white;
-      color: var(--foreground);
-      background: var(--background);
-    
-    @apply bg-background text-foreground;
-    @apply antialiased;
+
+  html, body {
+    @apply w-full h-full scroll-smooth bg-background text-foreground antialiased;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
   }
-  html { @apply scroll-smooth; }
+
   .animated-gradient {
     background: linear-gradient(
       -45deg,
@@ -93,6 +93,11 @@
     );
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
+    width: 100vw; /* Full viewport width */
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Avoid horizontal scroll issues */
   }
 }
 
@@ -109,6 +114,7 @@
     mask-composite: exclude;
   }
 }
+
 .dark .animated-gradient {
   background: linear-gradient(
     -45deg,
@@ -119,23 +125,8 @@
   );
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  @apply bg-[#030303] bg-no-repeat bg-center bg-fixed;
-  @apply backdrop-blur-lg transition ease-in-out;
-}
-.light {
-  @apply bg-cover bg-no-repeat bg-center bg-fixed;
-  @apply text-[#6a5252] bg-white;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  width: 100vw; /* Ensure full width in dark mode */
+  overflow-x: hidden;
 }
 
 @keyframes gradient {
@@ -149,36 +140,3 @@
     background-position: 0% 50%;
   }
 }
-
-.button-glow {
-  animation: button-glow 2s ease-in-out infinite;
-}
-
-@keyframes button-glow {
-  0% {
-    box-shadow: 0 0 5px rgba(139, 115, 85, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(139, 115, 85, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(139, 115, 85, 0.2);
-  }
-}
-
-.dark .button-glow {
-  animation: button-glow-dark 2s ease-in-out infinite;
-}
-
-@keyframes button-glow-dark {
-  0% {
-    box-shadow: 0 0 5px rgba(250, 247, 240, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 20px rgba(250, 247, 240, 0.4);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(250, 247, 240, 0.2);
-  }
-}
-

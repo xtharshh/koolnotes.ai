@@ -18,7 +18,7 @@ export default function Home() {
   };
 
   return (   
-    <div className="min-h-screen animated-gradient">
+    <div className="animated-gradient">
         <>
           <main className="max-w-7xl mx-auto pt-16">
             <Introduction />
